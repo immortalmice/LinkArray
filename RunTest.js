@@ -90,16 +90,7 @@ module.exports = class RunTest{
 		console.log("");
 		RunTest.printTestArrayInfo(testArray);
 		console.log("");
-/*
-		arrays.forEach((array) => {
-			let start = process.hrtime();
-			for(let i = 0; i <= testArray.length-1; i ++){
-				array.run(testArray[i]);
-			}
-			let end = process.hrtime(start);
-			console.log(array.getName(), ": ", end[0], "s ", end[1] / 1000000, "ms");
-		});
-*/
+
 		for(let i = 0; i <= arrays.length-1; i ++){
 			let array = arrays[i];
 			let start = process.hrtime();
