@@ -132,6 +132,9 @@ class FormatArray{
 			case "SHIFT":
 				return this.array.shift();
 			case "GET":
+				if(this.array.get){
+					return this.array.get(testUnit.value % this.array.length)
+				}
 				return this.array[testUnit.value % this.array.length];
 		}
 	}
