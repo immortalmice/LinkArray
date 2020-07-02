@@ -116,7 +116,7 @@ class FormatArray{
 		this.array = initial;
 	}
 	run(testUnit){
-		switch(String(testUnit.type)){
+		switch(testUnit.type){
 			case "PUSH":
 				this.array.push(testUnit.value);
 				break;
