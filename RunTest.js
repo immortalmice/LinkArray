@@ -55,7 +55,7 @@ module.exports = class RunTest{
 			str += key;
 			str += ": ";
 			str += info[key];
-			str += " |";
+			str += " | ";
 		}
 
 		console.log("Test Units Amount: ", testArray.length);
