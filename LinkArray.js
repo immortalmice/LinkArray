@@ -1,4 +1,4 @@
-module.exports = class LinkList{
+module.exports = class LinkArray{
 	constructor(){
 		this.head = null;
 		this.tail = this.head;
