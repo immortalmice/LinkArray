@@ -66,16 +66,21 @@ module.exports = class RunTest{
 		return new FormatArray(name, initial);
 	}
 
-	static randomFill(length, ...arrays){
+	static randomFill(length, showProgress, ...arrays){
 		console.log("----------------------------");
 		console.log("Filling");
 		let data = RunTest.genTest(length, ["PUSH", "UNSHIFT"]);
+		const length_fifth = data.length / 5;
 
-		arrays.forEach((array) => {
+		arrays.forEach((array, index) => {
 			for (var i = 0; i <= data.length-1; i++) {
 				array.run(data[i]);
+				if(showProgress && Math.floor((i + 1) / length_fifth) - Math.floor(i / length_fifth) > 0){
+					console.log(index + 1, "/", arrays.length, " | ", (i / (data.length - 1) * 100).toFixed(2), "%");
+				}
 			}
 		});
+
 		console.log("----------------------------");
 	}
 
