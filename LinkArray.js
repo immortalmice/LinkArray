@@ -45,6 +45,27 @@ module.exports = class LinkArray{
 		this.array.push(elementToUnshift);
 	}
 
+	pop(){
+		if(this.tail){
+			let value = this.tail.value;
+			this.tail.index = undefined;
+			this.tail = this.tail.pre;
+			this.upper_bound --;
+			return value;
+		}
+		return undefined;
+	}
+
+	shift(){
+		if(this.head){
+			let value = this.head.value;
+			this.head.index = undefined;
+			this.head = this.head.next;
+			this.lower_bound ++;
+		}
+		return undefined;
+	}
+
 	get(index){
 		if(index < 0 || index > this.array.length-1) return undefined;
 

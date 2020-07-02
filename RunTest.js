@@ -127,6 +127,10 @@ class FormatArray{
 			case "UNSHIFT":
 				this.array.unshift(testUnit.value);
 				break;
+			case "POP":
+				return this.array.pop();
+			case "SHIFT":
+				return this.array.shift();
 			case "GET":
 				return this.array[testUnit.value % this.array.length];
 		}
