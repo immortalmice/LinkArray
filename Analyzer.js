@@ -9,7 +9,7 @@ const COMMANDS = [
 	{ list: ["SHIFT"], preFilling: true },
 	{ list: ["GET", "PUSH", "POP"], preFilling: true },
 	{ list: ["GET", "PUSH", "POP"], preFilling: false },
-	{ list: ["GET", "PUSH", "UNSIFT"], preFilling: false },
+	{ list: ["GET", "PUSH", "UNSHIFT"], preFilling: false },
 	{ list: ["GET", "SHIFT", "UNSHIFT"], preFilling: true },
 	{ list: ["GET", "SHIFT", "UNSHIFT"], preFilling: false },
 	{ list: ["GET", "POP", "SHIFT"], preFilling: true },
