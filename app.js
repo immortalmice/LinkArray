@@ -1,17 +1,21 @@
 const LinkArray = require("./LinkArray.js");
 const AutoLinkArray = require("./AutoLinkArray.js");
-const RunTest = require("./RunTest");
+const RunTest = require("./RunTest.js");
+const Analyzer = require("./Analyzer.js");
 
-let linkArray = RunTest.getFormatArray("Link Array", new LinkArray());
-let autoLinkArray = RunTest.getFormatArray("Auto Link Array", new AutoLinkArray());
-let normalArray = RunTest.getFormatArray("Normal Array", []);
+const OUTPUT_PATH = "reports/Report"
 
-let testArray = RunTest.genTest(500000, ["GET"]);
+let analyzer = new Analyzer(
+		function(){ return RunTest.getFormatArray("Normal Array", []); }
+		, function(){ return RunTest.getFormatArray("Auto Link Array", new AutoLinkArray(5000)); }
+		, 1000000, 10, OUTPUT_PATH
+	);
 
-RunTest.randomFill(500000, normalArray, linkArray, autoLinkArray);
-RunTest.runTest(testArray, normalArray, linkArray, autoLinkArray);
+analyzer.runDefault();
 
-/*
-RunTest.randomFill(1000, linkArray, normalArray);
-RunTest.testCorrectness(linkArray, normalArray);
-*/
+// let normalArray = RunTest.getFormatArray("Normal Array", []);
+// let autoArray = RunTest.getFormatArray("Auto Link Array", new AutoLinkArray());
+
+// let testArray = RunTest.genTest(100000, ["GET", "PUSH", "UNSHIFT", "POP", "SHIFT"]);
+// RunTest.runTest(testArray, true, normalArray, autoArray);
+// RunTest.testCorrectness(normalArray, autoArray);

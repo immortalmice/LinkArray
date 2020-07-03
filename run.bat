@@ -1,3 +1,3 @@
-node app.js
+node app.js --expose-gc
 
 pause

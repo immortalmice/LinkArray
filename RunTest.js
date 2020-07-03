@@ -58,8 +58,10 @@ module.exports = class RunTest{
 			str += " | ";
 		}
 
-		console.log("Test Units Amount: ", testArray.length);
-		console.log(str);
+		let displayStr = "Test Units Amount: " + testArray.length + "\n" + str;
+
+		console.log(displayStr);
+		return displayStr;
 	}
 
 	static getFormatArray(name, initial){
@@ -67,8 +69,10 @@ module.exports = class RunTest{
 	}
 
 	static randomFill(length, showProgress, ...arrays){
-		console.log("----------------------------");
-		console.log("Filling");
+		if(showProgress){
+			console.log("----------------------------");
+			console.log("Filling");
+		}
 		let data = RunTest.genTest(length, ["PUSH", "UNSHIFT"]);
 		const length_fifth = data.length / 5;
 
@@ -81,15 +85,20 @@ module.exports = class RunTest{
 			}
 		});
 
-		console.log("----------------------------");
+		if(showProgress){
+			console.log("----------------------------");
+		}
 	}
 
-	static runTest(testArray, ...arrays){
-		console.log("----------------------------");
-		console.log("Start Testing");
-		console.log("");
-		RunTest.printTestArrayInfo(testArray);
-		console.log("");
+	static runTest(testArray, showProgress, ...arrays){
+		if(showProgress){
+			console.log("----------------------------");
+			console.log("Start Testing");
+			console.log("");
+			RunTest.printTestArrayInfo(testArray);
+			console.log("");
+		}
+		let results = [];
 
 		for(let i = 0; i <= arrays.length-1; i ++){
 			let array = arrays[i];
@@ -98,11 +107,16 @@ module.exports = class RunTest{
 				array.run(testArray[i]);
 			}
 			let end = process.hrtime(start);
-			console.log(array.getName(), ": ", end[0], "s ", end[1] / 1000000, "ms");
+			results.push(end);
+			if(showProgress){
+				console.log(array.getName(), ": ", end[0], "s ", end[1] / 1000000, "ms");
+			}
 		}
-		
-		console.log("");
-		console.log("----------------------------");
+		if(showProgress){
+			console.log("");
+			console.log("----------------------------");
+		}
+		return results;
 	}
 }
 

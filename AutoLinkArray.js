@@ -1,14 +1,12 @@
 const LinkArray = require("./LinkArray.js");
 
 module.exports = class AutoLinkArray extends LinkArray{
-	constructor(refactorBoundIn, refactorRatioIn){
+	constructor(refactorBoundIn){
 		super();
-		this.refactorBound = refactorBoundIn || 200;
-		this.refactorRatio = refactorRatioIn || 0.75;
+		this.refactorBound = refactorBoundIn || 10000;
 	}
 	get(index){
-		if(this.array.length >= this.refactorBound
-			&& (this.lastRefactorUpperBound <= 1 || this.lastRefactorUpperBound / this.array.length <= this.refactorRatio)){
+		if(this.array.length - this.lastRefactorUpperBound >= this.refactorBound){
 			this.refactor();
 			return this.array[index];
 		}
