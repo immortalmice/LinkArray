@@ -1,0 +1,2 @@
+node outputApp.js
+pause
