@@ -31,14 +31,49 @@ module.exports = class RunTest{
 			let array2Result = array2.run(test);
 
 			if(array1Result !== array2Result){
-				console.log("Failed");
+				console.log("GET Failed: ", i);
 				console.log(array1Result, " : ", array2Result);
 				console.log(array1.getArray());
 				console.log(array2.getArray());
-				return;
+				return false;
 			}
 		}
+
+		for(let i = 0; i <= length-1; i ++){
+			let test = Math.random() < 0.5 ? { type: "POP" } : { type: "SHIFT" };
+			let array1Result = array1.run(test);
+			let array2Result = array2.run(test);
+
+			if(array1Result !== array2Result){
+				console.log(test.type, i, "Failed");
+				console.log(array1Result, " : ", array2Result);
+				console.log(array1.getArray());
+				console.log(array2.getArray());
+				return false;
+			}
+		}
+
+		if(![{ type: "POP" }, { type: "SHIFT" }].every((test) => {
+				let array1Result = array1.run(test);
+				let array2Result = array2.run(test);
+
+				if(array1Result !== array2Result){
+					console.log(test.type, "on Empty Failed");
+					console.log(array1Result, " : ", array2Result);
+					console.log(array1.getArray());
+					console.log(array2.getArray());
+					
+					return false;
+				}
+				return true;
+			})){
+
+			return false;
+		}
+			
+
 		console.log("All Test Pass");
+		return true;
 	}
 
 	static printTestArrayInfo(testArray){
