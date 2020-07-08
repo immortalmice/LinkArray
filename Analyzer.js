@@ -97,10 +97,10 @@ module.exports = class Analyzer{
 		let array2Instance = this.array2();
 
 		let dateStr = (new Date()).toUTCString().replace(/:/g, "-");
-		this.outputPath += " - " + array2Instance.getArray().refactorBound + " - " + dateStr + ".txt";
+		this.outputPath += " - " + dateStr + ".txt";
 
 		let progressLogger = new ProgressLogger();
-		FS.appendFileSync(this.outputPath, "====================================================================================\n\n");
+		FS.appendFileSync(this.outputPath, "=====================================================================================\n\n");
 		FS.appendFileSync(this.outputPath, dateStr + "\n");
 		FS.appendFileSync(this.outputPath, "Test Unit Amount: " + this.unitAmount + "\n");
 		FS.appendFileSync(this.outputPath, "Sample Amount: " + this.sampleAmount + "\n\n");
@@ -115,7 +115,7 @@ module.exports = class Analyzer{
 			progressLogger.set({type: "state", value: index});
 			progressLogger.set({type: "sampleAmount", value: this.sampleAmount});
 
-			FS.appendFileSync(this.outputPath, "------------------------------------------------------------------------------------\n\n");
+			FS.appendFileSync(this.outputPath, "-------------------------------------------------------------------------------------\n\n");
 			FS.appendFileSync(this.outputPath, "Running Command [" + commands.list.join(", ") + "]" + (commands.preFilling ? " With PreFilling" : "") + " :\n\n");
 			progressLogger.log();
 
@@ -139,7 +139,7 @@ module.exports = class Analyzer{
 
 			FS.appendFileSync(this.outputPath, "Ratio: " + ratio.toFixed(4) + "\n\n");
 		});
-		FS.appendFileSync(this.outputPath, "------------------------------------------------------------------------------------\n\n");
+		FS.appendFileSync(this.outputPath, "-------------------------------------------------------------------------------------\n\n");
 
 		[array1Win, array2Win].forEach((winArray, index) => {
 			FS.appendFileSync(this.outputPath, [array1Instance, array2Instance][index].getName() + " Win Cases:\n");
@@ -153,7 +153,6 @@ module.exports = class Analyzer{
 			FS.appendFileSync(this.outputPath, "\n");
 		});
 		
-		FS.appendFileSync(this.outputPath, "\n");
 		FS.appendFileSync(this.outputPath, "====================================================================================\n");
 	}
 }
