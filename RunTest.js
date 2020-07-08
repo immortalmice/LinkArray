@@ -20,7 +20,8 @@ module.exports = class RunTest{
 	}
 
 	static testCorrectness(array1, array2){
-		let length = array1.length;
+		let length = array1.getArray().length;
+
 		for(let i = -1; i <= length; i ++){
 			let test = {
 				type: "GET",
