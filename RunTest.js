@@ -21,7 +21,7 @@ module.exports = class RunTest{
 
 	static testCorrectness(array1, array2){
 		let length = array1.length;
-		for(let i = 0; i <= length-1; i ++){
+		for(let i = -1; i <= length; i ++){
 			let test = {
 				type: "GET",
 				value: i
