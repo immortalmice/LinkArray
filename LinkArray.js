@@ -76,6 +76,7 @@ module.exports = class LinkArray{
 				this.tail = null;
 			}
 			this.lower_bound ++;
+			return value;
 		}
 		return undefined;
 	}
