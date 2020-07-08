@@ -69,8 +69,9 @@ module.exports = class LinkArray{
 	get(index){
 		if(index < 0 || index > this.length-1 || this.length === 0) return undefined;
 
-		if(index + this.lower_bound >= 0 && index + this.lower_bound <= this.lastRefactorUpperBound)
+		if(index + this.lower_bound >= 0 && index + this.lower_bound <= this.lastRefactorUpperBound){
 			return this.array[index + this.lower_bound].value;
+		}
 
 		let start, end, operator;
 		if(index + this.lower_bound < 0){
