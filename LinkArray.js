@@ -38,8 +38,12 @@ module.exports = class LinkArray{
 			next: this.head,
 			pre: null
 		}
+
 		if(this.head){
 			this.head.pre = elementToUnshift;
+		}
+		if(!this.tail){
+			this.tail = elementToUnshift;
 		}
 		this.head = elementToUnshift;
 		this.array.push(elementToUnshift);
