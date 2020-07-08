@@ -10,9 +10,9 @@ module.exports = class LinkArray{
 
 	get length(){ return this.upper_bound - this.lower_bound + 1; }
 
-	getMappedIndex(i){ return this.getIndex(i) - this.lower_bound; }
-	getIndex(i){ return this.array[i].index; }
-	
+	getMappedIndex(i){ return this.array[i].index - this.lower_bound; }
+	getReverseMappedIndex(i){ return i + this.lower_bound; }
+
 	push(val){
 		let elementToPush = {
 			index: ++ this.upper_bound,
@@ -88,24 +88,14 @@ module.exports = class LinkArray{
 			return this.array[index + this.lower_bound].value;
 		}
 
-		let start, end, operator;
-		if(index + this.lower_bound < 0){
-			start = this.array.length-1;
-			end = this.lastRefactorUpperBound;
-			operator = -1;
-		}else{
-			start = this.lastRefactorUpperBound+1;
-			end = this.array.length;
-			operator = 1;
+		let start = this.getReverseMappedIndex(index);
+		if(start < 0){
+			start = Math.abs(start) + this.lastRefactorUpperBound;
 		}
 		
-		for(let i = start; i !== end; i += operator){
+		for(let i = start; i <= this.array.length-1; i ++){
 			if(this.getMappedIndex(i) === index){
-				let value = this.array[i].value;
-				if(this.lastRefactorUpperBound - this.lower_bound){
-					[this.array[index], this.array[i]] = [this.array[i], this.array[index]];
-				}
-				return value;
+				return this.array[i].value;
 			}
 		}
 		/* Should never go here */
