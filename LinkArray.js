@@ -50,6 +50,11 @@ module.exports = class LinkArray{
 			let value = this.tail.value;
 			this.tail.index = undefined;
 			this.tail = this.tail.pre;
+			if(this.tail){
+				this.tail.next = null;
+			}else{
+				this.head = null;
+			}
 			this.upper_bound --;
 			return value;
 		}
@@ -61,6 +66,11 @@ module.exports = class LinkArray{
 			let value = this.head.value;
 			this.head.index = undefined;
 			this.head = this.head.next;
+			if(this.head){
+				this.head.pre = null;
+			}else{
+				this.tail = null;
+			}
 			this.lower_bound ++;
 		}
 		return undefined;
