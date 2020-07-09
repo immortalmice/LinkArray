@@ -52,7 +52,15 @@ module.exports = class ReportJsonPharserFile{
 			});
 		});
 
-		return result;
+		let sortedResult = {};
+		[ReportJsonPharserFile.PRIME_FIELD, ReportJsonPharserFile.SUB_FIELD].forEach((array, index) => {
+			array.forEach((FIELD) => {
+				let key = index === 1 ? FIELD.substring(0, FIELD.length-2) : FIELD;
+				sortedResult[key] = result[key];
+			});
+		});
+
+		return sortedResult;
 	}
 }
 
