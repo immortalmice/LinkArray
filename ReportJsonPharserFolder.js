@@ -9,6 +9,11 @@ module.exports = class ReportJsonPharserFolder{
 	parseReport(){
 		this.paths.forEach((path) => {
 			FS.readdir(path, (err, files) => {
+				if(err){
+					console.log(err);
+					return;
+				}
+
 				let results = [];
 				files.forEach((file) => {
 					let filePharser = new PHARSER_FILE(path + "/" + file);
