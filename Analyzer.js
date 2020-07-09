@@ -153,7 +153,7 @@ module.exports = class Analyzer{
 			FS.appendFileSync(this.outputPath, "\n");
 		});
 		
-		FS.appendFileSync(this.outputPath, "====================================================================================\n");
+		FS.appendFileSync(this.outputPath, "=====================================================================================\n");
 	}
 }
 
