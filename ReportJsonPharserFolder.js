@@ -7,7 +7,7 @@ module.exports = class ReportJsonPharserFolder{
 		this.sortBy = sortByIn || 'Test Unit Amount';
 	}
 
-	parseReport(){
+	pharseReport(){
 		this.paths.forEach((path) => {
 			FS.readdir(path, (err, files) => {
 				if(err){
@@ -18,7 +18,7 @@ module.exports = class ReportJsonPharserFolder{
 				let results = [];
 				files.forEach((file) => {
 					let filePharser = new PHARSER_FILE(path + "/" + file);
-					results.push(filePharser.parseReport());
+					results.push(filePharser.pharseReport());
 				});
 
 				results.sort((resultA, resultB) => {

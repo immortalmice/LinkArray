@@ -36,7 +36,7 @@ module.exports = class ReportJsonPharserFile{
 		return FS.readFileSync(this.path);
 	}
 
-	parseReport(){
+	pharseReport(){
 		let FILE_CONTENT = this.getContent();
 		let result = this.getPrimeField();
 
