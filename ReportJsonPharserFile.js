@@ -23,20 +23,22 @@ module.exports = class ReportJsonPharserFile{
 		"[GET, PUSH, UNSHIFT, POP, SHIFT] :"
 	];
 
+	static SORT_FIELD_ARRAY = [
+		...ReportJsonPharserFile.PRIME_FIELD, 
+		...(ReportJsonPharserFile.SUB_FIELD.map((str) => str.substring(0, str.length-2)))
+	];
+
 	constructor(pathIn){
 		this.path = pathIn;
 	}
 
+	getContent(){
+		return FS.readFileSync(this.path);
+	}
+
 	parseReport(){
-		let FILE_CONTENT = FS.readFileSync(this.path);
-		let result = {};
-
-		ReportJsonPharserFile.PRIME_FIELD.forEach((FIELD) => {
-			let pos = FILE_CONTENT.indexOf(FIELD);
-			let value = findValue(String(FILE_CONTENT.slice(pos)));
-
-			result[FIELD] = value;
-		});
+		let FILE_CONTENT = this.getContent();
+		let result = this.getPrimeField();
 
 		["Auto Link Array Win Cases", "Normal Array Win Cases"].forEach((NAME_SPACE, index) => {
 			let namePos = FILE_CONTENT.indexOf(NAME_SPACE);
@@ -52,17 +54,31 @@ module.exports = class ReportJsonPharserFile{
 			});
 		});
 
-		let sortedResult = {};
-		[ReportJsonPharserFile.PRIME_FIELD, ReportJsonPharserFile.SUB_FIELD].forEach((array, index) => {
-			array.forEach((FIELD) => {
-				let key = index === 1 ? FIELD.substring(0, FIELD.length-2) : FIELD;
-				sortedResult[key] = result[key];
-			});
+		return this.sort(result);
+	}
+
+
+	getPrimeField(){
+		let fileContent = this.getContent();
+		let result = {};
+		ReportJsonPharserFile.PRIME_FIELD.forEach((FIELD) => {
+			let pos = fileContent.indexOf(FIELD);
+			let value = findValue(String(fileContent.slice(pos)));
+
+			result[FIELD] = value;
+		});
+		return result;
+	}
+
+	sort(obj){
+		let sortedObj = {};
+		ReportJsonPharserFile.SORT_FIELD_ARRAY.forEach((key) => {
+			sortedObj[key] = obj[key];
 		});
 
-		return sortedResult;
+		return sortedObj;
 	}
-}
+} 
 
 function findValue(str){
 	for(let i = 0; i <= str.length-1; i ++){
