@@ -71,9 +71,26 @@ module.exports = class RunTest{
 			return false;
 		}
 			
-
 		console.log("All Test Pass");
 		return true;
+	}
+
+	static testCorrectnessWithArray(testArray, array1, array2){
+		let result = testArray.every((test) => {
+			let array1Result = array1.run(test);
+			let array2Result = array2.run(test);
+			console.log(test, array1Result, array2Result);
+
+			if(array1Result !== array2Result){
+				console.log(test, "Failed");
+				console.log(array1Result, " : ", array2Result);
+				console.log(array1.getArray());
+				console.log(array2.getArray());
+				return false;
+			}
+			return true;
+		});
+		return result;
 	}
 
 	static printTestArrayInfo(testArray){
