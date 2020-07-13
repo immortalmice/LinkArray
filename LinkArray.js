@@ -92,16 +92,17 @@ module.exports = class LinkArray{
 	get(index){
 		if(index < 0 || index > this.length-1 || this.length === 0) return undefined;
 
-		let start = this.getReverseMappedIndex(index);
-		if(start >= 0 && start <= this.lastRefactorUpperBound){
-			return this.array[start].value;
+		let target = this.getReverseMappedIndex(index);
+		if(target >= 0 && target <= this.lastRefactorUpperBound){
+			return this.array[target].value;
 		}
 
+		let start = target;
 		if(start < 0){
 			start = Math.abs(start) + this.lastRefactorUpperBound;
 		}
 		for(let i = start; i <= this.array.length-1; i ++){
-			if(this.getMappedIndex(this.array[i].index) === index){
+			if(this.array[i].index === target){
 				return this.array[i].value;
 			}
 		}
