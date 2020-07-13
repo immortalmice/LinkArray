@@ -10,7 +10,7 @@ module.exports = class LinkArray{
 
 	get length(){ return this.upper_bound - this.lower_bound + 1; }
 
-	getMappedIndex(i){ return this.array[i].index - this.lower_bound; }
+	getMappedIndex(i){ return i - this.lower_bound; }
 	getReverseMappedIndex(i){ return i + this.lower_bound; }
 
 	push(val){
@@ -102,7 +102,7 @@ module.exports = class LinkArray{
 		}
 		
 		for(let i = start; i <= this.array.length-1; i ++){
-			if(this.getMappedIndex(i) === index){
+			if(this.getMappedIndex(this.array[i].index) === index){
 				return this.array[i].value;
 			}
 		}
