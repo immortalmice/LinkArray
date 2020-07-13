@@ -1,5 +1,6 @@
 const PHARSER_FOLDER = require("./ReportJsonPharserFolder");
 
+/*
 const REPORT_FOLDERS = [
 	"reports/UnitResult",
 	"reports/LowUnitResult",
@@ -8,5 +9,8 @@ const REPORT_FOLDERS = [
 ];
 
 let pharserFolder = new PHARSER_FOLDER(REPORT_FOLDERS);
-
 pharserFolder.parseReport();
+*/
+
+let pharserFolder = new PHARSER_FOLDER(["reports/UnitResult"]);
+pharserFolder.pharseTimeReport();

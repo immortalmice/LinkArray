@@ -30,7 +30,7 @@ module.exports = class ReportJsonPharserFolder{
 		});
 	}
 
-	pharseTimeReport(){
+	pharseTimeReport(target){
 		this.paths.forEach((path) => {
 			FS.readdir(path, (err, files) => {
 				if(err){
@@ -41,14 +41,14 @@ module.exports = class ReportJsonPharserFolder{
 				let results = [];
 				files.forEach((file) => {
 					let filePharser = new PHARSER_FILE(path + "/" + file);
-					results.push(filePharser.pharseTime());
+					results.push(filePharser.pharseTime(target));
 				});
 
 				results.sort((resultA, resultB) => {
 					return resultA[this.sortBy] - resultB[this.sortBy]
 				});
 
-				FS.writeFileSync("jsons/" + path.replace("reports/", "") + "-Time.json", JSON.stringify(results));
+				FS.writeFileSync("jsons/" + path.replace("reports/", "") + "-" + target + "-Time.json", JSON.stringify(results));
 			});
 		});
 	}

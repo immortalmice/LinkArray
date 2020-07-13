@@ -57,14 +57,16 @@ module.exports = class ReportJsonPharserFile{
 		return this.sort(result);
 	}
 
-	pharseTime(){
+	pharseTime(target){
+		target = target || "Auto Link Array";
+
 		let FILE_CONTENT = this.getContent();
 		let result = this.getPrimeField();
 
 		ReportJsonPharserFile.SUB_FIELD.forEach((FIELD) => {
 			let linePos = FILE_CONTENT.indexOf(FIELD);
-			let autoPos = FILE_CONTENT.slice(linePos).indexOf("Auto Link Array") + linePos;
-			let avergePos = FILE_CONTENT.slice(autoPos).indexOf("Averge:") + autoPos;
+			let arrayPos = FILE_CONTENT.slice(linePos).indexOf(target) + linePos;
+			let avergePos = FILE_CONTENT.slice(arrayPos).indexOf("Averge:") + arrayPos;
 			let sPos = FILE_CONTENT.slice(avergePos).indexOf("s") + avergePos;
 
 			let s = findValue(String(FILE_CONTENT.slice(avergePos)));
