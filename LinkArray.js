@@ -30,9 +30,10 @@ module.exports = class LinkArray{
 		this.tail = elementToPush;
 		if(this.upper_bound >= 0 && this.upper_bound <= this.lastRefactorUpperBound){
 			this.array[this.upper_bound] = elementToPush;
-			return;
+		}else{
+			this.array.push(elementToPush);
 		}
-		this.array.push(elementToPush);
+		return this.length;
 	}
 
 	unshift(val){
@@ -52,9 +53,10 @@ module.exports = class LinkArray{
 		this.head = elementToUnshift;
 		if(this.lower_bound >= 0){
 			this.array[this.lower_bound] = elementToUnshift;
-			return;
+		}else{
+			this.array.push(elementToUnshift);
 		}
-		this.array.push(elementToUnshift);
+		return this.length;
 	}
 
 	pop(){
