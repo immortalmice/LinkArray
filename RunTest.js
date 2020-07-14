@@ -117,8 +117,8 @@ module.exports = class RunTest{
 		return displayStr;
 	}
 
-	static getFormatArray(name, initial){
-		return new FormatArray(name, initial);
+	static getFormatArray(name, initial, functions){
+		return new FormatArray(name, initial, functions);
 	}
 
 	static randomFill(length, showProgress, ...arrays){
@@ -178,28 +178,19 @@ function getCurrentMS(){
 }
 
 class FormatArray{
-	constructor(name, initial){
+	constructor(name, initial, functions){
 		this.name = name;
 		this.array = initial;
+		this.functions = Object.assign({
+			"PUSH": (array, value) => array.push(value),
+			"UNSHIFT": (array, value) => array.unshift(value),
+			"POP": (array) => array.pop(),
+			"SHIFT": (array) => array.shift(),
+			"GET": (array, value) => array[value % array.length]
+		}, functions);
 	}
 	run(testUnit){
-		switch(testUnit.type){
-			case "PUSH":
-				this.array.push(testUnit.value);
-				break;
-			case "UNSHIFT":
-				this.array.unshift(testUnit.value);
-				break;
-			case "POP":
-				return this.array.pop();
-			case "SHIFT":
-				return this.array.shift();
-			case "GET":
-				if(this.array.get){
-					return this.array.get(testUnit.value % this.array.length)
-				}
-				return this.array[testUnit.value % this.array.length];
-		}
+		return this.functions[testUnit.type](this.array, testUnit.value);
 	}
 	getArray(){ return this.array; }
 	getName(){ return this.name; }
