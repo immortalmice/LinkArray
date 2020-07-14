@@ -128,6 +128,16 @@ module.exports = class LinkArray{
 		this.upper_bound = this.array.length-1;
 	}
 
+	asArray(){
+		let newArray = [];
+		let current = this.head;
+		while(current){
+			newArray.push(current.value);
+			current = current.next;
+		}
+		return newArray;
+	}
+
 	devPrint(){
 		console.log(this.array);
 	}
