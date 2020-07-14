@@ -100,7 +100,7 @@ module.exports = class Analyzer{
 		this.outputPath += " - " + dateStr + ".txt";
 
 		let progressLogger = new ProgressLogger();
-		FS.appendFileSync(this.outputPath, "=====================================================================================\n\n");
+		FS.appendFileSync(this.outputPath, "=========================================================================================\n\n");
 		FS.appendFileSync(this.outputPath, dateStr + "\n");
 		FS.appendFileSync(this.outputPath, "Test Unit Amount: " + this.unitAmount + "\n");
 		FS.appendFileSync(this.outputPath, "Sample Amount: " + this.sampleAmount + "\n\n");
@@ -115,13 +115,13 @@ module.exports = class Analyzer{
 			progressLogger.set({type: "state", value: index});
 			progressLogger.set({type: "sampleAmount", value: this.sampleAmount});
 
-			FS.appendFileSync(this.outputPath, "-------------------------------------------------------------------------------------\n\n");
+			FS.appendFileSync(this.outputPath, "-----------------------------------------------------------------------------------------\n\n");
 			FS.appendFileSync(this.outputPath, "Running Command [" + commands.list.join(", ") + "]" + (commands.preFilling ? " With PreFilling" : "") + " :\n\n");
 			progressLogger.log();
 
 			let result = this.runWithCommands(commands, progressLogger);
-			FS.appendFileSync(this.outputPath, array1Instance.getName() + "\t|" + result[0].toString() + "\n");
-			FS.appendFileSync(this.outputPath, array2Instance.getName() + "\t|" + result[1].toString() + "\n\n");
+			FS.appendFileSync(this.outputPath, array1Instance.getName() + " ".repeat(20 - array1Instance.getName().length) + "|" + result[0].toString() + "\n");
+			FS.appendFileSync(this.outputPath, array2Instance.getName() + " ".repeat(20 - array2Instance.getName().length) + "|" + result[1].toString() + "\n\n");
 			FS.appendFileSync(this.outputPath, "Winner: " + (result[0].averge < result[1].averge ? array1Instance.getName() : array2Instance.getName()) + "\n");
 
 			let ratio = result[0].averge / result[1].averge;
@@ -139,7 +139,7 @@ module.exports = class Analyzer{
 
 			FS.appendFileSync(this.outputPath, "Ratio: " + ratio.toFixed(4) + "\n\n");
 		});
-		FS.appendFileSync(this.outputPath, "-------------------------------------------------------------------------------------\n\n");
+		FS.appendFileSync(this.outputPath, "-----------------------------------------------------------------------------------------\n\n");
 
 		[array1Win, array2Win].forEach((winArray, index) => {
 			FS.appendFileSync(this.outputPath, [array1Instance, array2Instance][index].getName() + " Win Cases:\n");
@@ -147,13 +147,13 @@ module.exports = class Analyzer{
 				let preStr = "[" + element.list.join(", ") + "]" + (element.preFilling ? " With PreFilling" : "") + " :";
 				let postStr = element.ratio.toFixed(4);
 
-				FS.appendFileSync(this.outputPath, preStr + " ".repeat(85 - preStr.length - postStr.length) + postStr + "\n");
+				FS.appendFileSync(this.outputPath, preStr + " ".repeat(89 - preStr.length - postStr.length) + postStr + "\n");
 			});
 
 			FS.appendFileSync(this.outputPath, "\n");
 		});
 		
-		FS.appendFileSync(this.outputPath, "=====================================================================================\n");
+		FS.appendFileSync(this.outputPath, "=========================================================================================\n");
 	}
 }
 
