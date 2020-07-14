@@ -1,11 +1,6 @@
 module.exports = class LinkArray{
 	constructor(){
-		this.head = null;
-		this.tail = this.head;
-		this.array = [];
-		this.lower_bound = 0;
-		this.upper_bound = -1;
-		this.lastRefactorUpperBound = -1;
+		this._init();
 	}
 
 	get length(){ return this.upper_bound - this.lower_bound + 1; }
@@ -136,5 +131,13 @@ module.exports = class LinkArray{
 			current = current.next;
 		}
 		return newArray;
+	}
+	_init(){
+		this.head = null;
+		this.tail = this.head;
+		this.array = [];
+		this.lower_bound = 0;
+		this.upper_bound = -1;
+		this.lastRefactorUpperBound = -1;
 	}
 }
