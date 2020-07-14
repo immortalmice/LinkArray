@@ -137,12 +137,4 @@ module.exports = class LinkArray{
 		}
 		return newArray;
 	}
-
-	devPrint(){
-		console.log(this.array);
-	}
-	refactorAndPrint(){
-		this.refactor();
-		console.log(this.array);
-	}
 }
