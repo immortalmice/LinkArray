@@ -132,6 +132,10 @@ module.exports = class LinkArray{
 		}
 		return newArray;
 	}
+
+	clear(){
+		this._init();
+	}
 	_init(){
 		this.head = null;
 		this.tail = this.head;
