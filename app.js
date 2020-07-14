@@ -6,13 +6,15 @@ const Analyzer = require("./Analyzer.js");
 
 const OUTPUT_PATH = "reports/Report"
 
-let analyzer = new Analyzer(
-		function(){ return RunTest.getFormatArray("Normal Array", []); }
-		, function(){ return RunTest.getFormatArray("Auto Link Array", new AutoLinkArray(5000)); }
-		, 1000000, 10, OUTPUT_PATH
+for(let i = 2000; i <= 500000; i += 2000){
+	let analyzer = new Analyzer(
+		function(){ return getNormalFormatArray(); }
+		, function(){ return getAutoFormatArray(); }
+		, i, 50, OUTPUT_PATH
 	);
 
-analyzer.runDefault();
+	analyzer.runDefault();
+}
 
 function getNormalFormatArray(){
 	return RunTest.getFormatArray("Normal Array", []);
