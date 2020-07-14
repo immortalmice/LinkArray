@@ -133,6 +133,10 @@ module.exports = class LinkArray{
 		return newArray;
 	}
 
+	isEmpty(){
+		return this.head === null;
+	}
+
 	clear(){
 		this._init();
 	}
