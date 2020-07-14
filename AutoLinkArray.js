@@ -16,4 +16,8 @@ module.exports = class AutoLinkArray extends LinkArray{
 		}
 		return super.get(index);
 	}
+	concat(anotherLinkArray){
+		this.refactor();
+		super.concat(anotherLinkArray);
+	}
 }
