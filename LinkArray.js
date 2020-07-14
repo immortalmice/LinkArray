@@ -149,6 +149,16 @@ module.exports = class LinkArray{
 		}
 	}
 
+	forEach(fun){
+		let current = this.head;
+		let i = 0;
+		while(current){
+			fun(current.value, i, this);
+			current = current.next;
+			i ++;
+		}
+	}
+
 	_init(){
 		this.head = null;
 		this.tail = this.head;
