@@ -44,3 +44,13 @@ function getDoublyFormatArray(){
 		}
 	});
 }
+
+/*
+let i = 0;
+while(RunTest.testCorrectnessWithArray(
+		RunTest.genTest(Math.floor(Math.random() * 100000), ["GET", "PUSH", "UNSHIFT", "POP", "SHIFT"])
+		, getAutoFormatArray(), getNormalFormatArray())){
+	
+	console.log(++ i);
+}
+*/
