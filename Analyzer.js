@@ -18,9 +18,8 @@ const COMMANDS = [
 ];
 
 module.exports = class Analyzer{
-	constructor(array1In, array2In, unitAmountIn, sampleAmountIn, outputPathIn){
-		this.array1 = array1In;
-		this.array2 = array2In;
+	constructor(arrayFactorysIn, unitAmountIn, sampleAmountIn, outputPathIn){
+		this.arrayFactorys = arrayFactorysIn;
 		this.unitAmount = unitAmountIn;
 		this.sampleAmount = sampleAmountIn;
 		this.outputPath = outputPathIn;
@@ -31,8 +30,7 @@ module.exports = class Analyzer{
 		let commands = commandsElement.list;
 
 		for(let i = 1; i <= this.sampleAmount; i ++){
-			let array1Instance = this.array1();
-			let array2Instance = this.array2();
+			let instances = this.arrayFactorys.map((factory) => factory());
 
 			try{
 				console.log(global.gc);
@@ -49,7 +47,7 @@ module.exports = class Analyzer{
 				if(progressLogger)
 					progressLogger.setAndLog({type: "descript", value: "Filling..."});
 
-				RunTest.randomFill(this.unitAmount, false, array1Instance, array2Instance);
+				RunTest.randomFill(this.unitAmount, false, ...instances);
 
 				if(progressLogger)
 					progressLogger.end("descript");
@@ -62,7 +60,7 @@ module.exports = class Analyzer{
 			if(progressLogger)
 				progressLogger.setAndLog({type: "descript", value: "Testing..."});
 
-			results.push(RunTest.runTest(testArray, false, array1Instance, array2Instance));
+			results.push(RunTest.runTest(testArray, false, ...instances));
 
 			if(progressLogger)
 				progressLogger.end("descript");
@@ -72,7 +70,7 @@ module.exports = class Analyzer{
 
 	analyze(results){
 		let report = [];
-		for(let i = 0; i <= 1; i ++){
+		for(let i = 0; i <= this.arrayFactorys.length-1; i ++){
 			report.push(new AnalyzeResult(
 				Math.max(...results.map((item) => {
 					return parseSecond(item[i]);
@@ -93,8 +91,7 @@ module.exports = class Analyzer{
 	}
 
 	runDefault(){
-		let array1Instance = this.array1();
-		let array2Instance = this.array2();
+		let instances = this.arrayFactorys.map((factory) => factory());
 
 		let dateStr = (new Date()).toUTCString().replace(/:/g, "-");
 		this.outputPath += " - " + dateStr + ".txt";
@@ -105,10 +102,13 @@ module.exports = class Analyzer{
 		FS.appendFileSync(this.outputPath, "Test Unit Amount: " + this.unitAmount + "\n");
 		FS.appendFileSync(this.outputPath, "Sample Amount: " + this.sampleAmount + "\n\n");
 
-		FS.appendFileSync(this.outputPath, "Auto List Array Parameters: " + array2Instance.getArray().refactorBound + "\n\n");
-
-		let array1Win = [];
-		let array2Win = [];
+		let autoArray = instances.find((instance) => instance.getName() === "Auto Link Array");
+		if(autoArray){
+			FS.appendFileSync(this.outputPath, "Auto List Array Parameters: " + autoArray.getArray().refactorBound + "\n\n");
+		}
+		
+		let winResult = [];
+		instances.forEach(() => winResult.push([]));
 
 		COMMANDS.forEach((commands, index) => {
 			progressLogger.set({type: "commands", value: commands.list.toString()});
@@ -120,32 +120,35 @@ module.exports = class Analyzer{
 			progressLogger.log();
 
 			let result = this.runWithCommands(commands, progressLogger);
-			FS.appendFileSync(this.outputPath, array1Instance.getName() + " ".repeat(20 - array1Instance.getName().length) + "|" + result[0].toString() + "\n");
-			FS.appendFileSync(this.outputPath, array2Instance.getName() + " ".repeat(20 - array2Instance.getName().length) + "|" + result[1].toString() + "\n\n");
-			FS.appendFileSync(this.outputPath, "Winner: " + (result[0].averge < result[1].averge ? array1Instance.getName() : array2Instance.getName()) + "\n");
+			instances.forEach((instance, index) => {
+				FS.appendFileSync(this.outputPath, instance.getName() + " ".repeat(20 - instance.getName().length) + "|" + result[index].toString() + "\n");
+			});
+			FS.appendFileSync(this.outputPath, "\n");
 
-			let ratio = result[0].averge / result[1].averge;
-			ratio = ratio < 1 ? 1 / ratio : ratio;
+			let winIndex = result.reduce((accumulator, currentValue, currentIndex) => {
+				return result[accumulator].averge < currentValue.averge ? accumulator : currentIndex;
+			}, 0);
 
-			if(result[0].averge < result[1].averge){
-				array1Win.push(Object.assign({
-					ratio: ratio
-				}, commands));
-			}else{
-				array2Win.push(Object.assign({
-					ratio: ratio
-				}, commands));
+			FS.appendFileSync(this.outputPath, "Winner: " + instances[winIndex].getName() + "\n");
+
+			let ratio;
+			if(instances.length === 2){
+				ratio = result[0].averge / result[1].averge;
+				ratio = ratio < 1 ? 1 / ratio : ratio;
+				FS.appendFileSync(this.outputPath, "Ratio: " + ratio.toFixed(4) + "\n\n");
 			}
 
-			FS.appendFileSync(this.outputPath, "Ratio: " + ratio.toFixed(4) + "\n\n");
+			winResult[winIndex].push(Object.assign({
+					ratio: ratio
+				}, commands));
 		});
 		FS.appendFileSync(this.outputPath, "-----------------------------------------------------------------------------------------\n\n");
 
-		[array1Win, array2Win].forEach((winArray, index) => {
-			FS.appendFileSync(this.outputPath, [array1Instance, array2Instance][index].getName() + " Win Cases:\n");
+		winResult.forEach((winArray, index) => {
+			FS.appendFileSync(this.outputPath, instances[index].getName() + " Win Cases:\n");
 			winArray.forEach((element) => {
 				let preStr = "[" + element.list.join(", ") + "]" + (element.preFilling ? " With PreFilling" : "") + " :";
-				let postStr = element.ratio.toFixed(4);
+				let postStr = element.ratio ? element.ratio.toFixed(4) : "";
 
 				FS.appendFileSync(this.outputPath, preStr + " ".repeat(89 - preStr.length - postStr.length) + postStr + "\n");
 			});
