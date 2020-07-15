@@ -118,9 +118,9 @@ module.exports = class LinkArray{
 			i ++;
 		}
 		this.array = newArray;
-		this.lastRefactorUpperBound = this.array.length-1;
 		this.lower_bound = 0;
 		this.upper_bound = this.array.length-1;
+		this.lastRefactorUpperBound = this.upper_bound;
 	}
 
 	asArray(){
