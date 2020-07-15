@@ -22,7 +22,7 @@ function getNormalFormatArray(){
 
 function getAutoFormatArray(i){
 	return RunTest.getFormatArray("Auto Link Array", new AutoLinkArray(i), {
-		"GET": (array, value) => array.get(value % array.length)
+		"GET": (array, value) => array.get(array.length === 0 ? 0 : value % array.length)
 	});
 }
 
@@ -39,7 +39,7 @@ function getDoublyFormatArray(){
 			return result ? result.getData() : undefined;
 		},
 		"GET": (array, value) => {
-			let result = array.findAt(value % array.size);
+			let result = array.findAt(array.size === 0 ? 0 : value % array.size);
 			return result === -1 ? undefined : result.getData();
 		}
 	});
