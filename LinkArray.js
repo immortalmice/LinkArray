@@ -149,6 +149,27 @@ module.exports = class LinkArray{
 		}
 	}
 
+	reverse(){
+		let current = this.tail;
+		let i = 0;
+		let newArray = [];
+		while(current){
+			[current.pre, current.next] = [current.next, current.pre];
+			current.index = i ++;
+			newArray.push(current);
+			current = current.next;
+		}
+		this.array = newArray;
+
+		this.head = this.array[0];
+		this.tail = this.array[this.array.length-1];
+
+		this.lower_bound = 0;
+		this.upper_bound = this.array.length-1;
+		this.lastRefactorUpperBound = this.upper_bound;
+		return this;
+	}
+
 	forEach(fun){
 		let current = this.head;
 		let i = 0;
