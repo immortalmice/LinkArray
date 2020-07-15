@@ -87,7 +87,7 @@ module.exports = class LinkArray{
 	}
 
 	get(index){
-		if(index < 0 || index > this.length-1 || this.length === 0) return undefined;
+		if(index < 0 || index > this.length-1) return undefined;
 
 		let target = this.getReverseMappedIndex(index);
 		if(target >= 0 && target <= this.lastRefactorUpperBound){
@@ -103,7 +103,7 @@ module.exports = class LinkArray{
 				return this.array[i].value;
 			}
 		}
-		/* Should never go here */
+		/* Should never go here, except index is not integer */
 		return "NOT FOUND";
 	}
 
