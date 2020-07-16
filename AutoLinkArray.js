@@ -20,4 +20,19 @@ module.exports = class AutoLinkArray extends LinkArray{
 		this.refactor();
 		super.concat(anotherLinkArray);
 	}
+	static fromArray(array, boundIn){
+		return AutoLinkArray.fromLinkArray(LinkArray.fromArray(array), boundIn);
+	}
+
+	static fromDoublyLinkedList(list, boundIn){
+		return AutoLinkArray.fromLinkArray(LinkArray.fromDoublyLinkedList(list), boundIn);
+	}
+
+	static fromLinkArray(linkArray, boundIn){
+		let autoLinkArray = new AutoLinkArray(boundIn);
+		linkArray.forEach((value) => {
+			autoLinkArray.push(value);
+		});
+		return autoLinkArray;
+	}
 }
