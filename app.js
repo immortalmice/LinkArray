@@ -1,5 +1,6 @@
 const LinkArray = require("./LinkArray.js");
 const AutoLinkArray = require("./AutoLinkArray.js");
+const SmartArray = require("./SmartArray.js");
 const DoublyLinkedList = require("../double_link_list/index.js");
 const RunTest = require("./RunTest.js");
 const Analyzer = require("./Analyzer.js");
@@ -22,6 +23,12 @@ function getNormalFormatArray(){
 
 function getAutoFormatArray(i){
 	return RunTest.getFormatArray("Auto Link Array", new AutoLinkArray(i), {
+		"GET": (array, value) => array.get(array.length === 0 ? 0 : value % array.length)
+	});
+}
+
+function getSmartArray(i) {
+	return RunTest.getFormatArray("Smart Array", new SmartArray(i), {
 		"GET": (array, value) => array.get(array.length === 0 ? 0 : value % array.length)
 	});
 }
