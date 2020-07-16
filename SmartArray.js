@@ -20,6 +20,7 @@ module.exports = class SmartArray{
 	unshift(val){
 		if(!this.upgraded && this.array.length >= this.bound){
 			this.array = AutoLinkArray.fromArray(this.array, this.refactorBound);
+			this.upgraded = true;
 		}
 		return this.array.unshift(val);
 	}
@@ -30,6 +31,7 @@ module.exports = class SmartArray{
 	shift(){
 		if(!this.upgraded && this.array.length >= this.bound){
 			this.array = AutoLinkArray.fromArray(this.array, this.refactorBound);
+			this.upgraded = true;
 		}
 		return this.array.shift();
 	}
