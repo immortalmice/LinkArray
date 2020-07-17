@@ -151,9 +151,10 @@ module.exports = class LinkArray{
 	}
 
 	reverse(){
+		let newArray = [];
+
 		let current = this.tail;
 		let i = 0;
-		let newArray = [];
 		while(current){
 			[current.pre, current.next] = [current.next, current.pre];
 			current.index = i ++;
