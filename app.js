@@ -5,16 +5,12 @@ const DoublyLinkedList = require("../double_link_list/index.js");
 const RunTest = require("./RunTest.js");
 const Analyzer = require("./Analyzer.js");
 
-const OUTPUT_PATH = "reports/Report"
 
-for(let i = 2000; i <= 500000; i += 2000){
-	let analyzer = new Analyzer(
-		function(){ return getNormalFormatArray(); }
-		, function(){ return getAutoFormatArray(); }
-		, i, 50, OUTPUT_PATH
-	);
-
-	analyzer.runDefault();
+while(RunTest.testCorrectnessWithArray(
+		RunTest.genTest(Math.floor(Math.random() * 100000), ["GET", "PUSH", "UNSHIFT", "POP", "SHIFT"])
+		, getLinkFormatArray(), getAdaptiveFormatArray()
+		)){
+	
 }
 
 function getNormalFormatArray(){
@@ -51,13 +47,3 @@ function getDoublyFormatArray(){
 		}
 	});
 }
-
-/*
-let i = 0;
-while(RunTest.testCorrectnessWithArray(
-		RunTest.genTest(Math.floor(Math.random() * 100000), ["GET", "PUSH", "UNSHIFT", "POP", "SHIFT"])
-		, getAutoFormatArray(), getNormalFormatArray())){
-	
-	console.log(++ i);
-}
-*/
