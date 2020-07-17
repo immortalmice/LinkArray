@@ -5,6 +5,33 @@ const DoublyLinkedList = require("../double_link_list/index.js");
 const RunTest = require("./RunTest.js");
 const Analyzer = require("./Analyzer.js");
 
+/* A sample of running tests and get performance reports */
+for(let i = 2000; i <= 200000; i += 2000){
+    let analyzer = new Analyzer(
+        [() => getNormalFormatArray(), () => getAdaptiveFormatArray()]
+        , i, 50, "reports/AdaptiveArray/NormalArray/Report"
+    );
+
+    analyzer.runDefault();
+}
+
+for(let i = 2000; i <= 200000; i += 2000){
+    let analyzer = new Analyzer(
+        [() => getDoublyFormatArray(), () => getAdaptiveFormatArray()]
+        , i, 50, "reports/AdaptiveArray/DoublyLinkedList/Report"
+    );
+
+    analyzer.runDefault();
+}
+
+for(let i = 2000; i <= 200000; i += 2000){
+    let analyzer = new Analyzer(
+        [() => getNormalFormatArray(), () => getDoublyFormatArray(), () => getAdaptiveFormatArray()]
+        , i, 50, "reports/AdaptiveArray/Triple/Report"
+    );
+
+    analyzer.runDefault();
+}
 
 /* A simple infinite(if no error found) loop to check the two array return SAME value in all cases */
 // while(RunTest.testCorrectnessWithArray(
