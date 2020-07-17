@@ -48,7 +48,15 @@ module.exports = class SmartArray{
 	}
 
 	concat(anotherSmartArray){
-		//TODO
+		if(this.upgraded ^ anotherSmartArray.upgraded){
+			let array1 = this.upgraded ? this : SmartArray.upgrade(this);
+			let array2 = anotherSmartArray.upgraded ? anotherSmartArray : SmartArray.upgrade(anotherSmartArray);
+			return array1.concat(array2);
+		}
+		let newSmartArray = new SmartArray(this.bound, this.refactorBound);
+		newSmartArray.array = this.array.concat(anotherSmartArray.array);
+		newSmartArray.upgraded = this.upgraded;
+		return newSmartArray;
 	}
 
 	reverse(){
