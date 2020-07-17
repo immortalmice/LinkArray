@@ -1,0 +1,158 @@
+=========================================================================================
+
+Wed, 15 Jul 2020 21-49-36 GMT
+Test Unit Amount: 182000
+Sample Amount: 50
+
+Auto List Array Parameters: 5000
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET] With PreFilling :
+
+Doubly Linked List  || Max:  33s 638.06ms | Min:  13s 949.49ms | Averge:  20s 882.72ms ||
+Auto Link Array     || Max:   0s  34.07ms | Min:   0s  21.77ms | Averge:   0s  24.78ms ||
+
+Winner: Auto Link Array
+Ratio: 842.7473
+
+-----------------------------------------------------------------------------------------
+
+Running Command [PUSH] :
+
+Doubly Linked List  || Max:   0s  39.71ms | Min:   0s   4.75ms | Averge:   0s  19.33ms ||
+Auto Link Array     || Max:   0s  22.76ms | Min:   0s   6.22ms | Averge:   0s   9.69ms ||
+
+Winner: Auto Link Array
+Ratio: 1.9954
+
+-----------------------------------------------------------------------------------------
+
+Running Command [UNSHIFT] :
+
+Doubly Linked List  || Max:   0s  37.47ms | Min:   0s   4.64ms | Averge:   0s  19.88ms ||
+Auto Link Array     || Max:   0s  43.75ms | Min:   0s  17.55ms | Averge:   0s  23.37ms ||
+
+Winner: Doubly Linked List
+Ratio: 1.1758
+
+-----------------------------------------------------------------------------------------
+
+Running Command [POP] With PreFilling :
+
+Doubly Linked List  || Max:   0s  12.54ms | Min:   0s   3.76ms | Averge:   0s   5.23ms ||
+Auto Link Array     || Max:   0s   8.44ms | Min:   0s   3.59ms | Averge:   0s   5.26ms ||
+
+Winner: Doubly Linked List
+Ratio: 1.0054
+
+-----------------------------------------------------------------------------------------
+
+Running Command [SHIFT] With PreFilling :
+
+Doubly Linked List  || Max:   0s  11.46ms | Min:   0s   3.73ms | Averge:   0s   5.33ms ||
+Auto Link Array     || Max:   0s   9.44ms | Min:   0s   3.51ms | Averge:   0s   4.85ms ||
+
+Winner: Auto Link Array
+Ratio: 1.0985
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, POP] With PreFilling :
+
+Doubly Linked List  || Max:  12s  40.00ms | Min:   4s 693.81ms | Averge:   6s 991.10ms ||
+Auto Link Array     || Max:   0s  61.03ms | Min:   0s  16.69ms | Averge:   0s  36.32ms ||
+
+Winner: Auto Link Array
+Ratio: 192.4805
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, POP] :
+
+Doubly Linked List  || Max:   0s  39.64ms | Min:   0s   7.19ms | Averge:   0s  20.20ms ||
+Auto Link Array     || Max:   0s  89.96ms | Min:   0s  35.58ms | Averge:   0s  58.40ms ||
+
+Winner: Doubly Linked List
+Ratio: 2.8904
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT] :
+
+Doubly Linked List  || Max:   3s 817.78ms | Min:   3s  97.87ms | Averge:   3s 421.20ms ||
+Auto Link Array     || Max:   0s  69.26ms | Min:   0s  45.84ms | Averge:   0s  55.19ms ||
+
+Winner: Auto Link Array
+Ratio: 61.9864
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, SHIFT, UNSHIFT] With PreFilling :
+
+Doubly Linked List  || Max:  12s 428.89ms | Min:   4s 822.36ms | Averge:   7s 228.08ms ||
+Auto Link Array     || Max:   0s  65.00ms | Min:   0s  14.37ms | Averge:   0s  30.79ms ||
+
+Winner: Auto Link Array
+Ratio: 234.7416
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, SHIFT, UNSHIFT] :
+
+Doubly Linked List  || Max:   0s  34.87ms | Min:   0s   6.19ms | Averge:   0s  16.75ms ||
+Auto Link Array     || Max:   0s 108.49ms | Min:   0s  31.46ms | Averge:   0s  64.75ms ||
+
+Winner: Doubly Linked List
+Ratio: 3.8653
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, POP, SHIFT] With PreFilling :
+
+Doubly Linked List  || Max:  12s 306.61ms | Min:   3s 722.31ms | Averge:   5s 658.25ms ||
+Auto Link Array     || Max:   0s  26.14ms | Min:   0s  14.17ms | Averge:   0s  17.67ms ||
+
+Winner: Auto Link Array
+Ratio: 320.1884
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT, POP, SHIFT] With PreFilling :
+
+Doubly Linked List  || Max:   8s 498.95ms | Min:   2s 723.93ms | Averge:   4s 420.38ms ||
+Auto Link Array     || Max:   0s  68.72ms | Min:   0s  16.30ms | Averge:   0s  43.26ms ||
+
+Winner: Auto Link Array
+Ratio: 102.1742
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT, POP, SHIFT] :
+
+Doubly Linked List  || Max:   0s  37.40ms | Min:   0s   6.36ms | Averge:   0s  20.82ms ||
+Auto Link Array     || Max:   0s 114.99ms | Min:   0s  31.71ms | Averge:   0s  66.39ms ||
+
+Winner: Doubly Linked List
+Ratio: 3.1891
+
+-----------------------------------------------------------------------------------------
+
+Doubly Linked List Win Cases:
+[UNSHIFT] :                                                                        1.1758
+[POP] With PreFilling :                                                            1.0054
+[GET, PUSH, POP] :                                                                 2.8904
+[GET, SHIFT, UNSHIFT] :                                                            3.8653
+[GET, PUSH, UNSHIFT, POP, SHIFT] :                                                 3.1891
+
+Auto Link Array Win Cases:
+[GET] With PreFilling :                                                          842.7473
+[PUSH] :                                                                           1.9954
+[SHIFT] With PreFilling :                                                          1.0985
+[GET, PUSH, POP] With PreFilling :                                               192.4805
+[GET, PUSH, UNSHIFT] :                                                            61.9864
+[GET, SHIFT, UNSHIFT] With PreFilling :                                          234.7416
+[GET, POP, SHIFT] With PreFilling :                                              320.1884
+[GET, PUSH, UNSHIFT, POP, SHIFT] With PreFilling :                               102.1742
+
+=========================================================================================

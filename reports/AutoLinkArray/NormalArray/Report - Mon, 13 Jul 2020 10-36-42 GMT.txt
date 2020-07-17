@@ -1,0 +1,158 @@
+=====================================================================================
+
+Mon, 13 Jul 2020 10-36-42 GMT
+Test Unit Amount: 28000
+Sample Amount: 50
+
+Auto List Array Parameters: 5000
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET] With PreFilling :
+
+Normal Array	|| Max:   0s   0.61ms | Min:   0s   0.37ms | Averge:   0s   0.42ms ||
+Auto Link Array	|| Max:   0s   4.32ms | Min:   0s   2.18ms | Averge:   0s   2.39ms ||
+
+Winner: Normal Array
+Ratio: 5.6232
+
+-------------------------------------------------------------------------------------
+
+Running Command [PUSH] :
+
+Normal Array	|| Max:   0s   0.52ms | Min:   0s   0.40ms | Averge:   0s   0.42ms ||
+Auto Link Array	|| Max:   0s   0.69ms | Min:   0s   0.54ms | Averge:   0s   0.59ms ||
+
+Winner: Normal Array
+Ratio: 1.4122
+
+-------------------------------------------------------------------------------------
+
+Running Command [UNSHIFT] :
+
+Normal Array	|| Max:   0s  72.74ms | Min:   0s  69.41ms | Averge:   0s  70.81ms ||
+Auto Link Array	|| Max:   0s   1.11ms | Min:   0s   0.80ms | Averge:   0s   0.89ms ||
+
+Winner: Auto Link Array
+Ratio: 79.6600
+
+-------------------------------------------------------------------------------------
+
+Running Command [POP] With PreFilling :
+
+Normal Array	|| Max:   0s   0.40ms | Min:   0s   0.27ms | Averge:   0s   0.28ms ||
+Auto Link Array	|| Max:   0s   0.44ms | Min:   0s   0.26ms | Averge:   0s   0.30ms ||
+
+Winner: Normal Array
+Ratio: 1.0502
+
+-------------------------------------------------------------------------------------
+
+Running Command [SHIFT] With PreFilling :
+
+Normal Array	|| Max:   0s  79.84ms | Min:   0s  72.12ms | Averge:   0s  74.80ms ||
+Auto Link Array	|| Max:   0s   0.44ms | Min:   0s   0.32ms | Averge:   0s   0.35ms ||
+
+Winner: Auto Link Array
+Ratio: 216.1663
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, POP] With PreFilling :
+
+Normal Array	|| Max:   0s   0.73ms | Min:   0s   0.44ms | Averge:   0s   0.54ms ||
+Auto Link Array	|| Max:   0s  10.43ms | Min:   0s   1.34ms | Averge:   0s   2.88ms ||
+
+Winner: Normal Array
+Ratio: 5.3801
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, POP] :
+
+Normal Array	|| Max:   0s   0.64ms | Min:   0s   0.46ms | Averge:   0s   0.50ms ||
+Auto Link Array	|| Max:   0s  44.97ms | Min:   0s  13.61ms | Averge:   0s  26.75ms ||
+
+Winner: Normal Array
+Ratio: 53.4342
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT] :
+
+Normal Array	|| Max:   0s  18.53ms | Min:   0s  15.30ms | Averge:   0s  16.21ms ||
+Auto Link Array	|| Max:   0s   8.20ms | Min:   0s   6.97ms | Averge:   0s   7.38ms ||
+
+Winner: Auto Link Array
+Ratio: 2.1967
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET, SHIFT, UNSHIFT] With PreFilling :
+
+Normal Array	|| Max:   0s  95.06ms | Min:   0s  88.60ms | Averge:   0s  91.94ms ||
+Auto Link Array	|| Max:   0s   9.10ms | Min:   0s   1.40ms | Averge:   0s   2.47ms ||
+
+Winner: Auto Link Array
+Ratio: 37.2232
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET, SHIFT, UNSHIFT] :
+
+Normal Array	|| Max:   0s   3.79ms | Min:   0s   0.98ms | Averge:   0s   1.30ms ||
+Auto Link Array	|| Max:   0s  42.57ms | Min:   0s  13.98ms | Averge:   0s  27.30ms ||
+
+Winner: Normal Array
+Ratio: 20.9423
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET, POP, SHIFT] With PreFilling :
+
+Normal Array	|| Max:   0s  35.20ms | Min:   0s  32.43ms | Averge:   0s  33.62ms ||
+Auto Link Array	|| Max:   0s   1.71ms | Min:   0s   1.31ms | Averge:   0s   1.41ms ||
+
+Winner: Auto Link Array
+Ratio: 23.7664
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT, POP, SHIFT] With PreFilling :
+
+Normal Array	|| Max:   0s  57.48ms | Min:   0s  53.11ms | Averge:   0s  54.38ms ||
+Auto Link Array	|| Max:   0s   6.27ms | Min:   0s   1.24ms | Averge:   0s   1.89ms ||
+
+Winner: Auto Link Array
+Ratio: 28.7905
+
+-------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT, POP, SHIFT] :
+
+Normal Array	|| Max:   0s   1.55ms | Min:   0s   0.86ms | Averge:   0s   1.05ms ||
+Auto Link Array	|| Max:   0s  27.25ms | Min:   0s   9.13ms | Averge:   0s  17.15ms ||
+
+Winner: Normal Array
+Ratio: 16.3691
+
+-------------------------------------------------------------------------------------
+
+Normal Array Win Cases:
+[GET] With PreFilling :                                                        5.6232
+[PUSH] :                                                                       1.4122
+[POP] With PreFilling :                                                        1.0502
+[GET, PUSH, POP] With PreFilling :                                             5.3801
+[GET, PUSH, POP] :                                                            53.4342
+[GET, SHIFT, UNSHIFT] :                                                       20.9423
+[GET, PUSH, UNSHIFT, POP, SHIFT] :                                            16.3691
+
+Auto Link Array Win Cases:
+[UNSHIFT] :                                                                   79.6600
+[SHIFT] With PreFilling :                                                    216.1663
+[GET, PUSH, UNSHIFT] :                                                         2.1967
+[GET, SHIFT, UNSHIFT] With PreFilling :                                       37.2232
+[GET, POP, SHIFT] With PreFilling :                                           23.7664
+[GET, PUSH, UNSHIFT, POP, SHIFT] With PreFilling :                            28.7905
+
+=====================================================================================
