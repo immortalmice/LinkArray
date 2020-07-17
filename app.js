@@ -27,8 +27,8 @@ function getAutoFormatArray(i){
 	});
 }
 
-function getSmartArray(i) {
-	return RunTest.getFormatArray("Smart Array", new SmartArray(i), {
+function getAdaptiveFormatArray(i, j) {
+	return RunTest.getFormatArray("Adaptive Array", new AdaptiveArray(i, j), {
 		"GET": (array, value) => array.get(array.length === 0 ? 0 : value % array.length)
 	});
 }

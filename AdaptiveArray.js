@@ -1,6 +1,6 @@
 const AutoLinkArray = require("./AutoLinkArray.js");
 
-module.exports = class SmartArray{
+module.exports = class AdaptiveArray{
 	constructor(boundIn, refactorBoundIn){
 		this.bound = boundIn || 5000;
 		this.refactorBound = refactorBoundIn || this.bound;
@@ -47,16 +47,23 @@ module.exports = class SmartArray{
 		this.upgraded = false;
 	}
 
-	concat(anotherSmartArray){
-		if(this.upgraded ^ anotherSmartArray.upgraded){
-			let array1 = this.upgraded ? this : SmartArray.upgrade(this);
-			let array2 = anotherSmartArray.upgraded ? anotherSmartArray : SmartArray.upgrade(anotherSmartArray);
+	concat(anotherAdaptiveArray){
+		if(this.upgraded ^ anotherAdaptiveArray.upgraded){
+			let array1 = this.upgraded ? this : AdaptiveArray.upgrade(this);
+			let array2 = anotherAdaptiveArray.upgraded ? anotherAdaptiveArray : AdaptiveArray.upgrade(anotherAdaptiveArray);
 			return array1.concat(array2);
 		}
-		let newSmartArray = new SmartArray(this.bound, this.refactorBound);
-		newSmartArray.array = this.array.concat(anotherSmartArray.array);
-		newSmartArray.upgraded = this.upgraded;
-		return newSmartArray;
+		let newAdaptiveArray = new AdaptiveArray(this.bound, this.refactorBound);
+		newAdaptiveArray.array = this.array.concat(anotherAdaptiveArray.array);
+		newAdaptiveArray.upgraded = this.upgraded;
+		return newAdaptiveArray;
+	}
+
+	asArray(){
+		if(this.upgraded){
+			return this.array.asArray();
+		}
+		return this.array;
 	}
 
 	reverse(){
@@ -74,14 +81,14 @@ module.exports = class SmartArray{
 		}
 	}
 
-	static upgrade(smartArrayIn){
-		let newSmartArray = new SmartArray(this.bound, this.refactorBound);
-		if(!smartArrayIn.upgraded){
-			newSmartArray.array = AutoLinkArray.fromArray(smartArrayIn.array);
+	static upgrade(adaptiveArrayIn){
+		let newAdaptiveArray = new AdaptiveArray(this.bound, this.refactorBound);
+		if(!adaptiveArrayIn.upgraded){
+			newAdaptiveArray.array = AutoLinkArray.fromArray(adaptiveArrayIn.array);
 		}else{
-			newSmartArray.array = smartArrayIn.array.copy();
+			newAdaptiveArray.array = adaptiveArrayIn.array.copy();
 		}
-		newSmartArray.upgraded = true;
-		return newSmartArray;
+		newAdaptiveArray.upgraded = true;
+		return newAdaptiveArray;
 	}
 }
