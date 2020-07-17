@@ -33,7 +33,6 @@ module.exports = class Analyzer{
 			let instances = this.arrayFactorys.map((factory) => factory());
 
 			try{
-				console.log(global.gc);
 				if(progressLogger) progressLogger.setAndLog({type: "descript", value: "Runing GC..."});
 				if(global.gc) global.gc();
 				if(progressLogger) progressLogger.end("descript");
@@ -47,7 +46,7 @@ module.exports = class Analyzer{
 				if(progressLogger)
 					progressLogger.setAndLog({type: "descript", value: "Filling..."});
 
-				RunTest.randomFill(this.unitAmount, false, ...instances);
+				RunTest.randomFill(this.unitAmount, true, ...instances);
 
 				if(progressLogger)
 					progressLogger.end("descript");

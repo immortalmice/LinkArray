@@ -133,7 +133,7 @@ module.exports = class RunTest{
 			for (var i = 0; i <= data.length-1; i++) {
 				array.run(data[i]);
 				if(showProgress && Math.floor((i + 1) / length_fifth) - Math.floor(i / length_fifth) > 0){
-					console.log(index + 1, "/", arrays.length, " | ", (i / (data.length - 1) * 100).toFixed(2), "%");
+					console.log(array.getName(), ":", index + 1, "/", arrays.length, " | ", (i / (data.length - 1) * 100).toFixed(2), "%");
 				}
 			}
 		});
