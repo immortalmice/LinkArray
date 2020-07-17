@@ -196,14 +196,6 @@ module.exports = class LinkArray{
 		return linkArray;
 	}
 
-	static fromDoublyLinkedList(list){
-		let linkArray = new LinkArray();
-		list.forEach((node) => {
-			linkArray.push(node.getData());
-		});
-		return linkArray;
-	}
-
 	_init(){
 		this.head = null;
 		this.tail = this.head;
