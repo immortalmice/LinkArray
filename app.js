@@ -6,13 +6,16 @@ const RunTest = require("./RunTest.js");
 const Analyzer = require("./Analyzer.js");
 
 
+/* A simple infinite(if no error found) loop to check the two array return SAME value in all cases */
 while(RunTest.testCorrectnessWithArray(
 		RunTest.genTest(Math.floor(Math.random() * 100000), ["GET", "PUSH", "UNSHIFT", "POP", "SHIFT"])
+		/* Change the two parameters below to switch array type for testing, recommend using helper functions in this file */
 		, getLinkFormatArray(), getAdaptiveFormatArray()
 		)){
 	
 }
 
+/* Helper functions to get a new formatted array that can use in testing directly */
 function getNormalFormatArray(){
 	return RunTest.getFormatArray("Normal Array", []);
 }
