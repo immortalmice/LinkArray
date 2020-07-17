@@ -142,10 +142,7 @@ module.exports = class LinkArray{
 	}
 
 	concat(anotherLinkArray){
-		let newLinkArray = new LinkArray();
-		this.forEach((value) => {
-			newLinkArray.push(value);
-		});
+		let newLinkArray = this.copy();
 		anotherLinkArray.forEach((value) => {
 			newLinkArray.push(value);
 		});
