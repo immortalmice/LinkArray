@@ -5,6 +5,7 @@ module.exports = class AutoLinkArray extends LinkArray{
 		super();
 		this.refactorBound = refactorBoundIn || 5000;
 	}
+	
 	get(index){
 		if(this.array.length - this.lastRefactorUpperBound >= this.refactorBound){
 			this.refactor();
@@ -19,6 +20,11 @@ module.exports = class AutoLinkArray extends LinkArray{
 	concat(anotherLinkArray, newRefactorBound){
 		return AutoLinkArray.fromLinkArray(super.concat(anotherLinkArray), newRefactorBound || this.refactorBound);
 	}
+
+	copy(){
+		return AutoLinkArray.fromLinkArray(super.copy(), this.refactorBound);
+	}
+
 	static fromArray(array, boundIn){
 		return AutoLinkArray.fromLinkArray(LinkArray.fromArray(array), boundIn);
 	}

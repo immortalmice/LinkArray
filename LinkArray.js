@@ -183,6 +183,14 @@ module.exports = class LinkArray{
 		}
 	}
 
+	copy(){
+		let newLinkArray = new LinkArray();
+		this.forEach((value) => {
+			newLinkArray.push(value);
+		});
+		return newLinkArray;
+	}
+
 	static fromArray(array){
 		let linkArray = new LinkArray();
 		array.forEach((value) => {
