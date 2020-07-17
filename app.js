@@ -17,6 +17,12 @@ function getNormalFormatArray(){
 	return RunTest.getFormatArray("Normal Array", []);
 }
 
+function getLinkFormatArray(){
+	return RunTest.getFormatArray("Link Array", new LinkArray(), {
+		"GET": (array, value) => array.get(array.length === 0 ? 0 : value % array.length)
+	});
+}
+
 function getAutoFormatArray(i){
 	return RunTest.getFormatArray("Auto Link Array", new AutoLinkArray(i), {
 		"GET": (array, value) => array.get(array.length === 0 ? 0 : value % array.length)
