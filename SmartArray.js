@@ -59,6 +59,13 @@ module.exports = class SmartArray{
 		return newSmartArray;
 	}
 
+	asArray(){
+		if(this.upgraded){
+			return this.array.asArray();
+		}
+		return this.array;
+	}
+
 	reverse(){
 		return this.array.reverse();
 	}
