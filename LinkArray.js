@@ -103,7 +103,8 @@ module.exports = class LinkArray{
 				return this.array[i].value;
 			}
 		}
-		/* Should never go here, except index is not integer */
+
+		// Should NEVER go here, except index is not a integer.
 		return "NOT FOUND";
 	}
 
