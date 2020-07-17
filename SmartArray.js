@@ -60,4 +60,22 @@ module.exports = class SmartArray{
 	forEach(fun){
 		this.array.forEach(fun);
 	}
+
+	inPlaceUpgrade(){
+		if(!this.upgraded){
+			this.array = AutoLinkArray.fromArray(this.array, this.refactorBound);
+			this.upgraded = true;
+		}
+	}
+
+	static upgrade(smartArrayIn){
+		let newSmartArray = new SmartArray(this.bound, this.refactorBound);
+		if(!smartArrayIn.upgraded){
+			newSmartArray.array = AutoLinkArray.fromArray(smartArrayIn.array);
+		}else{
+			newSmartArray.array = smartArrayIn.array.copy();
+		}
+		newSmartArray.upgraded = true;
+		return newSmartArray;
+	}
 }
