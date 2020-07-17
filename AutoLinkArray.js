@@ -16,9 +16,8 @@ module.exports = class AutoLinkArray extends LinkArray{
 		}
 		return super.get(index);
 	}
-	concat(anotherLinkArray){
-		this.refactor();
-		super.concat(anotherLinkArray);
+	concat(anotherLinkArray, newRefactorBound){
+		return AutoLinkArray.fromLinkArray(super.concat(anotherLinkArray), newRefactorBound || this.refactorBound);
 	}
 	static fromArray(array, boundIn){
 		return AutoLinkArray.fromLinkArray(LinkArray.fromArray(array), boundIn);

@@ -142,11 +142,14 @@ module.exports = class LinkArray{
 	}
 
 	concat(anotherLinkArray){
-		let current = anotherLinkArray.head;
-		while(current){
-			this.push(current.value);
-			current = current.next;
-		}
+		let newLinkArray = new LinkArray();
+		this.forEach((value) => {
+			newLinkArray.push(value);
+		});
+		anotherLinkArray.forEach((value) => {
+			newLinkArray.push(value);
+		});
+		return newLinkArray;
 	}
 
 	reverse(){
