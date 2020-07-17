@@ -34,13 +34,12 @@ for(let i = 2000; i <= 200000; i += 2000){
 }
 
 /* A simple infinite(if no error found) loop to check the two array return SAME value in all cases */
-// while(RunTest.testCorrectnessWithArray(
-// 		RunTest.genTest(Math.floor(Math.random() * 100000), ["GET", "PUSH", "UNSHIFT", "POP", "SHIFT"])
-// 		/* Change the two parameters below to switch array type for testing, recommend using helper functions in this file */
-// 		, getLinkFormatArray(), getNormalFormatArray()
-// 		)){
-	
-// }
+while(RunTest.testCorrectnessWithArray(
+		RunTest.genTest(Math.floor(Math.random() * 100000), ["GET", "PUSH", "UNSHIFT", "POP", "SHIFT"])
+		/* Change the two parameters below to switch array type for testing, recommend using helper functions in this file */
+		, getLinkFormatArray(), getNormalFormatArray()
+		)){
+}
 
 /* Helper functions to get a new formatted array that can use in testing directly */
 function getNormalFormatArray(){
