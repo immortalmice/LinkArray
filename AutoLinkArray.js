@@ -1,5 +1,10 @@
 const LinkArray = require("./LinkArray.js");
-
+/**
+ * A child class extends {@link LinkArray}.
+ * This will auto refator itself when the length of unrefactor parts exceed a const value set in contruction.
+ * 
+ * @author Immortalmice
+ */
 module.exports = class AutoLinkArray extends LinkArray{
 	constructor(refactorBoundIn){
 		super();
