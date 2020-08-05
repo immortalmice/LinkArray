@@ -36,11 +36,12 @@ module.exports = class ReportJsonPharserFile{
 		return FS.readFileSync(this.path);
 	}
 
-	pharseReport(){
+	pharseReport(targets){
+
 		let FILE_CONTENT = this.getContent();
 		let result = this.getPrimeField();
 
-		["Auto Link Array Win Cases", "Normal Array Win Cases"].forEach((NAME_SPACE, index) => {
+		targets.forEach((NAME_SPACE, index) => {
 			let namePos = FILE_CONTENT.indexOf(NAME_SPACE);
 			let rest = String(FILE_CONTENT.slice(namePos));
 
@@ -58,7 +59,7 @@ module.exports = class ReportJsonPharserFile{
 	}
 
 	pharseTime(target){
-		target = target || "Auto Link Array";
+		target = target || "Adaptive Array";
 
 		let FILE_CONTENT = this.getContent();
 		let result = this.getPrimeField();
