@@ -1,16 +1,12 @@
 const PHARSER_FOLDER = require("./ReportJsonPharserFolder");
 
-/*
-const REPORT_FOLDERS = [
-	"reports/UnitResult",
-	"reports/LowUnitResult",
-	"reports/BoundResult_100000",
-	"reports/BoundResult_300000"
-];
+let pharserFolder;
 
-let pharserFolder = new PHARSER_FOLDER(REPORT_FOLDERS);
-pharserFolder.parseReport();
-*/
+pharserFolder = new PHARSER_FOLDER(["reports/AdaptiveArray/NormalArray"]);
+pharserFolder.pharseReport(["Adaptive Array Win Cases", "Normal Array Win Cases"]);
 
-let pharserFolder = new PHARSER_FOLDER(["reports/UnitResult"]);
-pharserFolder.pharseTimeReport();
+pharserFolder = new PHARSER_FOLDER(["reports/AdaptiveArray/DoublyLinkedList"]);
+pharserFolder.pharseReport(["Adaptive Array Win Cases", "Doubly Linked List Win Cases"]);
+
+pharserFolder = new PHARSER_FOLDER(["reports/AdaptiveArray/Triple"]);
+pharserFolder.pharseTimeReport(["Normal Array", "Doubly Linked List", "Adaptive Array"]);
