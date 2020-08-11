@@ -1,7 +1,7 @@
-const LinkArray = require("./LinkArray.js");
-const AutoLinkArray = require("./AutoLinkArray.js");
-const AdaptiveArray = require("./AdaptiveArray.js");
-const DoublyLinkedList = require("../double_link_list/index.js");
+const LinkArray = require("../LinkArray.js");
+const AutoLinkArray = require("../AutoLinkArray.js");
+const AdaptiveArray = require("../AdaptiveArray.js");
+const DoublyLinkedList = require("../../../double_link_list/index.js");
 const RunTest = require("./RunTest.js");
 const Analyzer = require("./Analyzer.js");
 
@@ -19,6 +19,15 @@ for(let i = 2000; i <= 200000; i += 2000){
     let analyzer = new Analyzer(
         [() => getDoublyFormatArray(), () => getAdaptiveFormatArray()]
         , i, 50, "reports/AdaptiveArray/DoublyLinkedList/Report"
+    );
+
+    analyzer.runDefault();
+}
+
+for(let i = 2000; i <= 200000; i += 2000){
+    let analyzer = new Analyzer(
+        [() => getNormalFormatArray(), () => getDoublyFormatArray(), () => getAdaptiveFormatArray()]
+        , i, 50, "reports/AdaptiveArray/Triple/Report"
     );
 
     analyzer.runDefault();
