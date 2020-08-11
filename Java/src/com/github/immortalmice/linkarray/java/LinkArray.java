@@ -15,6 +15,45 @@ public class LinkArray<T>{
 	protected int getMappedIndex(int index){ return index - this.lowerBound; }
 	protected int getReverseMappedIndex(int index){ return index + this.lowerBound; }
 
+	public boolean push(T val){
+		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
+
+		if(this.tail != null){
+			this.tail.next = elementToPush;
+		}
+		if(this.head == null){
+			this.head = elementToPush;
+		}
+		this.tail = elementToPush;
+
+		if(this.upperBound >= 0 && this.upperBound <= this.lastRefactorUpperBound){
+			this.array.set(this.upperBound, elementToPush);
+		}else{
+			this.array.add(elementToPush);
+		}
+
+		return true;
+	}
+
+	public void unshift(T val){
+		LinkArrayNode<T> elementToUnshift = new LinkArrayNode<>(-- this.lowerBound, val);
+
+		if(this.head != null){
+			this.head.pre = elementToUnshift;
+		}
+		if(this.tail == null){
+			this.tail = elementToUnshift;
+		}
+		this.head = elementToUnshift;
+
+		if(this.lowerBound >= 0){
+			this.array.set(this.lowerBound, elementToUnshift);
+		}else{
+			this.array.add(elementToUnshift);
+		}
+
+		return;
+	}
 
 	public void devPrint(){
 		System.out.printf("==========================\n");
