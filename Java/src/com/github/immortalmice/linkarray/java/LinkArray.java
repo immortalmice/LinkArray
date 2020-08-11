@@ -15,6 +15,21 @@ public class LinkArray<T>{
 	protected int getMappedIndex(int index){ return index - this.lowerBound; }
 	protected int getReverseMappedIndex(int index){ return index + this.lowerBound; }
 
+
+	public void devPrint(){
+		System.out.printf("==========================\n");
+		System.out.printf("LowerBound: %d\n", this.lowerBound);
+		System.out.printf("UpperBound: %d\n", this.upperBound);
+		System.out.printf("LastRefactorUpperBound: %d\n", this.lastRefactorUpperBound);
+
+		System.out.printf("==========================");
+		this.array.forEach((node) -> {
+			System.out.printf("\nIndex: %d\n", node.index);
+			System.out.printf("Value: %d\n", node.value);
+		});
+		System.out.printf("==========================\n");
+	}
+
 	protected class LinkArrayNode<F>{
 		public int index;
 		public F value;
