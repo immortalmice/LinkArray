@@ -12,5 +12,8 @@ public class LinkArrayApp{
 		array.unshift(66);
 		array.unshift(7);
 		array.devPrint();
+		
+		array.refactor();
+		array.devPrint();
 	}
 }

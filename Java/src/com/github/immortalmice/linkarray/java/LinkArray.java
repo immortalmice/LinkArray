@@ -57,6 +57,27 @@ public class LinkArray<T>{
 		return;
 	}
 
+	public void refactor(){
+		ArrayList<LinkArrayNode<T>> newArray = new ArrayList<>();
+
+		LinkArrayNode<T> current = this.head;
+		int i = 0;
+
+		while(current != null){
+			current.index = i ++;
+			newArray.add(current);
+			current = current.next;
+		}
+
+		this.array = newArray;
+
+		this.lowerBound = 0;
+		this.upperBound = this.array.size()-1;
+		this.lastRefactorUpperBound = this.upperBound;
+
+		return;
+	}
+
 	public void devPrint(){
 		System.out.printf("==========================\n");
 		System.out.printf("LowerBound: %d\n", this.lowerBound);
