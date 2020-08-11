@@ -19,10 +19,6 @@
     LinkArray在資料量小時表現差  
     因此AdaptiveArray在資料量小時維持原生陣列的格式，資料量大時自行升級為LinkArray  
     
-性能測試報告
----
-- [AutoLinkArray](https://docs.google.com/spreadsheets/d/1BD9gHeoGC48EA0i1AbdahxI_zEBVmSjZAeOJUYpxKP4/edit?usp=sharing)
-- [AdaptiveArray](https://docs.google.com/spreadsheets/d/1z5rMht8dqc3bMp_eS2LW20jr-XR3ADW8Iw7a85ZbWk0/edit?usp=sharing)
 
 關於LinkArray
 ---
@@ -94,3 +90,26 @@ Refactor操作時間複雜度為O(n)
 
 當重構範圍越大，GET操作效率越好，但也不可頻繁的Refactor。  
 因此如何在適當的時間點進行重構，是LinkArray最大的課題。  
+
+關於AutoLinkArray
+---
+
+AutoLinkArray是LinkArray的衍伸類別  
+由於重構對於LinkArray的GET效率有著深厚的影響，但重構是一個O(n)的動作  
+因此AutoLinkArray會自行在適當的時間點進行重構  
+
+目前有兩個實作方法  
+
+1. 當未重構的範圍超過一定數量時，Ex.`array`中未重構的元素個數超過5000個時進行重構  
+2. 當未重構的範圍超過一定比例時，Ex.`array`中未重構的元素個數佔比20%以上時進行重構  
+
+
+關於AdaptiveArray
+---
+
+LinkArray在內含資料量小的時候優勢並不明顯。  
+儘管PUSH、UNSHIFT、POP、SHIFT的時間複雜度均為O(1)，但因為進行的操作的動作是比較多的情況下，LinkArray在做這些操作上依舊是會花較多的時間。  
+
+因此AdapativeArray因應而生。  
+AdaptiveArray剛開始的時候是一個原生的陣列，然而當陣列長度大於某個數值(EX.5000)，AdaptiveArray會自動升級成LinkArray(通常是AutoLinkArray)。  
+一旦升級，便不會降級回原生陣列，即使陣列長度再度小於該數值。  
