@@ -49,16 +49,16 @@ public class LinkArrayApp{
 
 	private static RunTest.FormatArray<ArrayList<Integer>> getArrayListFormatArray(){
 		return new RunTest.FormatArray<>("ArrayList", new ArrayList<Integer>()
-			, (array, value) -> { return array.get(array.size() == 0 ? 0 : value % array.size()); }
+			, (array, value) -> { return array.size() == 0 ? 0 : array.get(value % array.size()); }
 			, (array, value) -> { array.add(value); }
 			, (array, value) -> { array.add(0, value); }
-			, (array, value) -> { array.remove(array.size()-1); }
-			, (array, value) -> { array.remove(0); });
+			, (array, value) -> { if(array.size() != 0) array.remove(array.size()-1); }
+			, (array, value) -> { if(array.size() != 0) array.remove(0); });
 	}
 
 	private static RunTest.FormatArray<LinkArray<Integer>> getLinkArrayFormatArray(){
 		return new RunTest.FormatArray<>("LinkArray", new LinkArray<Integer>()
-			, (array, value) -> { return array.get(array.length() == 0 ? 0 : value % array.length()); }
+			, (array, value) -> { return array.length() == 0 ? 0 : array.get(value % array.length()); }
 			, (array, value) -> { array.push(value); }
 			, (array, value) -> { array.unshift(value); }
 			, (array, value) -> { array.pop(); }
