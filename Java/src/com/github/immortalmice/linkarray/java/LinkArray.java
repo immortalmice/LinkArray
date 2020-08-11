@@ -1,10 +1,13 @@
 package com.github.immortalmice.linkarray.java;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import com.sun.istack.internal.Nullable;
 
-public class LinkArray<T>{
+public class LinkArray<T> extends AbstractCollection<T>{
 	protected ArrayList<LinkArrayNode> array = new ArrayList<>();
 	protected LinkArrayNode head = null;
 	protected LinkArrayNode tail = null;
@@ -140,6 +143,60 @@ public class LinkArray<T>{
 		return null;
 	}
 
+	@Override
+	public boolean add(T val) {
+		return this.push(val);
+	}
+
+	@Override
+	public void clear() {
+		this.array = new ArrayList<>();
+
+		this.head = null;
+		this.tail = null;
+
+		this.lowerBound = 0;
+		this.upperBound = -1;
+		this.lastRefactorUpperBound = -1;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new LinkArrayIterator();
+	}
+
+	@Override
+	public boolean remove(Object object) {
+		if(this.head != null && this.head.value == object){
+			this.shift();
+			return true;
+		}
+		if(this.tail != null && this.tail.value == object){
+			this.pop();
+			return true;
+		}
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean removeAll(Collection<?> collection){
+		Iterator<?> iterator = collection.iterator();
+		while(iterator.hasNext()){
+			this.remove(iterator.next());
+		}
+		return true;
+	}
+
+	@Override
+	public boolean retainAll(Collection<?> collection){
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public int size(){
+		return this.length();
+	}
+
 	public void devPrint(){
 		System.out.printf("==========================\n");
 		System.out.printf("LowerBound: %d\n", this.lowerBound);
@@ -163,6 +220,34 @@ public class LinkArray<T>{
 		public LinkArrayNode(int indexIn, T valueIn){
 			this.index = indexIn;
 			this.value = valueIn;
+		}
+	}
+
+	private class LinkArrayIterator implements Iterator<T>{
+		private int cursor = -1;
+
+		@Override
+		public boolean hasNext(){
+			int newCursor = cursor + 1;
+			if(newCursor >= 0 && newCursor <= LinkArray.this.length()-1)
+				return true;
+			return false;
+		}
+
+		@Override
+		public T next(){
+			return LinkArray.this.get(++ cursor);
+		}
+		
+		@Override
+		public void remove(){
+			if(cursor == 0){
+				LinkArray.this.shift();
+			}else if(cursor == LinkArray.this.length()-1){
+				LinkArray.this.pop();
+			}else{
+				throw new UnsupportedOperationException();
+			}
 		}
 	}
 }

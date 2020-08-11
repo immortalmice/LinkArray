@@ -1,5 +1,7 @@
 package com.github.immortalmice.linkarray.java.analyze;
 
+import java.util.Iterator;
+
 import com.github.immortalmice.linkarray.java.LinkArray;
 
 public class LinkArrayApp{
@@ -17,9 +19,15 @@ public class LinkArrayApp{
 		System.out.println(array.get(5));
 		System.out.println(array.get(3));
 		System.out.println(array.get(2));
+
+		System.out.println("===========");
+		Iterator<Integer> iterator = array.iterator();
+		while(iterator.hasNext()){
+			System.out.println(iterator.next());
+		}
+		System.out.println("===========");
 		
 		array.refactor();
-		
 		array.devPrint();
 		System.out.println(array.get(0));
 		System.out.println(array.get(5));
