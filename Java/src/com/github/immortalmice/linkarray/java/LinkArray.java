@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import com.sun.istack.internal.Nullable;
 
 public class LinkArray<T>{
-	protected ArrayList<LinkArrayNode<T>> array = new ArrayList<>();
-	protected LinkArrayNode<T> head = null;
-	protected LinkArrayNode<T> tail = null;
+	protected ArrayList<LinkArrayNode> array = new ArrayList<>();
+	protected LinkArrayNode head = null;
+	protected LinkArrayNode tail = null;
 	protected int lowerBound = 0;
 	protected int upperBound = -1;
 	protected int lastRefactorUpperBound = -1;
@@ -18,7 +18,7 @@ public class LinkArray<T>{
 	protected int getReverseMappedIndex(int index){ return index + this.lowerBound; }
 
 	public boolean push(T val){
-		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
+		LinkArrayNode elementToPush = new LinkArrayNode(++ this.upperBound, val);
 		elementToPush.pre = this.tail;
 
 		if(this.tail != null){
@@ -39,7 +39,7 @@ public class LinkArray<T>{
 	}
 
 	public void unshift(T val){
-		LinkArrayNode<T> elementToUnshift = new LinkArrayNode<>(-- this.lowerBound, val);
+		LinkArrayNode elementToUnshift = new LinkArrayNode(-- this.lowerBound, val);
 		elementToUnshift.next = this.head;
 
 		if(this.head != null){
@@ -71,7 +71,7 @@ public class LinkArray<T>{
 			start = Math.abs(start) + this.lastRefactorUpperBound;
 
 		for(int i = start; i <= this.array.size()-1; i ++){
-			LinkArrayNode<T> node = this.array.get(i);
+			LinkArrayNode node = this.array.get(i);
 			if(node.index == target && node.value != null)
 				return node.value;
 		}
@@ -80,9 +80,9 @@ public class LinkArray<T>{
 	}
 
 	public void refactor(){
-		ArrayList<LinkArrayNode<T>> newArray = new ArrayList<>();
+		ArrayList<LinkArrayNode> newArray = new ArrayList<>();
 
-		LinkArrayNode<T> current = this.head;
+		LinkArrayNode current = this.head;
 		int i = 0;
 
 		while(current != null){
@@ -154,13 +154,13 @@ public class LinkArray<T>{
 		System.out.printf("==========================\n");
 	}
 
-	protected class LinkArrayNode<F>{
+	protected class LinkArrayNode{
 		public int index;
-		public F value;
-		public LinkArrayNode<F> next = null;
-		public LinkArrayNode<F> pre = null;
+		public T value;
+		public LinkArrayNode next = null;
+		public LinkArrayNode pre = null;
 
-		public LinkArrayNode(int indexIn, F valueIn){
+		public LinkArrayNode(int indexIn, T valueIn){
 			this.index = indexIn;
 			this.value = valueIn;
 		}
