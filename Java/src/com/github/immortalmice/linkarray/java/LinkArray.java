@@ -17,6 +17,7 @@ public class LinkArray<T>{
 
 	public boolean push(T val){
 		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
+		elementToPush.pre = this.tail;
 
 		if(this.tail != null){
 			this.tail.next = elementToPush;
@@ -37,6 +38,7 @@ public class LinkArray<T>{
 
 	public void unshift(T val){
 		LinkArrayNode<T> elementToUnshift = new LinkArrayNode<>(-- this.lowerBound, val);
+		elementToUnshift.next = this.head;
 
 		if(this.head != null){
 			this.head.pre = elementToUnshift;
