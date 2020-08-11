@@ -1,6 +1,7 @@
 package com.github.immortalmice.linkarray.java.analyze;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
@@ -27,6 +28,37 @@ public class RunTest{
 		return (new Random()).nextInt(upperBound);
 	}
 
+	public static boolean testCorrectnessWithList(List<TestUnit> testArray, FormatArray<?> array1, FormatArray<?> array2){
+		Iterator<TestUnit> iterator = testArray.iterator();
+		while(iterator.hasNext()){
+			TestUnit testUnit = iterator.next();
+
+			Object result1 = array1.run(testUnit);
+			Object result2 = array2.run(testUnit);
+
+			if(result1 != null && result2 != null && !result1.equals(result2)){
+				System.out.printf("Failed => %s\n", testUnit.toString());
+				System.out.printf("%s: %d\n", array1.getName(), result1);
+				System.out.printf("%s: %d\n", array2.getName(), result2);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean testGetCorrectness(int length, FormatArray<?> array1, FormatArray<?> array2){
+		List<TestUnit> testArray = new ArrayList<>();
+		for(int i = 0; i <= length-1; i ++){
+			testArray.add(new TestUnit("GET", i));
+		}
+		return RunTest.testCorrectnessWithList(testArray, array1, array2);
+	}
+
+	public static boolean testCorrectness(int length, FormatArray<?> array1, FormatArray<?> array2){
+		List<TestUnit> testArray = RunTest.genTest(length, new String[]{"GET", "PUSH", "UNSHIFT", "POP", "SHIFT"});
+		return RunTest.testCorrectnessWithList(testArray, array1, array2);
+	}
+
 	public static class TestUnit{
 		private String command;
 		private int value;
@@ -38,6 +70,7 @@ public class RunTest{
 
 		public String getCommand(){ return this.command; }
 		public int getValue(){ return this.value; }
+		public String toString(){ return String.format("%s: %d", this.command, this.value); }
 	}
 
 	public static class FormatArray<T>{

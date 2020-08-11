@@ -1,50 +1,29 @@
 package com.github.immortalmice.linkarray.java.analyze;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Random;
 
 import com.github.immortalmice.linkarray.java.LinkArray;
-import com.github.immortalmice.linkarray.java.analyze.RunTest;
 
 public class LinkArrayApp{
 	public static void main(String[] args){
-		LinkArray<Integer> array = new LinkArray<>();
-		array.push(5);
-		array.push(9);
-		array.unshift(-8);
-		array.push(106);
-		array.unshift(66);
-		array.unshift(7);
-		
-		array.devPrint();
-		System.out.println(array.get(0));
-		System.out.println(array.get(5));
-		System.out.println(array.get(3));
-		System.out.println(array.get(2));
+		LinkArrayApp.checkCorrectness(10);
+	}
 
-		System.out.println("===========");
-		Iterator<Integer> iterator = array.iterator();
-		while(iterator.hasNext()){
-			System.out.println(iterator.next());
+	private static boolean checkCorrectness(int times){
+		boolean isFailed = false;
+		while(times -- > 0 && !isFailed){
+			RunTest.FormatArray<ArrayList<Integer>> arrayList = LinkArrayApp.getArrayListFormatArray();
+			RunTest.FormatArray<LinkArray<Integer>> linkArray = LinkArrayApp.getLinkArrayFormatArray();
+
+			int randomLength = (new Random()).nextInt(100000);
+			System.out.printf("Round %d with length %d\n", times, randomLength);
+			if(!RunTest.testCorrectness(randomLength, arrayList, linkArray) || !RunTest.testGetCorrectness(randomLength, arrayList, linkArray))
+				isFailed = true;
 		}
-		System.out.println("===========");
-		
-		array.refactor();
-		array.devPrint();
-		System.out.println(array.get(0));
-		System.out.println(array.get(5));
-		System.out.println(array.get(3));
-		System.out.println(array.get(2));
-		
-		System.out.println("===========");
-		System.out.printf("POP: %d\n", array.pop());
-		System.out.printf("SHIFT: %d\n", array.shift());
-		System.out.printf("POP: %d\n", array.pop());
-		System.out.printf("POP: %d\n", array.pop());
-		System.out.printf("SHIFT: %d\n", array.shift());
-		System.out.printf("SHIFT: %d\n", array.shift());
-		System.out.printf("POP: %d\n", array.pop());
-		System.out.printf("SHIFT: %d\n", array.shift());
+		if(!isFailed)
+			System.out.println("All Test Passed!");
+		return isFailed;
 	}
 
 	private static RunTest.FormatArray<ArrayList<Integer>> getArrayListFormatArray(){
