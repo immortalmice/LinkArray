@@ -47,8 +47,8 @@ public class LinkArrayApp{
 		System.out.printf("SHIFT: %d\n", array.shift());
 	}
 
-	private static RunTest.FromatArray<ArrayList<Integer>> getArrayListFormatArray(){
-		return new RunTest.FromatArray<>("ArrayList", new ArrayList<Integer>()
+	private static RunTest.FormatArray<ArrayList<Integer>> getArrayListFormatArray(){
+		return new RunTest.FormatArray<>("ArrayList", new ArrayList<Integer>()
 			, (array, value) -> { return array.get(array.size() == 0 ? 0 : value % array.size()); }
 			, (array, value) -> { array.add(value); }
 			, (array, value) -> { array.add(0, value); }
@@ -56,8 +56,8 @@ public class LinkArrayApp{
 			, (array, value) -> { array.remove(0); });
 	}
 
-	private static RunTest.FromatArray<LinkArray<Integer>> getLinkArrayFormatArray(){
-		return new RunTest.FromatArray<>("LinkArray", new LinkArray<Integer>()
+	private static RunTest.FormatArray<LinkArray<Integer>> getLinkArrayFormatArray(){
+		return new RunTest.FormatArray<>("LinkArray", new LinkArray<Integer>()
 			, (array, value) -> { return array.get(array.length() == 0 ? 0 : value % array.length()); }
 			, (array, value) -> { array.push(value); }
 			, (array, value) -> { array.unshift(value); }

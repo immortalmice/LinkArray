@@ -40,7 +40,7 @@ public class RunTest{
 		public int getValue(){ return this.value; }
 	}
 
-	public static class FromatArray<T>{
+	public static class FormatArray<T>{
 		private String name;
 		private T array;
 
@@ -50,7 +50,7 @@ public class RunTest{
 		private BiConsumer<T, Integer> popFunction;
 		private BiConsumer<T, Integer> shiftFunction;
 
-		public FromatArray(String nameIn, T initialIn
+		public FormatArray(String nameIn, T initialIn
 			, BiFunction<T, Integer, Integer> getFunctionIn
 			, BiConsumer<T, Integer> pushFunctionIn
 			, BiConsumer<T, Integer> unshiftFunctionIn
