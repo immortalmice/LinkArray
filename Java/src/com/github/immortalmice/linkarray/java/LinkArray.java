@@ -2,6 +2,8 @@ package com.github.immortalmice.linkarray.java;
 
 import java.util.ArrayList;
 
+import com.sun.istack.internal.Nullable;
+
 public class LinkArray<T>{
 	protected ArrayList<LinkArrayNode<T>> array = new ArrayList<>();
 	protected LinkArrayNode<T> head = null;
@@ -69,8 +71,9 @@ public class LinkArray<T>{
 			start = Math.abs(start) + this.lastRefactorUpperBound;
 
 		for(int i = start; i <= this.array.size()-1; i ++){
-			if(this.array.get(i).index == target)
-				return this.array.get(i).value;
+			LinkArrayNode<T> node = this.array.get(i);
+			if(node.index == target && node.value != null)
+				return node.value;
 		}
 
 		return null;
@@ -95,6 +98,46 @@ public class LinkArray<T>{
 		this.lastRefactorUpperBound = this.upperBound;
 
 		return;
+	}
+
+	@Nullable
+	public T pop(){
+		if(this.tail != null){
+			T value = this.tail.value;
+			this.tail.value = null;
+			
+			this.tail = this.tail.pre;
+			if(this.tail != null){
+				this.tail.next = null;
+			}else{
+				this.head = null;
+			}
+
+			this.upperBound --;
+
+			return value;
+		}
+		return null;
+	}
+
+	@Nullable
+	public T shift(){
+		if(this.head != null){
+			T value = this.head.value;
+			this.head.value = null;
+
+			this.head = this.head.next;
+			if(this.head != null){
+				this.head.pre = null;
+			}else{
+				this.tail = null;
+			}
+
+			this.lowerBound ++;
+
+			return value;
+		}
+		return null;
 	}
 
 	public void devPrint(){

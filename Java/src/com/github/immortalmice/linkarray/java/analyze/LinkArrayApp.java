@@ -25,5 +25,15 @@ public class LinkArrayApp{
 		System.out.println(array.get(5));
 		System.out.println(array.get(3));
 		System.out.println(array.get(2));
+		
+		System.out.println("===========");
+		System.out.printf("POP: %d\n", array.pop());
+		System.out.printf("SHIFT: %d\n", array.shift());
+		System.out.printf("POP: %d\n", array.pop());
+		System.out.printf("POP: %d\n", array.pop());
+		System.out.printf("SHIFT: %d\n", array.shift());
+		System.out.printf("SHIFT: %d\n", array.shift());
+		System.out.printf("POP: %d\n", array.pop());
+		System.out.printf("SHIFT: %d\n", array.shift());
 	}
 }
