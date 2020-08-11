@@ -57,6 +57,25 @@ public class LinkArray<T>{
 		return;
 	}
 
+	public T get(int index){
+		if(index < 0 || index > this.length()-1) throw new IndexOutOfBoundsException();
+
+		int target = this.getReverseMappedIndex(index);
+		if(target >= 0 && target <= this.lastRefactorUpperBound)
+			return this.array.get(target).value;
+
+		int start = target;
+		if(start < 0)
+			start = Math.abs(start) + this.lastRefactorUpperBound;
+
+		for(int i = start; i <= this.array.size()-1; i ++){
+			if(this.array.get(i).index == target)
+				return this.array.get(i).value;
+		}
+
+		return null;
+	}
+
 	public void refactor(){
 		ArrayList<LinkArrayNode<T>> newArray = new ArrayList<>();
 

@@ -11,9 +11,19 @@ public class LinkArrayApp{
 		array.push(106);
 		array.unshift(66);
 		array.unshift(7);
+		
 		array.devPrint();
+		System.out.println(array.get(0));
+		System.out.println(array.get(5));
+		System.out.println(array.get(3));
+		System.out.println(array.get(2));
 		
 		array.refactor();
+		
 		array.devPrint();
+		System.out.println(array.get(0));
+		System.out.println(array.get(5));
+		System.out.println(array.get(3));
+		System.out.println(array.get(2));
 	}
 }
