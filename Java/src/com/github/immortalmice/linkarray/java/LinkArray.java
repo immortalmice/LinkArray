@@ -10,6 +10,11 @@ public class LinkArray<T>{
 	protected int upperBound = -1;
 	protected int lastRefactorUpperBound = -1;
 
+	public int length(){ return this.upperBound - this.lowerBound + 1; }
+
+	protected int getMappedIndex(int index){ return index - this.lowerBound; }
+	protected int getReverseMappedIndex(int index){ return index + this.lowerBound; }
+
 	protected class LinkArrayNode<F>{
 		public int index;
 		public F value;
