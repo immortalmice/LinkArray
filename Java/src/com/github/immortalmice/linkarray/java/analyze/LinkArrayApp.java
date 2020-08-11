@@ -1,8 +1,10 @@
 package com.github.immortalmice.linkarray.java.analyze;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.github.immortalmice.linkarray.java.LinkArray;
+import com.github.immortalmice.linkarray.java.analyze.RunTest;
 
 public class LinkArrayApp{
 	public static void main(String[] args){
@@ -43,5 +45,23 @@ public class LinkArrayApp{
 		System.out.printf("SHIFT: %d\n", array.shift());
 		System.out.printf("POP: %d\n", array.pop());
 		System.out.printf("SHIFT: %d\n", array.shift());
+	}
+
+	private static RunTest.FromatArray<ArrayList<Integer>> getArrayListFormatArray(){
+		return new RunTest.FromatArray<>("ArrayList", new ArrayList<Integer>()
+			, (array, value) -> { return array.get(array.size() == 0 ? 0 : value % array.size()); }
+			, (array, value) -> { array.add(value); }
+			, (array, value) -> { array.add(0, value); }
+			, (array, value) -> { array.remove(array.size()-1); }
+			, (array, value) -> { array.remove(0); });
+	}
+
+	private static RunTest.FromatArray<LinkArray<Integer>> getLinkArrayFormatArray(){
+		return new RunTest.FromatArray<>("LinkArray", new LinkArray<Integer>()
+			, (array, value) -> { return array.get(array.length() == 0 ? 0 : value % array.length()); }
+			, (array, value) -> { array.push(value); }
+			, (array, value) -> { array.unshift(value); }
+			, (array, value) -> { array.pop(); }
+			, (array, value) -> { array.shift(); });
 	}
 }
