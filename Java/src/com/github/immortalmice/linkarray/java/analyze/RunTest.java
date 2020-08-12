@@ -80,15 +80,15 @@ public class RunTest{
 		private BiFunction<T, Integer, Integer> getFunction;
 		private BiConsumer<T, Integer> pushFunction;
 		private BiConsumer<T, Integer> unshiftFunction;
-		private BiConsumer<T, Integer> popFunction;
-		private BiConsumer<T, Integer> shiftFunction;
+		private BiFunction<T, Integer, Integer> popFunction;
+		private BiFunction<T, Integer, Integer> shiftFunction;
 
 		public FormatArray(String nameIn, T initialIn
 			, BiFunction<T, Integer, Integer> getFunctionIn
 			, BiConsumer<T, Integer> pushFunctionIn
 			, BiConsumer<T, Integer> unshiftFunctionIn
-			, BiConsumer<T, Integer> popFunctionIn
-			, BiConsumer<T, Integer> shiftFunctionIn){
+			, BiFunction<T, Integer, Integer> popFunctionIn
+			, BiFunction<T, Integer, Integer> shiftFunctionIn){
 
 			this.name = nameIn;
 			this.array = initialIn;
@@ -111,11 +111,9 @@ public class RunTest{
 					this.unshiftFunction.accept(this.array, testUnit.getValue());
 					break;
 				case "POP":
-					this.popFunction.accept(this.array, testUnit.getValue());
-					break;
+					return this.popFunction.apply(this.array, testUnit.getValue());
 				case "SHIFT":
-					this.shiftFunction.accept(this.array, testUnit.getValue());
-					break;
+					return this.shiftFunction.apply(this.array, testUnit.getValue());
 			}
 			return null;
 		}
