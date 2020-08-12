@@ -3,24 +3,27 @@ package com.github.immortalmice.linkarray.java.analyze;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.function.Supplier;
 
 import com.github.immortalmice.linkarray.java.LinkArray;
 
+@SuppressWarnings("unused")
 public class LinkArrayApp{
 	public static void main(String[] args){
-		LinkArrayApp.checkCorrectness(10);
+		LinkArrayApp.checkCorrectness(10
+			, () -> LinkArrayApp.getArrayListFormatArray()
+			, () -> LinkArrayApp.getLinkArrayFormatArray());
 	}
 
-	private static boolean checkCorrectness(int times){
+	private static boolean checkCorrectness(int times, Supplier<RunTest.FormatArray<?>> factory1, Supplier<RunTest.FormatArray<?>> factory2){
 		boolean isFailed = false;
 		while(times -- > 0 && !isFailed){
-			RunTest.FormatArray<ArrayList<Integer>> arrayList = LinkArrayApp.getArrayListFormatArray();
-			RunTest.FormatArray<LinkArray<Integer>> linkArray = LinkArrayApp.getLinkArrayFormatArray();
-			RunTest.FormatArray<LinkedList<Integer>> linkedList = LinkArrayApp.getLinkedListFormatArray();
+			RunTest.FormatArray<?> array1 = factory1.get();
+			RunTest.FormatArray<?> array2 = factory2.get();
 
 			int randomLength = (new Random()).nextInt(100000);
 			System.out.printf("Round %d with length %d\n", times, randomLength);
-			if(!RunTest.testCorrectness(randomLength, linkedList, linkArray) || !RunTest.testGetCorrectness(randomLength, linkedList, linkArray))
+			if(!RunTest.testCorrectness(randomLength, array1, array2) || !RunTest.testGetCorrectness(randomLength, array1, array2))
 				isFailed = true;
 		}
 		if(!isFailed)
