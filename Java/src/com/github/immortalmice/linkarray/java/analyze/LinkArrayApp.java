@@ -6,13 +6,14 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 import com.github.immortalmice.linkarray.java.LinkArray;
+import com.github.immortalmice.linkarray.java.AutoLinkArray;
 
 @SuppressWarnings("unused")
 public class LinkArrayApp{
 	public static void main(String[] args){
 		LinkArrayApp.checkCorrectness(10
 			, () -> LinkArrayApp.getArrayListFormatArray()
-			, () -> LinkArrayApp.getLinkArrayFormatArray());
+			, () -> LinkArrayApp.getAutoLinkArrayFormatArray());
 	}
 
 	private static boolean checkCorrectness(int times, Supplier<RunTest.FormatArray<?>> factory1, Supplier<RunTest.FormatArray<?>> factory2){
@@ -52,6 +53,15 @@ public class LinkArrayApp{
 
 	private static RunTest.FormatArray<LinkArray<Integer>> getLinkArrayFormatArray(){
 		return new RunTest.FormatArray<>("LinkArray", new LinkArray<Integer>()
+			, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
+			, (array, value) -> { array.push(value); }
+			, (array, value) -> { array.unshift(value); }
+			, (array, value) -> { return array.length() != 0 ? array.pop() : null; }
+			, (array, value) -> { return array.length() != 0 ? array.shift() : null; });
+	}
+
+	private static RunTest.FormatArray<LinkArray<Integer>> getAutoLinkArrayFormatArray(){
+		return new RunTest.FormatArray<>("AutoLinkArray", new AutoLinkArray<Integer>()
 			, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
 			, (array, value) -> { array.push(value); }
 			, (array, value) -> { array.unshift(value); }
