@@ -11,11 +11,10 @@ import com.github.immortalmice.linkarray.java.AutoLinkArray;
 @SuppressWarnings("unused")
 public class LinkArrayApp{
 	public static void main(String[] args){
-		while(LinkArrayApp.checkCorrectness(1000
-			, () -> LinkArrayApp.getArrayListFormatArray()
-			, () -> LinkArrayApp.getAutoLinkArrayFormatArray())){
-
-		}
+		RunTest.randomFill(500000, true
+				, LinkArrayApp.getArrayListFormatArray()
+				, LinkArrayApp.getLinkedListFormatArray()
+				, LinkArrayApp.getAutoLinkArrayFormatArray());
 	}
 
 	private static boolean checkCorrectness(int times, Supplier<RunTest.FormatArray<?>> factory1, Supplier<RunTest.FormatArray<?>> factory2){

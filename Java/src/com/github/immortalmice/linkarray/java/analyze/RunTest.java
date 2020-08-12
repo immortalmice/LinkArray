@@ -59,6 +59,28 @@ public class RunTest{
 		return RunTest.testCorrectnessWithList(testArray, array1, array2);
 	}
 
+	public static void randomFill(int length, boolean showProgress, FormatArray<?> ...arrays){
+		if(showProgress){
+			System.out.println("----------------------------");
+			System.out.println("Filling");
+		}
+
+		List<TestUnit> data = RunTest.genTest(length, new String[]{"PUSH", "UNSHIFT"});
+		float length_fifth = data.size() / 5;
+
+		for(int i = 0; i <= arrays.length-1; i ++){
+			FormatArray<?> array = arrays[i];
+			for(int j = 0; j <= data.size()-1; j ++){
+				TestUnit unit = data.get(j);
+				array.run(unit);
+				if(showProgress && Math.floor((j + 1) / length_fifth) - Math.floor(j / length_fifth) > 0){
+					System.out.printf("%s: %d / %d | %d%%\n"
+						, array.getName(), i + 1, arrays.length, (int)((float) j / (data.size() - 1) * 100));
+				}
+			};
+		}
+	}
+
 	public static class TestUnit{
 		private String command;
 		private int value;
