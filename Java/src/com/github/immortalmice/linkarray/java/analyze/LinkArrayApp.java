@@ -11,9 +11,11 @@ import com.github.immortalmice.linkarray.java.AutoLinkArray;
 @SuppressWarnings("unused")
 public class LinkArrayApp{
 	public static void main(String[] args){
-		LinkArrayApp.checkCorrectness(10
+		while(LinkArrayApp.checkCorrectness(1000
 			, () -> LinkArrayApp.getArrayListFormatArray()
-			, () -> LinkArrayApp.getAutoLinkArrayFormatArray());
+			, () -> LinkArrayApp.getAutoLinkArrayFormatArray())){
+
+		}
 	}
 
 	private static boolean checkCorrectness(int times, Supplier<RunTest.FormatArray<?>> factory1, Supplier<RunTest.FormatArray<?>> factory2){
@@ -29,7 +31,7 @@ public class LinkArrayApp{
 		}
 		if(!isFailed)
 			System.out.println("All Test Passed!");
-		return isFailed;
+		return !isFailed;
 	}
 	
 	
