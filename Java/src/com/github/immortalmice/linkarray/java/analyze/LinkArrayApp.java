@@ -55,7 +55,7 @@ public class LinkArrayApp{
 			, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
 			, (array, value) -> { array.push(value); }
 			, (array, value) -> { array.unshift(value); }
-			, (array, value) -> { return array.size() != 0 ? array.pop() : null; }
-			, (array, value) -> { return array.size() != 0 ? array.shift() : null; });
+			, (array, value) -> { return array.length() != 0 ? array.pop() : null; }
+			, (array, value) -> { return array.length() != 0 ? array.shift() : null; });
 	}
 }

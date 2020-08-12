@@ -1,13 +1,11 @@
 package com.github.immortalmice.linkarray.java;
 
-import java.util.AbstractCollection;
-import java.util.Collection;
 import java.util.Iterator;
 
 import com.sun.istack.internal.Nullable;
 
 @SuppressWarnings("unchecked")
-public class LinkArray<T> extends AbstractCollection<T>{
+public class LinkArray<T> implements Iterable<T>{
 	protected int reservedCapacity;
 	protected int cursor = -1;
 	protected LinkArrayNode<T>[] array;
@@ -171,12 +169,6 @@ public class LinkArray<T> extends AbstractCollection<T>{
 		this.array = newArray;
 	}
 
-	@Override
-	public boolean add(T val) {
-		return this.push(val);
-	}
-
-	@Override
 	public void clear() {
 		this.array = (LinkArrayNode<T>[]) new LinkArrayNode[this.reservedCapacity];
 
@@ -191,38 +183,6 @@ public class LinkArray<T> extends AbstractCollection<T>{
 	@Override
 	public Iterator<T> iterator() {
 		return new LinkArrayIterator();
-	}
-
-	@Override
-	public boolean remove(Object object) {
-		if(this.head != null && this.head.value == object){
-			this.shift();
-			return true;
-		}
-		if(this.tail != null && this.tail.value == object){
-			this.pop();
-			return true;
-		}
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean removeAll(Collection<?> collection){
-		Iterator<?> iterator = collection.iterator();
-		while(iterator.hasNext()){
-			this.remove(iterator.next());
-		}
-		return true;
-	}
-
-	@Override
-	public boolean retainAll(Collection<?> collection){
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public int size(){
-		return this.length();
 	}
 
 	public void devPrint(){
