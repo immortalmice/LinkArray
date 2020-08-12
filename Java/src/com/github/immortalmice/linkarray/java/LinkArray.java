@@ -92,8 +92,10 @@ public class LinkArray<T> implements Iterable<T>{
 	}
 
 	public void refactor(){
-		LinkArrayNode<T>[] newArray = (LinkArrayNode<T>[]) new LinkArrayNode[this.array.length];
+		this.refactor((LinkArrayNode<T>[]) new LinkArrayNode[this.length()]);
+	}
 
+	protected void refactor(LinkArrayNode<T>[] newArray){
 		LinkArrayNode<T> current = this.head;
 		int i = 0;
 
