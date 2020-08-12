@@ -1,6 +1,7 @@
 package com.github.immortalmice.linkarray.java.analyze;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 import com.github.immortalmice.linkarray.java.LinkArray;
@@ -15,10 +16,11 @@ public class LinkArrayApp{
 		while(times -- > 0 && !isFailed){
 			RunTest.FormatArray<ArrayList<Integer>> arrayList = LinkArrayApp.getArrayListFormatArray();
 			RunTest.FormatArray<LinkArray<Integer>> linkArray = LinkArrayApp.getLinkArrayFormatArray();
+			RunTest.FormatArray<LinkedList<Integer>> linkedList = LinkArrayApp.getLinkedListFormatArray();
 
 			int randomLength = (new Random()).nextInt(100000);
 			System.out.printf("Round %d with length %d\n", times, randomLength);
-			if(!RunTest.testCorrectness(randomLength, arrayList, linkArray) || !RunTest.testGetCorrectness(randomLength, arrayList, linkArray))
+			if(!RunTest.testCorrectness(randomLength, linkedList, linkArray) || !RunTest.testGetCorrectness(randomLength, linkedList, linkArray))
 				isFailed = true;
 		}
 		if(!isFailed)
@@ -34,6 +36,15 @@ public class LinkArrayApp{
 			, (array, value) -> { array.add(0, value); }
 			, (array, value) -> { return array.size() != 0 ? array.remove(array.size()-1) : null; }
 			, (array, value) -> { return array.size() != 0 ? array.remove(0) : null; });
+	}
+
+	private static RunTest.FormatArray<LinkedList<Integer>> getLinkedListFormatArray(){
+		return new RunTest.FormatArray<>("LinkedList", new LinkedList<Integer>()
+			, (array, value) -> { return array.size() != 0 ? array.get(value % array.size()) : null; }
+			, (array, value) -> { array.addLast(value); }
+			, (array, value) -> { array.addFirst(value); }
+			, (array, value) -> { return array.size() != 0 ? array.removeLast() : null; }
+			, (array, value) -> { return array.size() != 0 ? array.removeFirst() : null; });
 	}
 
 	private static RunTest.FormatArray<LinkArray<Integer>> getLinkArrayFormatArray(){
