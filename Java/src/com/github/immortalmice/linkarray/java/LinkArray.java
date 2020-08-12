@@ -1,16 +1,18 @@
 package com.github.immortalmice.linkarray.java;
 
 import java.util.AbstractCollection;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
 import com.sun.istack.internal.Nullable;
 
+@SuppressWarnings("unchecked")
 public class LinkArray<T> extends AbstractCollection<T>{
-	protected ArrayList<LinkArrayNode> array = new ArrayList<>();
-	protected LinkArrayNode head = null;
-	protected LinkArrayNode tail = null;
+	protected int reservedCapacity;
+	protected int cursor = -1;
+	protected LinkArrayNode<T>[] array;
+	protected LinkArrayNode<T> head = null;
+	protected LinkArrayNode<T> tail = null;
 	protected int lowerBound = 0;
 	protected int upperBound = -1;
 	protected int lastRefactorUpperBound = -1;
@@ -20,8 +22,17 @@ public class LinkArray<T> extends AbstractCollection<T>{
 	protected int getMappedIndex(int index){ return index - this.lowerBound; }
 	protected int getReverseMappedIndex(int index){ return index + this.lowerBound; }
 
+	public LinkArray(){
+		this(1000);
+	}
+
+	public LinkArray(int reservedCapacityIn){
+		this.reservedCapacity = reservedCapacityIn;
+		this.array = (LinkArrayNode<T>[]) new LinkArrayNode[this.reservedCapacity];
+	}
+
 	public boolean push(T val){
-		LinkArrayNode elementToPush = new LinkArrayNode(++ this.upperBound, val);
+		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
 		elementToPush.pre = this.tail;
 
 		if(this.tail != null){
@@ -33,16 +44,16 @@ public class LinkArray<T> extends AbstractCollection<T>{
 		this.tail = elementToPush;
 
 		if(this.upperBound >= 0 && this.upperBound <= this.lastRefactorUpperBound){
-			this.array.set(this.upperBound, elementToPush);
+			this.array[this.upperBound] = elementToPush;
 		}else{
-			this.array.add(elementToPush);
+			this.addToEnd(elementToPush);
 		}
 
 		return true;
 	}
 
 	public void unshift(T val){
-		LinkArrayNode elementToUnshift = new LinkArrayNode(-- this.lowerBound, val);
+		LinkArrayNode<T> elementToUnshift = new LinkArrayNode<>(-- this.lowerBound, val);
 		elementToUnshift.next = this.head;
 
 		if(this.head != null){
@@ -54,9 +65,9 @@ public class LinkArray<T> extends AbstractCollection<T>{
 		this.head = elementToUnshift;
 
 		if(this.lowerBound >= 0){
-			this.array.set(this.lowerBound, elementToUnshift);
+			this.array[this.lowerBound] = elementToUnshift;
 		}else{
-			this.array.add(elementToUnshift);
+			this.addToEnd(elementToUnshift);
 		}
 
 		return;
@@ -67,14 +78,14 @@ public class LinkArray<T> extends AbstractCollection<T>{
 
 		int target = this.getReverseMappedIndex(index);
 		if(target >= 0 && target <= this.lastRefactorUpperBound)
-			return this.array.get(target).value;
+			return this.array[target].value;
 
 		int start = target;
 		if(start < 0)
 			start = Math.abs(start) + this.lastRefactorUpperBound;
 
-		for(int i = start; i <= this.array.size()-1; i ++){
-			LinkArrayNode node = this.array.get(i);
+		for(int i = start; i <= this.array.length-1; i ++){
+			LinkArrayNode<T> node = this.array[i];
 			if(node.index == target && node.value != null)
 				return node.value;
 		}
@@ -83,21 +94,22 @@ public class LinkArray<T> extends AbstractCollection<T>{
 	}
 
 	public void refactor(){
-		ArrayList<LinkArrayNode> newArray = new ArrayList<>();
+		LinkArrayNode<T>[] newArray = (LinkArrayNode<T>[]) new LinkArrayNode[this.array.length];
 
-		LinkArrayNode current = this.head;
+		LinkArrayNode<T> current = this.head;
 		int i = 0;
 
 		while(current != null){
-			current.index = i ++;
-			newArray.add(current);
+			current.index = i;
+			newArray[i] = current;
 			current = current.next;
+			i ++;
 		}
 
 		this.array = newArray;
 
 		this.lowerBound = 0;
-		this.upperBound = this.array.size()-1;
+		this.upperBound = this.length()-1;
 		this.lastRefactorUpperBound = this.upperBound;
 
 		return;
@@ -143,6 +155,21 @@ public class LinkArray<T> extends AbstractCollection<T>{
 		return null;
 	}
 
+	private void addToEnd(LinkArrayNode<T> node){
+		if(++ this.cursor >= this.array.length){
+			this.allocateNewArray(this.cursor);
+		}
+		this.array[cursor] = node;
+	}
+
+	protected void allocateNewArray(int minCapacity){
+		LinkArrayNode<T>[] newArray = (LinkArrayNode<T>[]) new LinkArrayNode[minCapacity + this.reservedCapacity];
+		for(int i = 0; i <= this.array.length-1; i ++){
+			newArray[i] = this.array[i];
+		}
+		this.array = newArray;
+	}
+
 	@Override
 	public boolean add(T val) {
 		return this.push(val);
@@ -150,7 +177,7 @@ public class LinkArray<T> extends AbstractCollection<T>{
 
 	@Override
 	public void clear() {
-		this.array = new ArrayList<>();
+		this.array = (LinkArrayNode<T>[]) new LinkArrayNode[this.reservedCapacity];
 
 		this.head = null;
 		this.tail = null;
@@ -204,20 +231,22 @@ public class LinkArray<T> extends AbstractCollection<T>{
 		System.out.printf("LastRefactorUpperBound: %d\n", this.lastRefactorUpperBound);
 
 		System.out.printf("==========================");
-		this.array.forEach((node) -> {
-			System.out.printf("\nIndex: %d\n", node.index);
-			System.out.printf("Value: %d\n", node.value);
-		});
+		for(LinkArrayNode<T> node : this.array){
+			if(node != null){
+				System.out.printf("\nIndex: %d\n", node.index);
+				System.out.printf("Value: %d\n", node.value);
+			}
+		}
 		System.out.printf("==========================\n");
 	}
 
-	protected class LinkArrayNode{
+	protected class LinkArrayNode<E>{
 		public int index;
-		public T value;
-		public LinkArrayNode next = null;
-		public LinkArrayNode pre = null;
+		public E value;
+		public LinkArrayNode<E> next = null;
+		public LinkArrayNode<E> pre = null;
 
-		public LinkArrayNode(int indexIn, T valueIn){
+		public LinkArrayNode(int indexIn, E valueIn){
 			this.index = indexIn;
 			this.value = valueIn;
 		}
