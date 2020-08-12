@@ -84,7 +84,7 @@ public class LinkArray<T> extends AbstractCollection<T>{
 		if(start < 0)
 			start = Math.abs(start) + this.lastRefactorUpperBound;
 
-		for(int i = start; i <= this.array.length-1; i ++){
+		for(int i = start; i <= this.cursor; i ++){
 			LinkArrayNode<T> node = this.array[i];
 			if(node.index == target && node.value != null)
 				return node.value;
@@ -109,7 +109,8 @@ public class LinkArray<T> extends AbstractCollection<T>{
 		this.array = newArray;
 
 		this.lowerBound = 0;
-		this.upperBound = this.length()-1;
+		this.upperBound = i - 1;
+		this.cursor = this.upperBound + 1;
 		this.lastRefactorUpperBound = this.upperBound;
 
 		return;
