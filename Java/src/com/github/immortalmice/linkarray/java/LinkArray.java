@@ -1,9 +1,7 @@
 package com.github.immortalmice.linkarray.java;
 
 import java.util.Iterator;
-
-import com.sun.istack.internal.Nullable;
-
+import javax.annotation.Nullable;
 @SuppressWarnings("unchecked")
 public class LinkArray<T> implements Iterable<T>{
 	protected int reservedCapacity;
