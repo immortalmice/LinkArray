@@ -2,29 +2,104 @@ package com.github.immortalmice.linkarray.java;
 
 import java.util.Iterator;
 import javax.annotation.Nullable;
+
+/**
+ * <p>A new array-like data structure.<br>
+ * Aims on better balance performance on array operations.</p>
+ *
+ * Since
+ * <li>Native array is slow when "shift & unshift", fast on random "get".
+ * <li>Doubly linked list fast on "shift & unshift" but slow on random "get".<br>
+ * 
+ * So this data structure trying to merge the advantages of native array and doubly linked list.<br><br>
+ *
+ * <p>The main structure is an native array with nodes that record negative allowed index
+ *     , and every node linked to other nodes like doubly linked list does.<br><br>
+ *
+ * @author Immortalmice
+ *
+ * @param <T> The type to store in
+ */
 @SuppressWarnings("unchecked")
 public class LinkArray<T> implements Iterable<T>{
+	/**
+	 * The initial & extra capacity when allocate {@link LinkArray#array}.
+	 */
 	protected int reservedCapacity;
+	/**
+	 * The cursor points to the last element in {@link LinkArray#array} that has data. 
+	 */
 	protected int cursor = -1;
+	/**
+	 * The main array to store data.
+	 */
 	protected LinkArrayNode<T>[] array;
+	/**
+	 * Pointer points to the first elements.
+	 */
 	protected LinkArrayNode<T> head = null;
+	/**
+	 * Pointer points to the last elements.
+	 */
 	protected LinkArrayNode<T> tail = null;
+	/**
+	 * The minimum INNER index currently store in this.
+	 */
 	protected int lowerBound = 0;
+	/**
+	 * The maximum INNER index currently store in this.
+	 */
 	protected int upperBound = -1;
+	/**
+	 * The {@link LinkArray#upperBound}'s value when last time refactored.
+	 */
 	protected int lastRefactorUpperBound = -1;
 
+	/**
+	 * Get the length of this.
+	 * 
+	 * @return The length
+	 */
 	public int length(){ return this.upperBound - this.lowerBound + 1; }
 
+	/**
+	 * Maps INTERNAL index [{@link LinkArray#lowerBound}, {@link LinkArray#upperBound}] to the EXTERNAL index [0, {@link LinkArray#length()}).
+	 * 
+	 * @param index The INTERNAL index 
+	 * @return The EXTERNAL index
+	 */
 	protected int getMappedIndex(int index){ return index - this.lowerBound; }
+	
+	/**
+	 * Maps EXTERNAL index [0, {@link LinkArray#length()}) to the INTERNAL index [{@link LinkArray#lowerBound}, {@link LinkArray#upperBound}].
+	 * 
+	 * @param index The EXTERNAL index 
+	 * @return The INTERNAL index
+	 */
 	protected int getReverseMappedIndex(int index){ return index + this.lowerBound; }
+	
+	/**
+	 * @param reservedCapacityIn {@link LinkArray#reservedCapacity}
+	 */
 	public LinkArray(int reservedCapacityIn){
 		this.reservedCapacity = reservedCapacityIn;
 		this.array = (LinkArrayNode<T>[]) new LinkArrayNode[this.reservedCapacity];
 	}
 	
+	/**
+	 * Default {@link LinkArray#reservedCapacity} is 1000.
+	 * 
+	 * @see #LinkArray(int)
+	 */
 	public LinkArray(){
 		this(1000);
 	}
+
+	/**
+	 * Pushes a element to the back of this.
+	 * 
+	 * @param val The value to push
+	 */
 	public void push(T val){
 		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
 		elementToPush.pre = this.tail;
@@ -46,6 +121,11 @@ public class LinkArray<T> implements Iterable<T>{
 		return;
 	}
 	
+	/**
+	 * Unshifts a element to the front of this.
+	 * 
+	 * @param val The value to unshift
+	 */
 	public void unshift(T val){
 		LinkArrayNode<T> elementToUnshift = new LinkArrayNode<>(-- this.lowerBound, val);
 		elementToUnshift.next = this.head;
@@ -67,6 +147,11 @@ public class LinkArray<T> implements Iterable<T>{
 		return;
 	}
 	
+	/**
+	 * Pops out the last element.
+	 * 
+	 * @return The element at the end of this, {@code null} if this is empty
+	 */
 	@Nullable
 	public T pop(){
 		if(this.tail != null){
@@ -87,6 +172,11 @@ public class LinkArray<T> implements Iterable<T>{
 		return null;
 	}
 
+	/**
+	 * Shifts out the first element.
+	 * 
+	 * @return The element at the start of this, {@code null} if this is empty
+	 */
 	@Nullable
 	public T shift(){
 		if(this.head != null){
@@ -107,6 +197,13 @@ public class LinkArray<T> implements Iterable<T>{
 		return null;
 	}
 
+	/**
+	 * Gets the value at the index.
+	 * 
+	 * @param index The index to query
+	 * @return The value at the specific index
+	 * @throws IndexOutOfBoundsException when the parameter index is out of range
+	 */
 	public T get(int index){
 		if(index < 0 || index > this.length()-1) throw new IndexOutOfBoundsException();
 
@@ -127,10 +224,18 @@ public class LinkArray<T> implements Iterable<T>{
 		return null;
 	}
 
+	/**
+	 * Refactor the inner structure of this.
+	 * After refactor, the inner order and index will match what it should be if this is a native array.
+	 */
 	public void refactor(){
 		this.refactor((LinkArrayNode<T>[]) new LinkArrayNode[this.length()]);
 	}
 
+	/**
+	 * @param newArray A array used in store the refactored data & replace original {@link LinkArray#array}
+	 * @see LinkArray#refactor()
+	 */
 	protected void refactor(LinkArrayNode<T>[] newArray){
 		LinkArrayNode<T> current = this.head;
 		int i = 0;
@@ -152,6 +257,12 @@ public class LinkArray<T> implements Iterable<T>{
 		return;
 	}
 
+	/**
+	 * Adds a node to the end of this.
+	 * Will reallocate {@link LinkArray#array} if capacity is not enough to add.
+	 * 
+	 * @param node The node to add
+	 */
 	private void addToEnd(LinkArrayNode<T> node){
 		if(++ this.cursor >= this.array.length){
 			this.allocateNewArray(this.cursor);
@@ -159,6 +270,11 @@ public class LinkArray<T> implements Iterable<T>{
 		this.array[cursor] = node;
 	}
 
+	/**
+	 * Reallocates {@link LinkArray#array}.
+	 * 
+	 * @param minCapacity The minimum capacity should support
+	 */
 	protected void allocateNewArray(int minCapacity){
 		LinkArrayNode<T>[] newArray = (LinkArrayNode<T>[]) new LinkArrayNode[minCapacity + this.reservedCapacity];
 		for(int i = 0; i <= this.array.length-1; i ++){
@@ -167,6 +283,9 @@ public class LinkArray<T> implements Iterable<T>{
 		this.array = newArray;
 	}
 
+	/**
+	 * Empties this.
+	 */
 	public void clear() {
 		this.array = (LinkArrayNode<T>[]) new LinkArrayNode[this.reservedCapacity];
 
@@ -178,11 +297,19 @@ public class LinkArray<T> implements Iterable<T>{
 		this.lastRefactorUpperBound = -1;
 	}
 
+	/**
+	 * Gets the iterator can walk through this.
+	 * 
+	 * @return An Iterator
+	 */
 	@Override
 	public Iterator<T> iterator() {
 		return new LinkArrayIterator();
 	}
 
+	/**
+	 * Prints the information for debugging.
+	 */
 	public void devPrint(){
 		System.out.printf("==========================\n");
 		System.out.printf("LowerBound: %d\n", this.lowerBound);
@@ -199,6 +326,13 @@ public class LinkArray<T> implements Iterable<T>{
 		System.out.printf("==========================\n");
 	}
 
+	/**
+	 * A node store an INNER index, also work as a linked list node.
+	 * 
+	 * @author Immortalmice
+	 *
+	 * @param <E> The type of stored value
+	 */
 	protected class LinkArrayNode<E>{
 		public int index;
 		public E value;
@@ -211,9 +345,18 @@ public class LinkArray<T> implements Iterable<T>{
 		}
 	}
 
+	/**
+	 * An implementation of iterator for {@link LinkArray} to use.
+	 * 
+	 * @author Immortalmice
+	 *
+	 */
 	private class LinkArrayIterator implements Iterator<T>{
 		private int cursor = -1;
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public boolean hasNext(){
 			int newCursor = cursor + 1;
@@ -222,11 +365,20 @@ public class LinkArray<T> implements Iterable<T>{
 			return false;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public T next(){
 			return LinkArray.this.get(++ cursor);
 		}
 		
+		/**
+		 * Only support when this points to the first or last element.
+		 *  
+		 * @throws UnsupportedOperationException when this is not pointing to valid position
+		 * {@inheritDoc}
+		 */
 		@Override
 		public void remove(){
 			if(cursor == 0){
