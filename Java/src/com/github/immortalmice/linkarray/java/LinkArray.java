@@ -28,8 +28,6 @@ public class LinkArray<T> implements Iterable<T>{
 		this.reservedCapacity = reservedCapacityIn;
 		this.array = (LinkArrayNode<T>[]) new LinkArrayNode[this.reservedCapacity];
 	}
-
-	public boolean push(T val){
 		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
 		elementToPush.pre = this.tail;
 
@@ -47,9 +45,9 @@ public class LinkArray<T> implements Iterable<T>{
 			this.addToEnd(elementToPush);
 		}
 
-		return true;
+		return;
 	}
-
+	
 	public void unshift(T val){
 		LinkArrayNode<T> elementToUnshift = new LinkArrayNode<>(-- this.lowerBound, val);
 		elementToUnshift.next = this.head;
