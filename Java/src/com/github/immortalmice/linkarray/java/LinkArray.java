@@ -19,14 +19,13 @@ public class LinkArray<T> implements Iterable<T>{
 
 	protected int getMappedIndex(int index){ return index - this.lowerBound; }
 	protected int getReverseMappedIndex(int index){ return index + this.lowerBound; }
-
-	public LinkArray(){
-		this(1000);
-	}
-
 	public LinkArray(int reservedCapacityIn){
 		this.reservedCapacity = reservedCapacityIn;
 		this.array = (LinkArrayNode<T>[]) new LinkArrayNode[this.reservedCapacity];
+	}
+	
+	public LinkArray(){
+		this(1000);
 	}
 		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
 		elementToPush.pre = this.tail;
