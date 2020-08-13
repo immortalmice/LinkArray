@@ -27,6 +27,7 @@ public class LinkArray<T> implements Iterable<T>{
 	public LinkArray(){
 		this(1000);
 	}
+	public void push(T val){
 		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
 		elementToPush.pre = this.tail;
 
