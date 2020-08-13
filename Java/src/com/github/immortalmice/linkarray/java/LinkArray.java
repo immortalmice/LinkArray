@@ -70,6 +70,46 @@ public class LinkArray<T> implements Iterable<T>{
 
 		return;
 	}
+	
+	@Nullable
+	public T pop(){
+		if(this.tail != null){
+			T value = this.tail.value;
+			this.tail.value = null;
+			
+			this.tail = this.tail.pre;
+			if(this.tail != null){
+				this.tail.next = null;
+			}else{
+				this.head = null;
+			}
+
+			this.upperBound --;
+
+			return value;
+		}
+		return null;
+	}
+
+	@Nullable
+	public T shift(){
+		if(this.head != null){
+			T value = this.head.value;
+			this.head.value = null;
+
+			this.head = this.head.next;
+			if(this.head != null){
+				this.head.pre = null;
+			}else{
+				this.tail = null;
+			}
+
+			this.lowerBound ++;
+
+			return value;
+		}
+		return null;
+	}
 
 	public T get(int index){
 		if(index < 0 || index > this.length()-1) throw new IndexOutOfBoundsException();
@@ -114,46 +154,6 @@ public class LinkArray<T> implements Iterable<T>{
 		this.lastRefactorUpperBound = this.upperBound;
 
 		return;
-	}
-
-	@Nullable
-	public T pop(){
-		if(this.tail != null){
-			T value = this.tail.value;
-			this.tail.value = null;
-			
-			this.tail = this.tail.pre;
-			if(this.tail != null){
-				this.tail.next = null;
-			}else{
-				this.head = null;
-			}
-
-			this.upperBound --;
-
-			return value;
-		}
-		return null;
-	}
-
-	@Nullable
-	public T shift(){
-		if(this.head != null){
-			T value = this.head.value;
-			this.head.value = null;
-
-			this.head = this.head.next;
-			if(this.head != null){
-				this.head.pre = null;
-			}else{
-				this.tail = null;
-			}
-
-			this.lowerBound ++;
-
-			return value;
-		}
-		return null;
 	}
 
 	private void addToEnd(LinkArrayNode<T> node){
