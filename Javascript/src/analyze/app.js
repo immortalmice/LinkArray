@@ -1,7 +1,7 @@
 const LinkArray = require("../LinkArray.js");
 const AutoLinkArray = require("../AutoLinkArray.js");
 const AdaptiveArray = require("../AdaptiveArray.js");
-const DoublyLinkedList = require("../../../double_link_list/index.js");
+const DoublyLinkedList = require("../../../../double_link_list/index.js");
 const RunTest = require("./RunTest.js");
 const Analyzer = require("./Analyzer.js");
 
