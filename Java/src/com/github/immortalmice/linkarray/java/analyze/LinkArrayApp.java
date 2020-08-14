@@ -7,15 +7,16 @@ import java.util.function.Supplier;
 
 import com.github.immortalmice.linkarray.java.LinkArray;
 import com.github.immortalmice.linkarray.java.AutoLinkArray;
+import com.github.immortalmice.linkarray.java.AdaptiveArray;
 
 @SuppressWarnings("unused")
 public class LinkArrayApp{
 	public static void main(String[] args){
 		@SuppressWarnings("unchecked")
 		Analyzer analyzer = new Analyzer(new Supplier[]{
-			() -> LinkArrayApp.getLinkedListFormatArray(),
-			() -> LinkArrayApp.getAutoLinkArrayFormatArray()
-		}, 200000, 50, "reports/Report");
+			() -> FormatArrayProvider.ARRAY_LIST(),
+			() -> FormatArrayProvider.ADAPTIVE_ARRAY()
+		}, 100000, 50, "reports/Report");
 		
 		analyzer.runDefault();
 	}
@@ -66,6 +67,15 @@ public class LinkArrayApp{
 
 		private static RunTest.FormatArray<LinkArray<Integer>> AUTO_LINK_ARRAY(){
 			return new RunTest.FormatArray<>("AutoLinkArray", new AutoLinkArray<Integer>()
+				, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
+				, (array, value) -> { array.push(value); }
+				, (array, value) -> { array.unshift(value); }
+				, (array, value) -> { return array.length() != 0 ? array.pop() : null; }
+				, (array, value) -> { return array.length() != 0 ? array.shift() : null; });
+		}
+
+		private static RunTest.FormatArray<AdaptiveArray<Integer>> ADAPTIVE_ARRAY(){
+			return new RunTest.FormatArray<>("AdaptiveArray", new AdaptiveArray<Integer>()
 				, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
 				, (array, value) -> { array.push(value); }
 				, (array, value) -> { array.unshift(value); }
