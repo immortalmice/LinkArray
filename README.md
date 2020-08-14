@@ -98,11 +98,12 @@ AutoLinkArray是LinkArray的衍伸類別
 由於重構對於LinkArray的GET效率有著深厚的影響，但重構是一個O(n)的動作  
 因此AutoLinkArray會自行在適當的時間點進行重構  
 
-目前有三個實作方法  
+目前有兩個實作方法  
 
 1. 當未重構的範圍超過一定數量時，Ex.`array`中未重構的元素個數超過5000個時進行重構  
 2. 當未重構的範圍超過一定比例時，Ex.`array`中未重構的元素個數佔比20%以上時進行重構  
-3. 當內部陣列需要重新要求空間並轉移時，在轉移至新的空間時順便進行重構  
+
+另外，對於可以手動操作記憶體的語言，可以在需要進行Reallocate Memory時，順便進行重構
 
 
 關於AdaptiveArray
@@ -114,3 +115,52 @@ LinkArray在內含資料量小的時候優勢並不明顯。
 因此AdapativeArray因應而生。  
 AdaptiveArray剛開始的時候是一個原生的陣列，然而當陣列長度大於某個數值(EX.5000)，AdaptiveArray會自動升級成LinkArray(通常是AutoLinkArray)。  
 一旦升級，便不會降級回原生陣列，即使陣列長度再度小於該數值。  
+
+關於Contribution
+---
+目前本Repo包含了以下語言的實作
+- JavaScript
+
+包含以下語言的性能測試
+- JavaScript
+
+對於未在上表的語言，若你有意提供協助的話，歡迎把實作or性能測試發Pull Request給我
+
+關於測試
+---
+
+測試項目一共有13個  
+方括弧中的是本項目中包含的指令種類，為隨機生成，因此各指令出線機率可視為相等  
+測試結果測試對象跑完由本項目生成的指定長度指令列表所花的時間  
+Ex. Auto Link Array跑完 4000筆 [GET] With PreFilling 所花的時間  
+
+PreFilling指在運行指令列表前，先對測試對象塞入指令長度的資料  
+每一個塞入動作為PUSH、UNSHIFT隨機擇一  
+Ex. 在測試 [GET] With PreFilling 前，對Auto Link Array用PUSH、UNSHIFT隨機塞入4000筆資料  
+
+- **[GET] With PreFilling**  
+    純GET能力
+- **[PUSH]**  
+    純PUSH能力
+- **[UNSHIFT]**  
+    純UNSHIFT能力
+- **[POP] With PreFilling**  
+    純POP能力
+- **[SHIFT] With PreFilling**  
+    純SHIFT能力
+- **[GET, PUSH, UNSHIFT]**  
+    塞入能力
+- **[GET, POP, SHIFT] With PreFilling**  
+    拔除能力
+- **[GET, PUSH, POP] With PreFilling**  
+    尾端操作能力，包含預填入
+- **[GET, PUSH, POP]**  
+    尾端操作能力
+- **[GET, SHIFT, UNSHIFT] With PreFilling**  
+    首端操作能力，包含預填入
+- **[GET, SHIFT, UNSHIFT]**  
+    首端操作能力
+- **[GET, PUSH, UNSHIFT, POP, SHIFT] With PreFilling**  
+    綜合能力，包含預填入
+- **[GET, PUSH, UNSHIFT, POP, SHIFT]**  
+    綜合能力
