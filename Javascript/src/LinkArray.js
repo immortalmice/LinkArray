@@ -59,7 +59,7 @@ module.exports = class LinkArray{
 	 * @return {Non-Negative Integer} The length of this LinkArray after push.
 	 */
 	push(val){
-		// Contruct a node with increased {@link LinkArray#upper_bound} value.
+		// Construct a node with increased {@link LinkArray#upper_bound} value.
 		let elementToPush = {
 			index: ++ this.upper_bound,
 			value: val,
@@ -94,7 +94,7 @@ module.exports = class LinkArray{
 	 * @return {Non-Negative Integer} The length of this LinkArray after unshift.
 	 */
 	unshift(val){
-		// Contruct a node with decreased {@link LinkArray#lower_bound} value.
+		// Construct a node with decreased {@link LinkArray#lower_bound} value.
 		let elementToUnshift = {
 			index: -- this.lower_bound,
 			value: val,
@@ -172,7 +172,7 @@ module.exports = class LinkArray{
 				this.tail = null;
 			}
 
-			// Decrease {@link LinkArray#lower_bound} since first data is removed.
+			// Increase {@link LinkArray#lower_bound} since first data is removed.
 			this.lower_bound ++;
 
 			// Return the deleted data.
