@@ -35,41 +35,42 @@ public class LinkArrayApp{
 			System.out.println("All Test Passed!");
 		return !isFailed;
 	}
-	
-	
-	private static RunTest.FormatArray<ArrayList<Integer>> getArrayListFormatArray(){
-		return new RunTest.FormatArray<>("ArrayList", new ArrayList<Integer>()
-			, (array, value) -> { return array.size() != 0 ? array.get(value % array.size()) : null; }
-			, (array, value) -> { array.add(value); }
-			, (array, value) -> { array.add(0, value); }
-			, (array, value) -> { return array.size() != 0 ? array.remove(array.size()-1) : null; }
-			, (array, value) -> { return array.size() != 0 ? array.remove(0) : null; });
-	}
 
-	private static RunTest.FormatArray<LinkedList<Integer>> getLinkedListFormatArray(){
-		return new RunTest.FormatArray<>("LinkedList", new LinkedList<Integer>()
-			, (array, value) -> { return array.size() != 0 ? array.get(value % array.size()) : null; }
-			, (array, value) -> { array.addLast(value); }
-			, (array, value) -> { array.addFirst(value); }
-			, (array, value) -> { return array.size() != 0 ? array.removeLast() : null; }
-			, (array, value) -> { return array.size() != 0 ? array.removeFirst() : null; });
-	}
+	private static class FormatArrayProvider{
+		private static RunTest.FormatArray<ArrayList<Integer>> ARRAY_LIST(){
+			return new RunTest.FormatArray<>("ArrayList", new ArrayList<Integer>()
+				, (array, value) -> { return array.size() != 0 ? array.get(value % array.size()) : null; }
+				, (array, value) -> { array.add(value); }
+				, (array, value) -> { array.add(0, value); }
+				, (array, value) -> { return array.size() != 0 ? array.remove(array.size()-1) : null; }
+				, (array, value) -> { return array.size() != 0 ? array.remove(0) : null; });
+		}
 
-	private static RunTest.FormatArray<LinkArray<Integer>> getLinkArrayFormatArray(){
-		return new RunTest.FormatArray<>("LinkArray", new LinkArray<Integer>()
-			, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
-			, (array, value) -> { array.push(value); }
-			, (array, value) -> { array.unshift(value); }
-			, (array, value) -> { return array.length() != 0 ? array.pop() : null; }
-			, (array, value) -> { return array.length() != 0 ? array.shift() : null; });
-	}
+		private static RunTest.FormatArray<LinkedList<Integer>> LINKED_LIST(){
+			return new RunTest.FormatArray<>("LinkedList", new LinkedList<Integer>()
+				, (array, value) -> { return array.size() != 0 ? array.get(value % array.size()) : null; }
+				, (array, value) -> { array.addLast(value); }
+				, (array, value) -> { array.addFirst(value); }
+				, (array, value) -> { return array.size() != 0 ? array.removeLast() : null; }
+				, (array, value) -> { return array.size() != 0 ? array.removeFirst() : null; });
+		}
 
-	private static RunTest.FormatArray<LinkArray<Integer>> getAutoLinkArrayFormatArray(){
-		return new RunTest.FormatArray<>("AutoLinkArray", new AutoLinkArray<Integer>()
-			, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
-			, (array, value) -> { array.push(value); }
-			, (array, value) -> { array.unshift(value); }
-			, (array, value) -> { return array.length() != 0 ? array.pop() : null; }
-			, (array, value) -> { return array.length() != 0 ? array.shift() : null; });
+		private static RunTest.FormatArray<LinkArray<Integer>> LINK_ARRAY(){
+			return new RunTest.FormatArray<>("LinkArray", new LinkArray<Integer>()
+				, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
+				, (array, value) -> { array.push(value); }
+				, (array, value) -> { array.unshift(value); }
+				, (array, value) -> { return array.length() != 0 ? array.pop() : null; }
+				, (array, value) -> { return array.length() != 0 ? array.shift() : null; });
+		}
+
+		private static RunTest.FormatArray<LinkArray<Integer>> AUTO_LINK_ARRAY(){
+			return new RunTest.FormatArray<>("AutoLinkArray", new AutoLinkArray<Integer>()
+				, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
+				, (array, value) -> { array.push(value); }
+				, (array, value) -> { array.unshift(value); }
+				, (array, value) -> { return array.length() != 0 ? array.pop() : null; }
+				, (array, value) -> { return array.length() != 0 ? array.shift() : null; });
+		}
 	}
 }
