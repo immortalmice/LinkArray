@@ -1,6 +1,8 @@
+Node.js v12.18.0
 
-Javascript實作性能測試報告
+JavaScript實作性能測試報告
 ---
+*(本性能測試中所使用的原生陣列來自於JavaScript內建的陣列)*  
 *(本性能測試中所使用的雙向連結串列來自於[此Repo](https://github.com/jasonsjones/doubly-linked-list))*  
 
 - [AutoLinkArray](https://docs.google.com/spreadsheets/d/1BD9gHeoGC48EA0i1AbdahxI_zEBVmSjZAeOJUYpxKP4/edit?usp=sharing)
