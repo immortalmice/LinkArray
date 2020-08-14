@@ -1,5 +1,6 @@
 package com.github.immortalmice.linkarray.java.analyze;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -79,6 +80,38 @@ public class RunTest{
 				}
 			};
 		}
+	}
+
+	public static long[] runTest(List<TestUnit> testArray, FormatArray<?> ...arrays){
+		System.out.println("");
+
+		long[] results = new long[arrays.length];
+		for(int i = 0; i <= arrays.length-1; i ++){
+			FormatArray<?> array = arrays[i];
+
+			long startTime = System.nanoTime();
+			testArray.forEach((unit) -> {
+				array.run(unit);
+			});
+			long endTime = System.nanoTime();
+
+			results[i] = endTime - startTime;
+
+			System.out.printf("%s: %s\n", array.getName(), RunTest.formatSecondSring(results[i]));
+		}
+
+		System.out.println("");
+		return results;
+	}
+
+	public static String formatSecondSring(long nanoSecond){
+		String second = String.valueOf(nanoSecond / 1000000000);
+		String milliSecond = (new DecimalFormat("0.##")).format(((float)nanoSecond / 1000000) % 1000);
+		return String.format("%s%ss%s%sms "
+			, new String(new char[3 - second.length()]).replace("\0", " ")
+			, second
+			, new String(new char[7 - milliSecond.length()]).replace("\0", " ")
+			, milliSecond);
 	}
 
 	public static class TestUnit{
