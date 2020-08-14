@@ -11,14 +11,64 @@ import com.github.immortalmice.linkarray.java.AdaptiveArray;
 
 @SuppressWarnings("unused")
 public class LinkArrayApp{
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args){
-		@SuppressWarnings("unchecked")
-		Analyzer analyzer = new Analyzer(new Supplier[]{
-			() -> FormatArrayProvider.ARRAY_LIST(),
-			() -> FormatArrayProvider.ADAPTIVE_ARRAY()
-		}, 100000, 50, "reports/Report");
-		
-		analyzer.runDefault();
+		for(int i = 2000; i <= 200000; i += 2000){
+			Analyzer analyzer = new Analyzer(new Supplier[]{
+				() -> FormatArrayProvider.ARRAY_LIST(),
+				() -> FormatArrayProvider.AUTO_LINK_ARRAY()
+			}, i, 50, "reports/AutoLinkArray/ArrayList/Report");
+			
+			analyzer.runDefault();
+		}
+
+		for(int i = 2000; i <= 200000; i += 2000){
+			Analyzer analyzer = new Analyzer(new Supplier[]{
+				() -> FormatArrayProvider.LINKED_LIST(),
+				() -> FormatArrayProvider.AUTO_LINK_ARRAY()
+			}, i, 50, "reports/AutoLinkArray/LinkedList/Report");
+			
+			analyzer.runDefault();
+		}
+
+		for(int i = 2000; i <= 200000; i += 2000){
+			Analyzer analyzer = new Analyzer(new Supplier[]{
+				() -> FormatArrayProvider.ARRAY_LIST(),
+				() -> FormatArrayProvider.LINKED_LIST(),
+				() -> FormatArrayProvider.AUTO_LINK_ARRAY()
+			}, i, 50, "reports/AutoLinkArray/Triple/Report");
+			
+			analyzer.runDefault();
+		}
+
+
+		for(int i = 2000; i <= 200000; i += 2000){
+			Analyzer analyzer = new Analyzer(new Supplier[]{
+				() -> FormatArrayProvider.ARRAY_LIST(),
+				() -> FormatArrayProvider.ADAPTIVE_ARRAY()
+			}, i, 50, "reports/AdaptiveArray/ArrayList/Report");
+			
+			analyzer.runDefault();
+		}
+
+		for(int i = 2000; i <= 200000; i += 2000){
+			Analyzer analyzer = new Analyzer(new Supplier[]{
+				() -> FormatArrayProvider.LINKED_LIST(),
+				() -> FormatArrayProvider.ADAPTIVE_ARRAY()
+			}, i, 50, "reports/AdaptiveArray/LinkedList/Report");
+			
+			analyzer.runDefault();
+		}
+
+		for(int i = 2000; i <= 200000; i += 2000){
+			Analyzer analyzer = new Analyzer(new Supplier[]{
+				() -> FormatArrayProvider.ARRAY_LIST(),
+				() -> FormatArrayProvider.LINKED_LIST(),
+				() -> FormatArrayProvider.ADAPTIVE_ARRAY()
+			}, i, 50, "reports/AdaptiveArray/Triple/Report");
+			
+			analyzer.runDefault();
+		}
 	}
 
 	private static boolean checkCorrectness(int times, Supplier<RunTest.FormatArray<?>> factory1, Supplier<RunTest.FormatArray<?>> factory2){
