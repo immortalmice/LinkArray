@@ -306,6 +306,52 @@ public class LinkArray<T> implements Iterable<T>{
 	public Iterator<T> iterator() {
 		return new LinkArrayIterator();
 	}
+	
+	/**
+	 * Appends another iterable to this back.
+	 * 
+	 * @param iterable An iterable to append
+	 */
+	public void concat(Iterable<? extends T> iterable){
+		Iterator<? extends T> iterator = iterable.iterator();
+
+		while(iterator.hasNext()){
+			this.push(iterator.next());
+		}
+	}
+	
+	/**
+	 * Reverses this.
+	 */
+	public void reverse(){
+		LinkArrayNode<T>[] newArray = (LinkArrayNode<T>[]) new LinkArrayNode[this.length()];
+
+		// Visit each node from the end of this LinkArray and put the node into new native array(container) in order.
+		LinkArrayNode<T> current = this.tail;
+		int i = 0;
+		while(current != null){
+			// Swap {@link Node#pre} and {@link Node#next}, since order is now reversed.
+			LinkArrayNode<T> temp = current.pre;
+			current.pre = current.next;
+			current.next = temp;
+			// Update {@link Node#index} value.
+			current.index = i;
+
+			newArray[i ++] = current;
+			current = current.next;
+		}
+
+		// Replace the original {@link LinkArray#array}.
+		this.array = newArray;
+
+		// Update properties.
+		this.head = this.array[0];
+		this.tail = this.array[this.array.length-1];
+
+		this.lowerBound = 0;
+		this.upperBound = this.array.length-1;
+		this.lastRefactorUpperBound = this.upperBound;
+	}
 
 	/**
 	 * Prints the information for debugging.
