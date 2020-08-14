@@ -1,6 +1,6 @@
 const FS = require('fs');
 
-module.exports = class ReportJsonPharserFile{
+module.exports = class ReportJsonParserFile{
 	static PRIME_FIELD = [
 		"Test Unit Amount",
 		"Sample Amount",
@@ -24,8 +24,8 @@ module.exports = class ReportJsonPharserFile{
 	];
 
 	static SORT_FIELD_ARRAY = [
-		...ReportJsonPharserFile.PRIME_FIELD, 
-		...(ReportJsonPharserFile.SUB_FIELD.map((str) => str.substring(0, str.length-2)))
+		...ReportJsonParserFile.PRIME_FIELD, 
+		...(ReportJsonParserFile.SUB_FIELD.map((str) => str.substring(0, str.length-2)))
 	];
 
 	constructor(pathIn){
@@ -36,7 +36,7 @@ module.exports = class ReportJsonPharserFile{
 		return FS.readFileSync(this.path);
 	}
 
-	pharseReport(targets){
+	parseReport(targets){
 
 		let FILE_CONTENT = this.getContent();
 		let result = this.getPrimeField();
@@ -45,7 +45,7 @@ module.exports = class ReportJsonPharserFile{
 			let namePos = FILE_CONTENT.indexOf(NAME_SPACE);
 			let rest = String(FILE_CONTENT.slice(namePos));
 
-			ReportJsonPharserFile.SUB_FIELD.forEach((FIELD) => {
+			ReportJsonParserFile.SUB_FIELD.forEach((FIELD) => {
 				let pos = rest.indexOf(FIELD);
 				if(pos !== -1){
 					let value = findValue(rest.slice(pos));
@@ -58,13 +58,13 @@ module.exports = class ReportJsonPharserFile{
 		return this.sort(result);
 	}
 
-	pharseTime(target){
+	parseTime(target){
 		target = target || "Adaptive Array";
 
 		let FILE_CONTENT = this.getContent();
 		let result = this.getPrimeField();
 
-		ReportJsonPharserFile.SUB_FIELD.forEach((FIELD) => {
+		ReportJsonParserFile.SUB_FIELD.forEach((FIELD) => {
 			let linePos = FILE_CONTENT.indexOf(FIELD);
 			let arrayPos = FILE_CONTENT.slice(linePos).indexOf(target) + linePos;
 			let avergePos = FILE_CONTENT.slice(arrayPos).indexOf("Averge:") + arrayPos;
@@ -82,7 +82,7 @@ module.exports = class ReportJsonPharserFile{
 	getPrimeField(){
 		let fileContent = this.getContent();
 		let result = {};
-		ReportJsonPharserFile.PRIME_FIELD.forEach((FIELD) => {
+		ReportJsonParserFile.PRIME_FIELD.forEach((FIELD) => {
 			let pos = fileContent.indexOf(FIELD);
 			let value = findValue(String(fileContent.slice(pos)));
 
@@ -93,7 +93,7 @@ module.exports = class ReportJsonPharserFile{
 
 	sort(obj){
 		let sortedObj = {};
-		ReportJsonPharserFile.SORT_FIELD_ARRAY.forEach((key) => {
+		ReportJsonParserFile.SORT_FIELD_ARRAY.forEach((key) => {
 			sortedObj[key] = obj[key];
 		});
 

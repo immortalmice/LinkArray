@@ -1,7 +1,7 @@
 const FS = require('fs');
-let PHARSER_FILE = require("./ReportJsonPharserFile");
+let PARSER_FILE = require("./ReportJsonParserFile");
 
-module.exports = class ReportJsonPharserFolder{
+module.exports = class ReportJsonParserFolder{
 	constructor(nameIn, pathsIn, sortByIn){
 		this.name = nameIn;
 		this.paths = pathsIn;
@@ -13,7 +13,7 @@ module.exports = class ReportJsonPharserFolder{
 		}
 	}
 
-	pharseReport(targets){
+	parseReport(targets){
 		this.paths.forEach((path) => {
 			FS.readdir(path, (err, files) => {
 				if(err){
@@ -23,8 +23,8 @@ module.exports = class ReportJsonPharserFolder{
 
 				let results = [];
 				files.forEach((file) => {
-					let filePharser = new PHARSER_FILE(path + "/" + file);
-					results.push(filePharser.pharseReport(targets));
+					let fileParser = new PARSER_FILE(path + "/" + file);
+					results.push(fileParser.parseReport(targets));
 				});
 
 				results.sort((resultA, resultB) => {
@@ -36,7 +36,7 @@ module.exports = class ReportJsonPharserFolder{
 		});
 	}
 
-	pharseTimeReport(targets){
+	parseTimeReport(targets){
 		this.paths.forEach((path) => {
 			FS.readdir(path, (err, files) => {
 				if(err){
@@ -46,26 +46,26 @@ module.exports = class ReportJsonPharserFolder{
 
 				let results = {};
 				files.forEach((file) => {
-					let filePharser = new PHARSER_FILE(path + "/" + file);
-					let pharseResults = [];
+					let fileParser = new PARSER_FILE(path + "/" + file);
+					let parseResults = [];
 
 					targets.forEach((target) => {
-						pharseResults.push(filePharser.pharseTime(target));
+						parseResults.push(fileParser.parseTime(target));
 					});
 
-					PHARSER_FILE.SUB_FIELD.forEach((KEY) => {
+					PARSER_FILE.SUB_FIELD.forEach((KEY) => {
 						let field = KEY.substring(0, KEY.length-2);
 
 						if(!results[field]) results[field] = [];
-						results[field].push({"Test Unit Amount": pharseResults[0]["Test Unit Amount"]});
+						results[field].push({"Test Unit Amount": parseResults[0]["Test Unit Amount"]});
 
-						pharseResults.forEach((result, index) => {
+						parseResults.forEach((result, index) => {
 							results[field][results[field].length-1][targets[index]] = parseFloat(result[field].toFixed(4));
 						});
 					});
 				});
 
-				PHARSER_FILE.SUB_FIELD.forEach((KEY) => {
+				PARSER_FILE.SUB_FIELD.forEach((KEY) => {
 					let field = KEY.substring(0, KEY.length-2);
 
 					results[field].sort((a, b) => {
