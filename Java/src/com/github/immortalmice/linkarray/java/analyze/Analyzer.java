@@ -158,7 +158,7 @@ public class Analyzer{
 			this.preFilling = preFillingIn;
 		}
 		
-		public String toString(){ return "[ " + String.join(", ", this.list) + " ]"; }
+		public String toString(){ return "[" + String.join(", ", this.list) + "]"; }
 	}
 
 	private class ProcessLogger{

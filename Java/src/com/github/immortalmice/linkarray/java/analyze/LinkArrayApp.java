@@ -89,7 +89,7 @@ public class LinkArrayApp{
 
 	private static class FormatArrayProvider{
 		private static RunTest.FormatArray<ArrayList<Integer>> ARRAY_LIST(){
-			return new RunTest.FormatArray<>("ArrayList", new ArrayList<Integer>()
+			return new RunTest.FormatArray<>("Array List", new ArrayList<Integer>()
 				, (array, value) -> { return array.size() != 0 ? array.get(value % array.size()) : null; }
 				, (array, value) -> { array.add(value); }
 				, (array, value) -> { array.add(0, value); }
@@ -98,7 +98,7 @@ public class LinkArrayApp{
 		}
 
 		private static RunTest.FormatArray<LinkedList<Integer>> LINKED_LIST(){
-			return new RunTest.FormatArray<>("LinkedList", new LinkedList<Integer>()
+			return new RunTest.FormatArray<>("Linked List", new LinkedList<Integer>()
 				, (array, value) -> { return array.size() != 0 ? array.get(value % array.size()) : null; }
 				, (array, value) -> { array.addLast(value); }
 				, (array, value) -> { array.addFirst(value); }
@@ -107,7 +107,7 @@ public class LinkArrayApp{
 		}
 
 		private static RunTest.FormatArray<LinkArray<Integer>> LINK_ARRAY(){
-			return new RunTest.FormatArray<>("LinkArray", new LinkArray<Integer>()
+			return new RunTest.FormatArray<>("Link Array", new LinkArray<Integer>()
 				, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
 				, (array, value) -> { array.push(value); }
 				, (array, value) -> { array.unshift(value); }
@@ -116,7 +116,7 @@ public class LinkArrayApp{
 		}
 
 		private static RunTest.FormatArray<LinkArray<Integer>> AUTO_LINK_ARRAY(){
-			return new RunTest.FormatArray<>("AutoLinkArray", new AutoLinkArray<Integer>()
+			return new RunTest.FormatArray<>("Auto Link Array", new AutoLinkArray<Integer>()
 				, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
 				, (array, value) -> { array.push(value); }
 				, (array, value) -> { array.unshift(value); }
@@ -125,7 +125,7 @@ public class LinkArrayApp{
 		}
 
 		private static RunTest.FormatArray<AdaptiveArray<Integer>> ADAPTIVE_ARRAY(){
-			return new RunTest.FormatArray<>("AdaptiveArray", new AdaptiveArray<Integer>()
+			return new RunTest.FormatArray<>("Adaptive Array", new AdaptiveArray<Integer>()
 				, (array, value) -> { return array.length() != 0 ? array.get(value % array.length()) : null; }
 				, (array, value) -> { array.push(value); }
 				, (array, value) -> { array.unshift(value); }
