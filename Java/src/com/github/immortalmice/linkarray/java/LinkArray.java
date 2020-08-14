@@ -101,9 +101,11 @@ public class LinkArray<T> implements Iterable<T>{
 	 * @param val The value to push
 	 */
 	public void push(T val){
+		// Construct a node with increased {@link LinkArray#upperBound} value.
 		LinkArrayNode<T> elementToPush = new LinkArrayNode<>(++ this.upperBound, val);
 		elementToPush.pre = this.tail;
 
+		// Do doubly linked list stuffs.
 		if(this.tail != null){
 			this.tail.next = elementToPush;
 		}
@@ -112,6 +114,7 @@ public class LinkArray<T> implements Iterable<T>{
 		}
 		this.tail = elementToPush;
 
+		// Put the node into the container {@link LinkArray#array} by replacing deleted refactored node or push operation.
 		if(this.upperBound >= 0 && this.upperBound <= this.lastRefactorUpperBound){
 			this.array[this.upperBound] = elementToPush;
 		}else{
@@ -127,9 +130,11 @@ public class LinkArray<T> implements Iterable<T>{
 	 * @param val The value to unshift
 	 */
 	public void unshift(T val){
+		// Construct a node with decreased {@link LinkArray#lowerBound} value.
 		LinkArrayNode<T> elementToUnshift = new LinkArrayNode<>(-- this.lowerBound, val);
 		elementToUnshift.next = this.head;
 
+		// Do doubly linked list stuffs.
 		if(this.head != null){
 			this.head.pre = elementToUnshift;
 		}
@@ -138,6 +143,8 @@ public class LinkArray<T> implements Iterable<T>{
 		}
 		this.head = elementToUnshift;
 
+		// Put the node into the container {@link LinkArray#array} by replacing deleted refactored node or push operation.
+		// Push operation is used instead of unshift, since we don't have to move all elements to its next position.
 		if(this.lowerBound >= 0){
 			this.array[this.lowerBound] = elementToUnshift;
 		}else{
@@ -156,8 +163,11 @@ public class LinkArray<T> implements Iterable<T>{
 	public T pop(){
 		if(this.tail != null){
 			T value = this.tail.value;
+
+			// Mark node as removed.
 			this.tail.value = null;
 			
+			// Do doubly linked list stuffs.
 			this.tail = this.tail.pre;
 			if(this.tail != null){
 				this.tail.next = null;
@@ -165,10 +175,13 @@ public class LinkArray<T> implements Iterable<T>{
 				this.head = null;
 			}
 
+			// Decrease {@link LinkArray#upperBound} since last data is removed.
 			this.upperBound --;
 
+			// Return the deleted data.
 			return value;
 		}
+		// Return undefined when LinkArray is empty.
 		return null;
 	}
 
@@ -181,8 +194,11 @@ public class LinkArray<T> implements Iterable<T>{
 	public T shift(){
 		if(this.head != null){
 			T value = this.head.value;
+
+			// Mark node as removed.
 			this.head.value = null;
 
+			// Do doubly linked list stuffs.
 			this.head = this.head.next;
 			if(this.head != null){
 				this.head.pre = null;
@@ -190,10 +206,13 @@ public class LinkArray<T> implements Iterable<T>{
 				this.tail = null;
 			}
 
+			// Increase {@link LinkArray#lowerBound} since first data is removed.
 			this.lowerBound ++;
 
+			// Return the deleted data.
 			return value;
 		}
+		// Return undefined when LinkArray is empty.
 		return null;
 	}
 
@@ -205,22 +224,33 @@ public class LinkArray<T> implements Iterable<T>{
 	 * @throws IndexOutOfBoundsException when the parameter index is out of range
 	 */
 	public T get(int index){
+		// Throw exception when param is out of bound.
 		if(index < 0 || index > this.length()-1) throw new IndexOutOfBoundsException();
 
+		// Get the INTERNAL index from EXTERNAL index.
 		int target = this.getReverseMappedIndex(index);
+
+		// If the queried data is in refactored area, directly return the data by using native array's get.
+		// In this case, time complexity will be O(1).
 		if(target >= 0 && target <= this.lastRefactorUpperBound)
 			return this.array[target].value;
 
+		// If the queried data is NOT in refactored area, do searching in unrefactored area.
+		// In this case, time complexity will be O(n).
+
+		// Shink the searching range
 		int start = target;
 		if(start < 0)
 			start = Math.abs(start) + this.lastRefactorUpperBound;
 
+		// Do searching and return the queried data.
 		for(int i = start; i <= this.cursor; i ++){
 			LinkArrayNode<T> node = this.array[i];
 			if(node.index == target && node.value != null)
 				return node.value;
 		}
 
+		// Should NEVER go here, since range is already checked.
 		return null;
 	}
 
@@ -240,6 +270,7 @@ public class LinkArray<T> implements Iterable<T>{
 		LinkArrayNode<T> current = this.head;
 		int i = 0;
 
+		// Visit each node, put them into new native array in order with modified index in the node.
 		while(current != null){
 			current.index = i;
 			newArray[i] = current;
@@ -247,8 +278,10 @@ public class LinkArray<T> implements Iterable<T>{
 			i ++;
 		}
 
+		// Replace the original {@link LinkArray#array}
 		this.array = newArray;
 
+		// Update properties.
 		this.lowerBound = 0;
 		this.upperBound = i - 1;
 		this.cursor = this.upperBound + 1;
