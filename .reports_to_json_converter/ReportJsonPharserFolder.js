@@ -2,9 +2,15 @@ const FS = require('fs');
 let PHARSER_FILE = require("./ReportJsonPharserFile");
 
 module.exports = class ReportJsonPharserFolder{
-	constructor(pathsIn, sortByIn){
+	constructor(nameIn, pathsIn, sortByIn){
+		this.name = nameIn;
 		this.paths = pathsIn;
 		this.sortBy = sortByIn || 'Test Unit Amount';
+
+		let index = this.name.lastIndexOf("/");
+		if(index !== -1 && !FS.existsSync("jsons/" + this.name.substring(0, index))){
+			FS.mkdirSync("jsons/" + this.name.substring(0, index), { recursive: true });
+		}
 	}
 
 	pharseReport(targets){
@@ -25,7 +31,7 @@ module.exports = class ReportJsonPharserFolder{
 					return resultA[this.sortBy] - resultB[this.sortBy]
 				});
 
-				FS.writeFileSync("jsons/" + path.replace("reports/", "") + ".json", JSON.stringify(results));
+				FS.writeFileSync("jsons/" + this.name + ".json", JSON.stringify(results));
 			});
 		});
 	}
@@ -65,7 +71,7 @@ module.exports = class ReportJsonPharserFolder{
 					results[field].sort((a, b) => {
 						return a["Test Unit Amount"] - b["Test Unit Amount"];
 					});
-					FS.writeFileSync("jsons/" + path.replace("reports/", "") + "-" + field.trim() + "-Time.json", JSON.stringify(results[field]));
+					FS.writeFileSync("jsons/" + this.name + "-" + field.trim() + ".json", JSON.stringify(results[field]));
 				});
 			});
 		});
