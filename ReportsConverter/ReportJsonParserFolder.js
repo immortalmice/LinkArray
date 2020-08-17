@@ -68,10 +68,13 @@ module.exports = class ReportJsonParserFolder{
 				PARSER_FILE.SUB_FIELD.forEach((KEY) => {
 					let field = KEY.substring(0, KEY.length-2);
 
-					results[field].sort((a, b) => {
-						return a["Test Unit Amount"] - b["Test Unit Amount"];
-					});
-					FS.writeFileSync("jsons/" + this.name + "-" + field.trim() + ".json", JSON.stringify(results[field]));
+					if(results[field]){
+						results[field].sort((a, b) => {
+							return a["Test Unit Amount"] - b["Test Unit Amount"];
+						});
+					}
+					
+					FS.writeFileSync("jsons/" + this.name + "-" + field.trim() + ".json", JSON.stringify(results[field] ? results[field] : []));
 				});
 			});
 		});
