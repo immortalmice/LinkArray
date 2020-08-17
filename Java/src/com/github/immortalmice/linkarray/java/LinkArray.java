@@ -431,17 +431,14 @@ public class LinkArray<T> implements Iterable<T>{
 	 *
 	 */
 	private class LinkArrayIterator implements Iterator<T>{
-		private int cursor = -1;
+		private LinkArrayNode<T> cursor = LinkArray.this.head;
 
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public boolean hasNext(){
-			int newCursor = cursor + 1;
-			if(newCursor >= 0 && newCursor <= LinkArray.this.length()-1)
-				return true;
-			return false;
+			return this.cursor != null;
 		}
 
 		/**
@@ -449,24 +446,20 @@ public class LinkArray<T> implements Iterable<T>{
 		 */
 		@Override
 		public T next(){
-			return LinkArray.this.get(++ cursor);
+			T result = cursor.value;
+			cursor = cursor.next;
+			return result;
 		}
 		
 		/**
-		 * Only support when this points to the first or last element.
+		 * Not supported.
 		 *  
 		 * @throws UnsupportedOperationException when this is not pointing to valid position
 		 * {@inheritDoc}
 		 */
 		@Override
 		public void remove(){
-			if(cursor == 0){
-				LinkArray.this.shift();
-			}else if(cursor == LinkArray.this.length()-1){
-				LinkArray.this.pop();
-			}else{
-				throw new UnsupportedOperationException();
-			}
+			throw new UnsupportedOperationException();
 		}
 	}
 }
