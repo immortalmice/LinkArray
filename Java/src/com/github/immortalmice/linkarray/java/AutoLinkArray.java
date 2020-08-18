@@ -18,6 +18,6 @@ public class AutoLinkArray<T> extends LinkArray<T>{
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void allocateNewArray(int minCapacity){
-		this.refactor((LinkArrayNode<T>[]) new LinkArrayNode[minCapacity + this.reservedCapacity]);
+		this.refactor((LinkArrayNode<T>[]) new LinkArrayNode[this.length() + this.reservedCapacity]);
 	}
 }

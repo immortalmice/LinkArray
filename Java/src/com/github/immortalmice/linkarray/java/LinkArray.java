@@ -267,15 +267,50 @@ public class LinkArray<T> implements Iterable<T>{
 	 * @see LinkArray#refactor()
 	 */
 	protected void refactor(LinkArrayNode<T>[] newArray){
+		int refactoredLower = 0, refactorUpper = -1;
+		boolean hasVaildRefactoredZone = this.lastRefactorUpperBound == -1;
+
+		if(hasVaildRefactoredZone){
+			if(this.lowerBound > this.lastRefactorUpperBound || this.upperBound < 0){
+				hasVaildRefactoredZone = false;
+			}else{
+				refactoredLower = Math.max(this.lowerBound, 0);
+				refactorUpper = Math.min(this.upperBound, this.lastRefactorUpperBound);
+			}
+		}
+
 		LinkArrayNode<T> current = this.head;
 		int i = 0;
 
-		// Visit each node, put them into new native array in order with modified index in the node.
-		while(current != null){
-			current.index = i;
-			newArray[i] = current;
-			current = current.next;
-			i ++;
+		if(hasVaildRefactoredZone){
+			if(refactoredLower == 0){
+				while(i != -1 * this.lowerBound){
+					//current.index = i;
+					newArray[i] = current;
+					current = current.next;
+					i ++;
+				}
+			}
+
+			System.arraycopy(this.array, refactoredLower, newArray, i, refactorUpper - refactoredLower + 1);
+			i += refactorUpper - refactoredLower + 1;
+			current = newArray[i - 1].next;
+
+			if(refactorUpper == this.lastRefactorUpperBound){
+				while(current != null){
+					//current.index = i;
+					newArray[i] = current;
+					current = current.next;
+					i ++;
+				}
+			}
+		}else{
+			while(current != null){
+				current.index = i;
+				newArray[i] = current;
+				current = current.next;
+				i ++;
+			}
 		}
 
 		// Replace the original {@link LinkArray#array}
