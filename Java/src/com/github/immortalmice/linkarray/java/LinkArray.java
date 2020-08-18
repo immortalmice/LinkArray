@@ -263,7 +263,7 @@ public class LinkArray<T> implements Iterable<T>{
 	}
 
 	/**
-	 * @param newArray A array used in store the refactored data & replace original {@link LinkArray#array}
+	 * @param newArray A array used in store the refactored data & replace original {@link LinkArray#array}, this array must long enough.
 	 * @see LinkArray#refactor()
 	 */
 	protected void refactor(LinkArrayNode<T>[] newArray){
