@@ -26,7 +26,7 @@ const JAVA_CONFIG = {
 	]
 };
 
-parseReports();
+parseReports(JAVA_CONFIG);
 
 function parseReports(config){
 	config = config || JAVASCRIPT_CONFIG;

@@ -1,0 +1,145 @@
+=========================================================================================
+
+Mon, 24 08 2020 04-29-06 CST
+Test Unit Amount: 178000
+Sample Amount: 50
+
+-----------------------------------------------------------------------------------------
+
+Running Command [GET] With PreFilling :
+
+Array List          || Max:   0s   23.7ms | Min:   0s   5.33ms | Averge:   0s   6.94ms ||
+Linked List         || Max:  18s 439.18ms | Min:  10s 946.69ms | Averge:  14s 217.08ms ||
+Adaptive Array      || Max:   0s  28.43ms | Min:   0s   8.47ms | Averge:   0s  13.28ms ||
+
+Winner: Array List
+-----------------------------------------------------------------------------------------
+
+Running Command [PUSH] :
+
+Array List          || Max:   0s   6.99ms | Min:   0s   2.01ms | Averge:   0s   2.84ms ||
+Linked List         || Max:   0s   9.31ms | Min:   0s   1.96ms | Averge:   0s   2.84ms ||
+Adaptive Array      || Max:   0s  32.09ms | Min:   0s   1.98ms | Averge:   0s   4.18ms ||
+
+Winner: Array List
+-----------------------------------------------------------------------------------------
+
+Running Command [UNSHIFT] :
+
+Array List          || Max:   2s 512.82ms | Min:   2s 498.07ms | Averge:   2s 503.31ms ||
+Linked List         || Max:   0s  10.42ms | Min:   0s   2.27ms | Averge:   0s   2.73ms ||
+Adaptive Array      || Max:   0s  65.17ms | Min:   0s  32.41ms | Averge:   0s   37.9ms ||
+
+Winner: Linked List
+-----------------------------------------------------------------------------------------
+
+Running Command [POP] With PreFilling :
+
+Array List          || Max:   0s   3.52ms | Min:   0s   2.42ms | Averge:   0s   2.82ms ||
+Linked List         || Max:   0s   3.54ms | Min:   0s   2.38ms | Averge:   0s   2.71ms ||
+Adaptive Array      || Max:   0s   4.13ms | Min:   0s   2.78ms | Averge:   0s   3.21ms ||
+
+Winner: Linked List
+-----------------------------------------------------------------------------------------
+
+Running Command [SHIFT] With PreFilling :
+
+Array List          || Max:   2s  53.87ms | Min:   1s 998.36ms | Averge:   2s  26.92ms ||
+Linked List         || Max:   0s  11.46ms | Min:   0s    2.2ms | Averge:   0s   3.22ms ||
+Adaptive Array      || Max:   0s  12.89ms | Min:   0s   2.66ms | Averge:   0s   3.75ms ||
+
+Winner: Linked List
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT] :
+
+Array List          || Max:   0s 569.82ms | Min:   0s 553.41ms | Averge:   0s  561.3ms ||
+Linked List         || Max:   2s 568.94ms | Min:   2s 115.52ms | Averge:   2s  495.5ms ||
+Adaptive Array      || Max:   0s 125.64ms | Min:   0s  26.78ms | Averge:   0s  37.55ms ||
+
+Winner: Adaptive Array
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, POP, SHIFT] With PreFilling :
+
+Array List          || Max:   0s 931.39ms | Min:   0s 894.06ms | Averge:   0s 908.53ms ||
+Linked List         || Max:   3s 917.29ms | Min:   2s 174.76ms | Averge:   2s 958.08ms ||
+Adaptive Array      || Max:   0s  17.16ms | Min:   0s   6.74ms | Averge:   0s   8.55ms ||
+
+Winner: Adaptive Array
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, POP] With PreFilling :
+
+Array List          || Max:   0s 153.08ms | Min:   0s   5.53ms | Averge:   0s   9.69ms ||
+Linked List         || Max:   6s 129.46ms | Min:   3s 287.58ms | Averge:   4s 471.24ms ||
+Adaptive Array      || Max:   0s  27.77ms | Min:   0s   5.64ms | Averge:   0s  10.32ms ||
+
+Winner: Array List
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, POP] :
+
+Array List          || Max:   0s   4.78ms | Min:   0s   2.83ms | Averge:   0s   3.24ms ||
+Linked List         || Max:   0s  19.98ms | Min:   0s   3.94ms | Averge:   0s   7.26ms ||
+Adaptive Array      || Max:   0s   6.93ms | Min:   0s   2.88ms | Averge:   0s   3.45ms ||
+
+Winner: Array List
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, SHIFT, UNSHIFT] With PreFilling :
+
+Array List          || Max:   3s  72.99ms | Min:   3s  16.81ms | Averge:   3s  42.92ms ||
+Linked List         || Max:   6s 200.61ms | Min:   3s 610.39ms | Averge:   4s 594.95ms ||
+Adaptive Array      || Max:   0s  28.82ms | Min:   0s   7.58ms | Averge:   0s  11.13ms ||
+
+Winner: Adaptive Array
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, SHIFT, UNSHIFT] :
+
+Array List          || Max:   0s  14.75ms | Min:   0s   4.81ms | Averge:   0s    7.4ms ||
+Linked List         || Max:   0s  26.63ms | Min:   0s   4.33ms | Averge:   0s   7.73ms ||
+Adaptive Array      || Max:   0s  14.82ms | Min:   0s   4.99ms | Averge:   0s   7.31ms ||
+
+Winner: Adaptive Array
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT, POP, SHIFT] With PreFilling :
+
+Array List          || Max:   1s 851.49ms | Min:   1s 809.78ms | Averge:   1s 829.18ms ||
+Linked List         || Max:   3s 728.75ms | Min:   1s 980.01ms | Averge:   2s  654.2ms ||
+Adaptive Array      || Max:   0s  26.74ms | Min:   0s   7.17ms | Averge:   0s  11.59ms ||
+
+Winner: Adaptive Array
+-----------------------------------------------------------------------------------------
+
+Running Command [GET, PUSH, UNSHIFT, POP, SHIFT] :
+
+Array List          || Max:   0s   9.95ms | Min:   0s   4.53ms | Averge:   0s   6.27ms ||
+Linked List         || Max:   0s  16.46ms | Min:   0s   3.98ms | Averge:   0s   7.18ms ||
+Adaptive Array      || Max:   0s   9.92ms | Min:   0s   4.67ms | Averge:   0s   6.46ms ||
+
+Winner: Array List
+-----------------------------------------------------------------------------------------
+
+Array List Win Cases:
+[GET] With PreFilling :                                                                  
+[PUSH] :                                                                                 
+[GET, PUSH, POP] With PreFilling :                                                       
+[GET, PUSH, POP] :                                                                       
+[GET, PUSH, UNSHIFT, POP, SHIFT] :                                                       
+
+Linked List Win Cases:
+[UNSHIFT] :                                                                              
+[POP] With PreFilling :                                                                  
+[SHIFT] With PreFilling :                                                                
+
+Adaptive Array Win Cases:
+[GET, PUSH, UNSHIFT] :                                                                   
+[GET, POP, SHIFT] With PreFilling :                                                      
+[GET, SHIFT, UNSHIFT] With PreFilling :                                                  
+[GET, SHIFT, UNSHIFT] :                                                                  
+[GET, PUSH, UNSHIFT, POP, SHIFT] With PreFilling :                                       
+
+=========================================================================================
