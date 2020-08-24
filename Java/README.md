@@ -40,6 +40,7 @@ Java中 Auto Link Array 的實作方法為：
 	- 所有 AutoLinkArray 的劣勢在 AdaptiveArray 中明顯的被撫平
 
 2. 由於自動重構發生於內部空間重新分配時，因此 AutoLinkArray [PUSH]、[UNSHIFT] 操作較為緩慢  
-	但這些劣勢於 AdaptiveArray 被撫平，**然而我尚未得出結論為何會如此**
+	而 [PUSH] 的劣勢在 AdaptiveArray 中會被去除，原因在於連續的PUSH並不會觸發升級為 AutoLinkArray  
+	*(詳情請見程式碼，僅有SHIFT、UNSHIFT才有可能觸發升級)*
 
 3. 所有的劣勢相較於優勢相對較小
