@@ -121,12 +121,12 @@ AdaptiveArray剛開始的時候是一個原生的陣列，然而當陣列長度�
 關於Contribution
 ---
 目前本Repo包含了以下語言的實作
-- JavaScript
-- Java
+- [JavaScript](https://github.com/immortalmice/LinkArray/tree/master/Javascript)
+- [Java](https://github.com/immortalmice/LinkArray/tree/master/Java)
 
 包含以下語言的性能測試
-- JavaScript
-- Java
+- [JavaScript](https://github.com/immortalmice/LinkArray/blob/master/Javascript/README.md)
+- [Java](https://github.com/immortalmice/LinkArray/blob/master/Java/README.md)
 
 對於未在上表的語言，若你有意提供協助的話，歡迎把實作或性能測試發Pull Request給我
 
