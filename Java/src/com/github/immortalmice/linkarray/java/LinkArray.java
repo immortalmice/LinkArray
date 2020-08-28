@@ -38,10 +38,10 @@ public class LinkArray<T> implements Iterable<T>{
 	/** Pointer points to the last elements. */
 	protected LinkArrayNode<T> tail = null;
 	
-	/** The minimum INNER index currently store in this. */
+	/** The minimum INTERNAL index currently store in this. */
 	protected int lowerBound = 0;
 	
-	/** The maximum INNER index currently store in this. */
+	/** The maximum INTERNAL index currently store in this. */
 	protected int upperBound = -1;
 	
 	/** The {@link LinkArray#upperBound}'s value when last time refactored. */
@@ -216,7 +216,7 @@ public class LinkArray<T> implements Iterable<T>{
 	 * @throws IndexOutOfBoundsException when the parameter index is out of range
 	 */
 	public T get(int index){
-		// Throw exception when param is out of bound.
+		// Throw exception when parameter is out of bound.
 		if(index < 0 || index > this.length()-1) throw new IndexOutOfBoundsException();
 
 		// Get the INTERNAL index from EXTERNAL index.
@@ -398,7 +398,7 @@ public class LinkArray<T> implements Iterable<T>{
 	}
 
 	/**
-	 * A node store an INNER index, also work as a linked list node.
+	 * A node store an INTERNAL index, also work as a linked list node.
 	 * 
 	 * @author Immortalmice
 	 *
@@ -420,7 +420,6 @@ public class LinkArray<T> implements Iterable<T>{
 	 * An implementation of iterator for {@link LinkArray} to use.
 	 * 
 	 * @author Immortalmice
-	 *
 	 */
 	private class LinkArrayIterator implements Iterator<T>{
 		private LinkArrayNode<T> cursor = LinkArray.this.head;
