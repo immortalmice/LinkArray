@@ -69,3 +69,72 @@ The time complexity of rafactor is O(n).
 
 When the scope that is refactored becomes larger, the efficiency of GET becomes better. However, one should not call refactor frequently.  
 As a result, the top goal of LinkArray is to call refactor at sutible time point.
+
+# About AutoLinkArray
+AutoLinkArray is a derived class of LinkArray.  
+Refactor has a far influence on the efficiency of GET, but refactor is an action with time complexity O(n).  
+Therefore, AutoLinkArray will call refactor at suitable time point.  
+
+By now, we have three ways to implement AutoLinkArray.  
+1. The number of nodes that are not refactored exceeds a certain amount and a GET command is received. Ex. The number of nodes that are not refactored in `array` exceeds 5000.  
+2. The proportion of nodes that are not refactored exceeds a specified percent and a GET command is received. Ex. The proportion of nodes that are not refactored in `array` exceeds 20%.
+3. When the internal array demands a new space and tries to transfer to the new space, the refactor can be done when doing transfer.  
+
+One can choose his or her demanded way to implement from the three ways mentioned above.  
+Apart from choosing one of the three ways, one can also mix two or more methods.  
+
+# About AdaptiveArray
+When the size of data contained in LinkArray is small, the advantage of LinkArray is not impressive.  
+Although the time complexity on doing PUSH, UNSHIFT, POP, SHIFT are all O(1), in the situation that the amount of doing these actions is large, LinkArray still have to spend more time on doing these.  
+
+As the result of the statement mentioned above, AdaptiveArray is invented.  
+At the beginning, the AdaptiveArray is an original array. When the length of the array exceeds a certain number(Ex. 5000), the AdaptiveArray will automatically upgrade itself to a LinkArray(usually AutoLinkArray).  
+Once the array is upgraded, the array will never downgrade to the original array even if the length becomes smaller than the certain value again.
+
+# About Contribution
+This repo contains the implementation by the languages listed below by now.
+* [JavaScript](https://github.com/immortalmice/LinkArray/tree/master/Javascript)
+* [Java](https://github.com/immortalmice/LinkArray/tree/master/Java)
+
+The efficiency tests in the below languages are contained.  
+* [JavaScript](https://github.com/immortalmice/LinkArray/blob/master/Javascript/README.md)
+* [Java](https://github.com/immortalmice/LinkArray/blob/master/Java/README.md)  
+
+If you are intend to provide some help on the languages not mentioned above, please make a pull request on your own implementation and efficiency test to me.
+
+# About Tests
+The test can be divided into 13 sections.  
+The commands in the bracket are the types of commands that are contained in the certain section. All the commands are generated randomly, so the ratio of every command can be considered to be equal.  
+The result of test is the time spent by running the specified number of commands in certain section.  
+*Ex.The time spent by running 4000 \[GET\] With Prefilling with Auto Link Array.*  
+
+Prefilling means inserting data which contains the number of commands in the test section before running the test commands.  
+Every insertion is done by PUSH and UNSHIFT randomly.  
+*Ex. Before testing \[GET\] With Prefilling, insert 4000 data into an Auto Link Array by PUSH and UNSHIFT randomly.*
+
+* \[GET\] With Prefilling  
+The ability of successive pure GET.
+* \[PUSH\]  
+The ability of successive pure PUSH.
+* \[UNSHIFT\]  
+The ability of successive pure UNSHIFT.
+* \[POP\] With Prefilling  
+The ability of successive pure POP.
+* \[SHIFT\] With Prefilling  
+The ability of successive pure SHIFT.
+* \[GET, PUSH, UNSHIFT\]  
+The ability of insertion.
+* \[GET, POP, SHIFT\] With Prefilling  
+The ability of deletion.
+* \[GET, PUSH, POP\] With Prefilling  
+The ability of operations on the tail. Containing prefilled data.
+* \[GET, PUSH, POP\]  
+The ability of operations on the tail.
+* \[GET, SHIFT, UNSHIFT\] With Prefilling  
+The ability of operations on the head. Containing prefilled data.
+* \[GET, SHIFT, UNSHIFT\]  
+The ability of operations on the head.
+* \[GET, PUSH, UNSHIFT, POP, SHIFT\] With Prefilling  
+The ability of mixed operations. Containing prefilled data.
+* \[GET, PUSH, UNSHIFT, POP, SHIFT\]
+The ability of mixed opeartions.
