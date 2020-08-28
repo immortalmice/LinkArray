@@ -100,7 +100,7 @@ The efficiency tests in the below languages are contained.
 * [JavaScript](https://github.com/immortalmice/LinkArray/blob/master/Javascript/README.md)
 * [Java](https://github.com/immortalmice/LinkArray/blob/master/Java/README.md)  
 
-If you are intend to provide some help on the languages not mentioned above, please make a pull request on your own implementation and efficiency test to me.
+If you are intend to provide some help on the languages not mentioned above, please make a pull request on your own implementation or efficiency test to me.
 
 # About Tests
 The test can be divided into 13 sections.  
