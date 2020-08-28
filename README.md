@@ -137,4 +137,6 @@ The ability of operations on the head.
 * \[GET, PUSH, UNSHIFT, POP, SHIFT\] With Prefilling  
 The ability of mixed operations. Containing prefilled data.
 * \[GET, PUSH, UNSHIFT, POP, SHIFT\]
-The ability of mixed opeartions.
+The ability of mixed opeartions.  
+
+[繁體中文README在此](https://github.com/immortalmice/LinkArray/blob/master/README-zh.md)  

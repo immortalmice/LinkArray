@@ -34,4 +34,6 @@ The way to implement AutoLinkArray in Java is:
 2. Since the automatical refactor occurs when the internal space rearranges, the operations \[PUSH\], \[UNSHIFT\] are slower in AutoLinkArray to LinkedList.  
 	The disadvantage in \[PUSH\] is removed in AdaptiveArray, because successive PUSH would not trigger the array to upgrade to AutoLinkArray.  
 	*(See the source code for details. Only SHIFT, UNSHIFT would probably trigger the upgrade.)*
-3. All disadvatages are rather minor compare to advantages.
+3. All disadvatages are rather minor compare to advantages.  
+
+[繁體中文README在此](https://github.com/immortalmice/LinkArray/blob/master/Java/README-zh.md)  
