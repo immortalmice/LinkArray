@@ -36,6 +36,8 @@ The way to implement AutoLinkArray in Java is:
 	*(See the source code for details. Only SHIFT, UNSHIFT would probably trigger the upgrade.)*
 3. All disadvatages are rather minor compare to advantages.  
 
+*Translator: [YenHsinWu](https://gitlab.com/YenHsinWu)*  
+
 README Languages
 ---
 * [繁體中文](https://github.com/immortalmice/LinkArray/blob/master/Java/README-zh.md)  

@@ -139,6 +139,8 @@ The ability of mixed operations. Containing prefilled data.
 * \[GET, PUSH, UNSHIFT, POP, SHIFT\]
 The ability of mixed opeartions.  
 
+*Translator: [YenHsinWu](https://gitlab.com/YenHsinWu)*  
+
 README Languages
 ---
 * [繁體中文](https://github.com/immortalmice/LinkArray/blob/master/README-zh.md)  
