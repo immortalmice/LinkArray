@@ -1,45 +1,37 @@
 Eclipse 2020-06 (4.16.0)  
-Java jdk1.8.0 261, jre1.8.0 261  
+Java jdk1.8.0 261, jre1.8.0 261 
 
-Java實作性能測試報告
----
-*(本性能測試中所使用的原生陣列來自於`java.util.ArrayList`)*  
-*(本性能測試中所使用的雙向連結串列來自於`java.util.LinkedList`)*  
+# The Report of Performance Test in JAVA
+*(The original array used in this test is from `java.util.ArrayList`)*  
+*(The doubly-linked-list used in this test is from `java.util.LinkedList`)*  
 
-- [AutoLinkArray](https://docs.google.com/spreadsheets/d/1HxICQQ9OwkDOyxkJOCSsRYNHTwmzQg6eJDhVC1DliAc/edit?usp=sharing)
-- [AdaptiveArray](https://docs.google.com/spreadsheets/d/1DMEIXr-UyiBHu53ZgROcng_ugzBpTUWgUeEo5X8aHf0/edit?usp=sharing)
+* [AutoLinkArray](https://docs.google.com/spreadsheets/d/1HxICQQ9OwkDOyxkJOCSsRYNHTwmzQg6eJDhVC1DliAc/edit?usp=sharing)
+* [AdaptiveArray](https://docs.google.com/spreadsheets/d/1DMEIXr-UyiBHu53ZgROcng_ugzBpTUWgUeEo5X8aHf0/edit?usp=sharing)
 
-上述所連結的表格中，第一個頁籤
-- Time (ms)
+In the links mentioned above, the first page
+* Time(ms)  
 
-為原生陣列、雙向連結串列、Auto Link Array / Adaptive Array三者的比較，**單位是時間(毫秒)**  
+is the comparason of ArrayList, LinkedList and AutoLinkArray/AdaptiveArray. **The unit of time is ms.**
 
-而後兩個頁籤  
-- Compare: Normal Array (Factor)
-- Compare: Doubly Linked List (Factor)
+About the next two pages
+* Compare: Array List (Factor)
+* Compare: Linked List (Factor)  
 
-是分別對於JavaScript原生陣列以及雙向連結串列進行效能測試，**單位是時間反比的倍率**  
-Ex. Adaptive Array在 **[GET] With PreFilling** 測試項目的 **2000筆測資** 中表現比陣列快 **100.5128** 倍  
-*若為負數，則意旨速度較慢，這是一個方便視覺化的轉換： 0.5倍 => -2倍*  
-  
-此兩個頁籤中的 19\~31 列為評分，旨在找尋在同一測試項目中 Auto Link Array / Adaptive Array 於各資料量下的表現
-以 B18 為例 `B18 = (B18 - Min(B4-CO4)) / (Max(B4-CO4) - Min(B4-CO4))`  
-最後再以行進行分析，旨在找尋此資料量下 Auto Link Array / Adaptive Array 於各測試項目的 **最佳、最差、平均** 表現
-以 B 為例，`B32 = Min(B18-B30)`、`B33 = Max(B18-B30)`、`B34 = Averge(B18-B30)`
+are the performances comparison of ArrayList and LinkedList in Java. **The unit is the ratio to inverse of time.**  
+Ex. AdaptiveArray performs faster than LinkedList by 23.9385 times in **\[GET\] With Prefilling** test with **2000 data**.  
+*The ratio being a negative number means the performance is slower. It's a easier way to visualize: 0.5 times => -2 times.*
 
-簡要分析
----
+In these two pages, the 19 to 31 rows are the scores. The scores are used to compare the performances of AutoLinkArray/AdaptiveArray with different length of command list in the same test section. Say B18 as example. `B18 = (B18 - Min(B4-CO4)) / (Max(B4-CO4) - Min(B4-CO4))`.  
+Finally, we analysis the performances by columns. The analysis is aim to find the **best, worst, average** performances with certain length of command list in each test section. Take column B as example. `B32 = Min(B18-B30)、B33 = Max(B18-B30)、B34 = Averge(B18-B30)`.  
 
-Java中 Auto Link Array 的實作方法為：  
-*當內部陣列需要重新要求空間並轉移時，在轉移至新的陣列空間時順便進行重構*  
-
-1. 以單一種操作來說：  
-	- [SHIFT]、[UNSHIFT] AutoLinkArray 明顯勝過原生陣列
-	- [GET] AutoLinkArray 明顯勝過雙向連結串列
-	- 所有 AutoLinkArray 的劣勢在 AdaptiveArray 中明顯的被撫平
-
-2. 由於自動重構發生於內部空間重新分配時，因此 AutoLinkArray [PUSH]、[UNSHIFT] 操作較為緩慢  
-	而 [PUSH] 的劣勢在 AdaptiveArray 中會被去除，原因在於連續的PUSH並不會觸發升級為 AutoLinkArray  
-	*(詳情請見程式碼，僅有SHIFT、UNSHIFT才有可能觸發升級)*
-
-3. 所有的劣勢相較於優勢相對較小
+# Brief Analysis
+The way to implement AutoLinkArray in Java is:  
+*When the internal array demands new space and tries to transfer to the new space, do refactor at the mean time.*
+1. Only one type of command: 
+    * \[SHIFT\], \[UNSHIFT\] AutoLinkArray performs better than original array apparently.
+    * \[GET\] AutoLinkArray outperforms the doubly-linked-list apparently.
+    * All disavantages in AutoLinkArray are improved in AdaptiveArray apparently.
+2. Since the automatical refactor occurs when the internal space rearranges, the operations \[PUSH\], \[UNSHIFT\] are slower in AutoLinkArray to LinkedList.  
+	The disadvantage in \[PUSH\] is removed in AdaptiveArray, because successive PUSH would not trigger the array to upgrade to AutoLinkArray.  
+	*(See the source code for details. Only SHIFT, UNSHIFT would probably trigger the upgrade.)*
+3. All disadvatages are rather minor compare to advantages.
