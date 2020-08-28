@@ -57,7 +57,7 @@ The internal `index` corresponding to the requesting data should be `1 + (-3) = 
 Therefore, we have to set the starting point of finding the data with `index` be `-2` to be `array[4 + -(-2)] = array[6]`.
 (You must insert `-1` before `-2`, so the starting point is `array[6]`, not `array[5]`)
 3. GET 8 (The data being requested is in the scope that is **NOT refactored** and the recording index is greater than 0.)  
-The `index` corresponding to the requesting data should be `8 + (-3) = 5`.  
+The internal `index` corresponding to the requesting data should be `8 + (-3) = 5`.  
 Therefore, we set the starting point of finding the data with `index` be `5` to be `array[5]`.  
 Finally, we find `array[5] = {5, 9} = 9`. 
 The reason we start finding at `array[5]` is the same as mentioned in 2.  
