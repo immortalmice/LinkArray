@@ -8,7 +8,12 @@ JavaScript實作性能測試報告
 - [AutoLinkArray](https://docs.google.com/spreadsheets/d/1BD9gHeoGC48EA0i1AbdahxI_zEBVmSjZAeOJUYpxKP4/edit?usp=sharing)
 - [AdaptiveArray](https://docs.google.com/spreadsheets/d/1z5rMht8dqc3bMp_eS2LW20jr-XR3ADW8Iw7a85ZbWk0/edit?usp=sharing)
 
-上述所連結的表格中，前兩個頁籤
+上述所連結的表格中，第一個頁籤
+- Time (ms)
+
+為原生陣列、雙向連結串列、Auto Link Array / Adaptive Array三者的比較，**單位是時間(毫秒)**  
+
+而後兩個頁籤  
 - Compare: Normal Array (Factor)
 - Compare: Doubly Linked List (Factor)
 
@@ -20,11 +25,6 @@ Ex. Adaptive Array在 **[GET] With PreFilling** 測試項目的 **2000筆測資*
 以 B18 為例 `B18 = (B18 - Min(B4-CO4)) / (Max(B4-CO4) - Min(B4-CO4))`  
 最後再以行進行分析，旨在找尋此資料量下 Auto Link Array / Adaptive Array 於各測試項目的 **最佳、最差、平均** 表現
 以 B 為例，`B32 = Min(B18-B30)`、`B33 = Max(B18-B30)`、`B34 = Averge(B18-B30)`
-
-而第三個頁籤
-- Time (ms)
-
-則為原生陣列、雙向連結串列、Auto Link Array / Adaptive Array三者的比較，**單位是時間(毫秒)**  
 
 簡要分析
 ---
