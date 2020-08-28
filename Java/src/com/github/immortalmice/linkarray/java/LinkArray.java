@@ -22,37 +22,29 @@ import javax.annotation.Nullable;
  */
 @SuppressWarnings("unchecked")
 public class LinkArray<T> implements Iterable<T>{
-	/**
-	 * The initial & extra capacity when allocate {@link LinkArray#array}.
-	 */
+	
+	/** The initial & extra capacity when allocate {@link LinkArray#array}. */
 	protected int reservedCapacity;
-	/**
-	 * The cursor points to the last element in {@link LinkArray#array} that has data. 
-	 */
+	
+	/** The cursor points to the last element in {@link LinkArray#array} that has data. */
 	protected int cursor = -1;
-	/**
-	 * The main array to store data.
-	 */
+	
+	/** The main array to store data. */
 	protected LinkArrayNode<T>[] array;
-	/**
-	 * Pointer points to the first elements.
-	 */
+	
+	/** Pointer points to the first elements. */
 	protected LinkArrayNode<T> head = null;
-	/**
-	 * Pointer points to the last elements.
-	 */
+	
+	/** Pointer points to the last elements. */
 	protected LinkArrayNode<T> tail = null;
-	/**
-	 * The minimum INNER index currently store in this.
-	 */
+	
+	/** The minimum INNER index currently store in this. */
 	protected int lowerBound = 0;
-	/**
-	 * The maximum INNER index currently store in this.
-	 */
+	
+	/** The maximum INNER index currently store in this. */
 	protected int upperBound = -1;
-	/**
-	 * The {@link LinkArray#upperBound}'s value when last time refactored.
-	 */
+	
+	/** The {@link LinkArray#upperBound}'s value when last time refactored. */
 	protected int lastRefactorUpperBound = -1;
 
 	/**

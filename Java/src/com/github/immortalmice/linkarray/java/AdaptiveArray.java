@@ -15,21 +15,17 @@ import java.util.Iterator;
  * @see AutoLinkArray
  */
 public class AdaptiveArray<T> implements Iterable<T>{
-	/**
-	 * Will be used in implementation when this is not upgraded.
-	 */
+	
+	/** Will be used in implementation when this is not upgraded. */
 	private ArrayList<T> nativeArray = new ArrayList<>();
-	/**
-	 * Will be used in implementation when this is upgraded.
-	 */
+	
+	/** Will be used in implementation when this is upgraded. */
 	private AutoLinkArray<T> linkArray = new AutoLinkArray<>();
-	/**
-	 * A flag shows this is upgraded or not currently.
-	 */
+	
+	/** A flag shows this is upgraded or not currently. */
 	private boolean isUpgraded = false;
-	/**
-	 * When length is over {@link AdaptiveArray#upgradeBound}, this will upgrade itself.
-	 */
+	
+	/** When length is over {@link AdaptiveArray#upgradeBound}, this will upgrade itself. */
 	private int upgradeBound;
 	
 	/**
