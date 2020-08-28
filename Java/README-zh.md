@@ -3,7 +3,7 @@ Java jdk1.8.0 261, jre1.8.0 261
 
 Java實作性能測試報告
 ---
-*(本性能測試中所使用的原生陣列來自於`java.util.ArrayList`)*  
+*(本性能測試中所使用的動態陣列來自於`java.util.ArrayList`)*  
 *(本性能測試中所使用的雙向連結串列來自於`java.util.LinkedList`)*  
 
 - [AutoLinkArray](https://docs.google.com/spreadsheets/d/1HxICQQ9OwkDOyxkJOCSsRYNHTwmzQg6eJDhVC1DliAc/edit?usp=sharing)
@@ -12,14 +12,14 @@ Java實作性能測試報告
 上述所連結的表格中，第一個頁籤
 - Time (ms)
 
-為原生陣列、雙向連結串列、Auto Link Array / Adaptive Array三者的比較，**單位是時間(毫秒)**  
+為動態陣列、雙向連結串列、Auto Link Array / Adaptive Array三者的比較，**單位是時間(毫秒)**  
 
 而後兩個頁籤  
 - Compare: Normal Array (Factor)
 - Compare: Doubly Linked List (Factor)
 
-是分別對於原生陣列以及雙向連結串列進行效能測試，**單位是時間反比的倍率**  
-Ex. Adaptive Array在 **[GET] With PreFilling** 測試項目的 **2000筆測資** 中表現比陣列快 **100.5128** 倍  
+是分別對於動態陣列以及雙向連結串列進行效能測試，**單位是時間反比的倍率**  
+Ex. Adaptive Array在 **[GET] With PreFilling** 測試項目的 **2000筆測資** 中表現比動態陣列快 **100.5128** 倍  
 *若為負數，則意旨速度較慢，這是一個方便視覺化的轉換： 0.5倍 => -2倍*  
   
 此兩個頁籤中的 19\~31 列為評分，旨在找尋在同一測試項目中 Auto Link Array / Adaptive Array 於各資料量下的表現
@@ -34,7 +34,7 @@ Java中 Auto Link Array 的實作方法為：
 *當內部陣列需要重新要求空間並轉移時，在轉移至新的陣列空間時順便進行重構*  
 
 1. 以單一種操作來說：  
-	- [SHIFT]、[UNSHIFT] AutoLinkArray 明顯勝過原生陣列
+	- [SHIFT]、[UNSHIFT] AutoLinkArray 明顯勝過動態陣列
 	- [GET] AutoLinkArray 明顯勝過雙向連結串列
 	- 所有 AutoLinkArray 的劣勢在 AdaptiveArray 中明顯的被撫平
 
