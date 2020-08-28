@@ -134,24 +134,24 @@ AdaptiveArray剛開始的時候是一個原生的陣列，然而當陣列長度�
 ---
 
 測試項目一共有13個  
-方括弧中的是本項目中包含的指令種類，為隨機生成，因此各指令出線機率可視為相等  
+方括弧中的是本項目中包含的指令種類，為隨機生成，因此各指令出現機率可視為相等  
 測試結果測試對象跑完由本項目生成的指定長度指令列表所花的時間  
-Ex. Auto Link Array跑完 4000筆 [GET] With PreFilling 所花的時間  
+*Ex. Auto Link Array跑完 4000筆 [GET] With PreFilling 所花的時間*  
 
 PreFilling指在運行指令列表前，先對測試對象塞入指令長度的資料  
 每一個塞入動作為PUSH、UNSHIFT隨機擇一  
-Ex. 在測試 [GET] With PreFilling 前，對Auto Link Array用PUSH、UNSHIFT隨機塞入4000筆資料  
+*Ex. 在測試 [GET] With PreFilling 前，對Auto Link Array用PUSH、UNSHIFT隨機塞入4000筆資料*  
 
 - **[GET] With PreFilling**  
-    純GET能力
+    連續純GET能力
 - **[PUSH]**  
-    純PUSH能力
+    連續純PUSH能力
 - **[UNSHIFT]**  
-    純UNSHIFT能力
+    連續純UNSHIFT能力
 - **[POP] With PreFilling**  
-    純POP能力
+    連續純POP能力
 - **[SHIFT] With PreFilling**  
-    純SHIFT能力
+    連續純SHIFT能力
 - **[GET, PUSH, UNSHIFT]**  
     塞入能力
 - **[GET, POP, SHIFT] With PreFilling**  
