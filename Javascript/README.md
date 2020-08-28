@@ -17,15 +17,15 @@ About the next two pages
 * Compare: Doubly Linked List (Factor)  
 
 are the performances comparison of original array and doubly-linked-list in JavaScript. **The unit is the ratio to inverse of time.**  
-Ex. AdaptiveArray performs faster than array by 100.5128 times in **\[GET\] With Prefilling** test with **2000 data**.  
+Ex. AdaptiveArray performs faster than doubly-linked-list by 100.5128 times in **\[GET\] With Prefilling** test with **2000 data**.  
 *The ratio being a negative number means the performance is slower. It's a easier way to visualize: 0.5 times => -2 times.*
 
-In these two pages, the 19 to 31 rows are the scores. The scores are used to compare the performances of AutoLinkArray/AdaptiveArray with different size of data in the same test section. Say B18 as example. `B18 = (B18 - Min(B4-CO4)) / (Max(B4-CO4) - Min(B4-CO4))`.  
-Finally, we analysis the performances by columns. The analysis is aim to find the **best, worst, average** performances with certain size of data in each test section. Take column B as example. `B32 = Min(B18-B30)、B33 = Max(B18-B30)、B34 = Averge(B18-B30)`.  
+In these two pages, the 19 to 31 rows are the scores. The scores are used to compare the performances of AutoLinkArray/AdaptiveArray with different length of command list in the same test section. Say B18 as example. `B18 = (B18 - Min(B4-CO4)) / (Max(B4-CO4) - Min(B4-CO4))`.  
+Finally, we analysis the performances by columns. The analysis is aim to find the **best, worst, average** performances with certain length of command list in each test section. Take column B as example. `B32 = Min(B18-B30)、B33 = Max(B18-B30)、B34 = Averge(B18-B30)`.  
 
 # Brief Analysis
 The way to implement AutoLinkArray in JavaScript is:  
-Do refactor when the number of not refactored nodes exceeds 5000 in `array`.  
+*Do refactor when the number of not refactored nodes exceeds 5000 in `array`.*  
 1. Only one type of command:
     * \[SHIFT\], \[UNSHIFT\] AutoLinkArray performs better than original array apparently.
     * \[GET\] AutoLinkArray outperforms the doubly-linked-list apparently.
@@ -39,5 +39,5 @@ Do refactor when the number of not refactored nodes exceeds 5000 in `array`.
 On the contrary, in the sections without prefilling, since the AutoLinkArray is not refactored, GET will performs slower.  
 **As a result, AutoLinkArray will outperforms in sections with prefilling and performs worse in sections without prefilling.**  
 All these disadvantages will be removed in AdaptiveArray.
-4. As we can see from the charts of score of AutoLinkArray, AutoLinkArray performs better generally with respect to average when the size of data is large. AdaptiveArray seems to has no matter with the size of data.
+4. As we can see from the charts of score of AutoLinkArray, AutoLinkArray performs better generally with respect to average when the length of command list is large. AdaptiveArray's scores seems to has no big matter with the length of command list.
 5. All disadvatages are rather minor compare to advantages.
