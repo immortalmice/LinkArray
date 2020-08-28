@@ -2,4 +2,6 @@ This is the code to transform the output txt reports into json files, in order t
 
 The development and executing environment is Node.js v12.18.0  
 
-[繁體中文README在此](https://github.com/immortalmice/LinkArray/blob/master/ReportsConverter/README-zh.md)  
+README Languages
+---
+* [繁體中文](https://github.com/immortalmice/LinkArray/blob/master/ReportsConverter/README-zh.md)  

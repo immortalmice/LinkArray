@@ -42,4 +42,6 @@ All these disadvantages will be removed in AdaptiveArray.
 4. As we can see from the charts of score of AutoLinkArray, AutoLinkArray performs better generally with respect to average when the length of command list is large. AdaptiveArray's scores seems to has no big matter with the length of command list.
 5. All disadvatages are rather minor compare to advantages.  
 
-[繁體中文README在此](https://github.com/immortalmice/LinkArray/blob/master/Javascript/README-zh.md)  
+README Languages
+---
+* [繁體中文](https://github.com/immortalmice/LinkArray/blob/master/Javascript/README-zh.md)  
