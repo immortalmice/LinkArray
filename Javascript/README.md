@@ -39,7 +39,7 @@ The way to implement AutoLinkArray in JavaScript is:
 On the contrary, in the sections without prefilling, since the AutoLinkArray is not refactored, GET will performs slower.  
 **As a result, AutoLinkArray will outperforms in sections with prefilling and performs worse in sections without prefilling.**  
 All these disadvantages will be removed in AdaptiveArray.
-4. As we can see from the charts of score of AutoLinkArray, AutoLinkArray performs better generally with respect to average when the length of command list is large. AdaptiveArray's scores seems to has no big matter with the length of command list.
+4. As we can see from the charts of score of AutoLinkArray, AutoLinkArray performs better generally with respect to average when the length of command list is large. AdaptiveArray's scores seems to has no big difference with the length of command list.
 5. All disadvatages are rather minor compare to advantages.  
 
 README Languages
