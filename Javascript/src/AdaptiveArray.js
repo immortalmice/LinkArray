@@ -34,6 +34,10 @@ module.exports = class AdaptiveArray{
 		return this.array.shift();
 	}
 
+	[Symbol.iterator](){
+		return this.array[Symbol.iterator];
+	}
+
 	asArray(){
 		return this.upgraded ? this.array.asArray() : this.array;
 	}

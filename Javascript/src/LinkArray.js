@@ -255,6 +255,14 @@ module.exports = class LinkArray{
 	}
 
 	/**
+	 * Return an iterator.
+	 * @see {@link LinkArrayIterator}
+	 */
+	[Symbol.iterator](){
+		return new LinkArrayIterator(this.head);
+	}
+
+	/**
 	 * Get the native array version of this LinkArray.
 	 * Shallow-Copy on every data.
 	 * @return {Array} Data in native array form.
@@ -419,5 +427,33 @@ module.exports = class LinkArray{
 		 * @type {Interger >= -1}.
 		 */
 		this.lastRefactorUpperBound = -1;
+	}
+}
+
+/**
+ * A class implement LinkArray's iterator.
+ *
+ * @author Immortalmice
+ */
+class LinkArrayIterator{
+	/**
+	 * @constructors
+	 *
+	 * @param {Node} - The first element.
+	 */
+	constructor(head){
+		this.current = head;
+	}
+
+	/**
+	 * Get the next value.
+	 */
+	next(){
+		if(this.current){
+			let currentValue = this.current.value;
+			this.current = this.current.next;
+			return { done: false, value: currentValue };
+		}
+		return { done: true };
 	}
 }
